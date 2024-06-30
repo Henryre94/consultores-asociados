@@ -13,6 +13,8 @@ class Filters extends Page
 
     public $filterValues = [];
 
+    public $selectedColums = [];
+
     public $inputValue = '';
 
     public $variable;
@@ -27,13 +29,14 @@ class Filters extends Page
 
     public function mount(){
 
-    $this->diligenciamientos = Diligenciamiento::get();
+    
 
     }
 
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
+        $this->selectedColums[] = $this->selectedOption;
     }
 
     public function resetFilter()
@@ -46,7 +49,24 @@ class Filters extends Page
     {
         $this->filterValues[] = $this->inputValue;
     }
+    
+    public function getFilteredData()
+    {
 
+        $query = Diligenciamiento::query();
+
+        if (count($this->selectedColums) === count($this->filterValues)) {
+            // Iterate over the arrays
+            foreach ($this->selectedColums as $index => $selectedColum) {
+                // Assuming column names are safe to use in SQL (e.g., they are validated or sanitized)
+                $filterValue = $this->filterValues[$index];
+
+                // Add a where condition for each column-value pair
+                $query->where($selectedColum, '=', $filterValue);
+            }
+        }
+      $this->diligenciamientos = $query->get();
+    }
 
 
 
