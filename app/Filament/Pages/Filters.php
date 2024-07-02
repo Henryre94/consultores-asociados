@@ -18,7 +18,7 @@ class Filters extends Page
     public $inputValue = '';
 
     public $variable;
-
+    
     public $diligenciamientos;
 
     public $choosedFilter = false;
@@ -26,6 +26,8 @@ class Filters extends Page
     public $selectedOption = '';
 
     public $selectedValue;
+
+    public $filteredOptions = '';
 
     public function mount(){
 
@@ -42,13 +44,21 @@ class Filters extends Page
     public function resetFilter()
     {
         $this->choosedFilter = false; 
-        $this->inputValue = '';  // Clear the input field after saving the value
+        $this->inputValue = ''; 
     }
 
     public function setFilter()
     {
         $this->filterValues[] = $this->inputValue;
+        $this->selectedOption = '';
     }
+
+    public function resetFilterData()
+    {
+        $this->selectedColums = [];
+        $this->filterValues = [];
+    }
+
     
     public function getFilteredData()
     {
@@ -66,6 +76,18 @@ class Filters extends Page
             }
         }
       $this->diligenciamientos = $query->get();
+    }
+
+    public function getListOfSelectedFilter()
+    {
+        foreach ($this->selectedColums as $index => $selectedColum) {
+            // Assuming column names are safe to use in SQL (e.g., they are validated or sanitized)
+            $filterValue = $this->filterValues[$index];
+
+            // Add a where condition for each column-value pair
+         
+        }
+    
     }
 
 

@@ -1,74 +1,95 @@
 <x-filament-panels::page>
 
     <div class="overflow-hidden shadow-xl sm:rounded-lg">
-        <div class="px-4 py-5 sm:px-6">
-            <p class="mt-1 max-w-2xl text-white">Lista de todos los dilengenciamientos en el sistema</p>
+        <div class="flex justify-end mb-2">
+            <div>
+                <div class="mb-2">
+                    <x-filament::button wire:click="getFilteredData" color="info" style="font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+                        Aplicar filtros
+                    </x-filament::button>
+                    <x-filament::button wire:click="resetFilterData" color="info" style="font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+                        Eliminar filtros
+                    </x-filament::button>
+                </div>
+                <div>
+                @if (empty($selectedColums) || empty($filterValues))   
+                 <div></div>   
+                @else
+                <div class="flex justify-between rounded bg-white p-2 ">
+                    <div class="me-1">
+                        @foreach ($this->selectedColums as $selectedColum)
+                        <p style="color: #0a0101; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;"> {{ $selectedColum }}:</p>
+                        @endforeach
+                    </div>
+                    
+                    <div >
+                        @foreach ($this->filterValues as $filterValue)
+                        <p style="color: #0a0101; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;"> {{  $filterValue }} </p>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+                </div>
+            </div>
         </div>
+        
         <div>
-            <div class="flex justify-between  px-4 py-3 sm:px-6 bg-gray-400 rounded mb-2 ">
-                <div class="flex ">
+            <div class="flex justify-between px-4 py-3 sm:px-6 rounded mb-2 bg-gray-300">
+                <div class="flex flex-row ">
                     @if (!$choosedFilter)
-                    <div class="py-2">
-                        <x-filament::input.wrapper>
-                         <x-filament::input.select wire:model="selectedOption" wire:change="choosedFilterFunction">
-                            <option value="">Seleccione un filtro</option>
-                            <option value="grupo_vulnerable">Tipo de Vulnerabilidad</option>
-                            <option value="tipo_discapacidad">Tipo de discapacidad</option>
-                            <option value="edad">Edad</option>
-                            <option value="sexo">Genero</option>
-                            <option value="ficha_no.">Ficha No.</option>
-                            <option value="centro_poblado">Ubicacion o Centro Poblado</option>
-                            <option value="tipo_vivienda">Tipo de Vivienda</option>
+                    <div>
+                        <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                         <x-filament::input.select wire:model="selectedOption" wire:change="choosedFilterFunction" style="color: #0a0101; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="">Seleccione un filtro</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="grupo_vulnerable">Tipo de Vulnerabilidad</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="tipo_discapacidad">Tipo de discapacidad</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="edad">Edad</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="sexo">Genero</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="ficha_no.">Ficha No.</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="centro_poblado">Ubicacion o Centro Poblado</option>
+                            <option style="background-color: rgb(245, 245, 245); font-family: Arial, sans-serif; font-size: 12px;" value="tipo_vivienda">Tipo de Vivienda</option>
                         </x-filament::input.select>
                         </x-filament::input.wrapper>
                     </div>
                     @else
-                    <x-filament::input.wrapper>
+                    <div class="flex">
+                        <div class="me-1">
+                            <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
                                 <x-filament::input
                                     id="selectedFilter"
                                     value="{{ $selectedOption }}"
-                                />
-                    </x-filament::input.wrapper>
-                         @if ($selectedOption === "edad" || $selectedOption === "ficha_no."  )
-                            <x-filament::input.wrapper>
-                                <x-filament::input
-                                    type="number"
-                                    wire:model="inputValue"
-                                    wire:change="setFilter"
+                                    style="color: #0a0101 ; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;"
                                 />
                             </x-filament::input.wrapper>
-                        @else
-                        <x-filament::input.wrapper>
-                            <x-filament::input
-                                type="text"
-                                wire:model="inputValue"
-                                wire:change="setFilter"
-                            />
-                        </x-filament::input.wrapper>
-                         @endif
-                    <x-filament::button icon="heroicon-c-plus" wire:click="resetFilter">
-                        
-                    </x-filament::button>
+                        </div>
+                        <div class="me-1">
+                            @if ($selectedOption === "edad" || $selectedOption === "ficha_no."  )
+                                <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                 <x-filament::input
+                                   type="number"
+                                   wire:model="inputValue"
+                                   wire:change="setFilter"
+                                   style="color: #0a0101; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;"
+                                />
+                                </x-filament::input.wrapper>
+                            @else
+                            <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                <x-filament::input
+                                    type="text"
+                                    wire:model="inputValue"
+                                    wire:change="setFilter"
+                                    style="color: #0a0101; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;"
+                                 />
+                            </x-filament::input.wrapper>
+                            @endif
+                        </div>
+                        <div>
+                        <x-filament::button icon="heroicon-c-plus" icon-position="after" wire:click="resetFilter" color="info" style="font-family: Arial, sans-serif; font-size: 16px; font-weight: bold;">
+                            Addicionar otro filtro
+                        </x-filament::button>
+                        </div>
+                    </div>
                     @endif
-                </div>
-                
-                <x-filament::button wire:click="getFilteredData" >
-                  Aplicar filtros
-                </x-filament::button>
-                <div class="bg-gray-200 rounded p-2 flex justify-center items-center"> 
-                    @forelse ($filterValues as $filterValue)
-                        <li> {{ $filterValue }}</li>
-                    @empty
-                        <span class="font-medium text-gray-700">No hay filtros aplicados</span>
-                    @endforelse
-                </div>
-
-                <div class="bg-gray-200 rounded p-2 flex justify-center items-center"> 
-                    @forelse ($selectedColums as $selectedColum)
-                        <li> {{ $selectedColum }}</li>
-                    @empty
-                        <span class="font-medium text-gray-700">No hay filtros aplicados</span>
-                    @endforelse
                 </div>
             </div>
 
@@ -78,8 +99,8 @@
 
             <div class="flex justify-center items-center overflow-x-auto rounded">
                 @if ($diligenciamientos === null)
-                <div class="p-3">
-                    No hay Diligenciameintos
+                <div class="p-3" style="font-family: Arial, sans-serif; font-size: 24px; font-weight: bold;">
+                    No hay Diligenciamientos correspondientes a los filtros aplicados
                 </div>
             @else
             <table class="min-w-full w-full divide-y divide-gray-200">
