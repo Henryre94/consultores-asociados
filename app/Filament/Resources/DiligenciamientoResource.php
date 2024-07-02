@@ -17,7 +17,7 @@ class DiligenciamientoResource extends Resource
 {
     protected static ?string $model = Diligenciamiento::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
     public static function form(Form $form): Form
     {
