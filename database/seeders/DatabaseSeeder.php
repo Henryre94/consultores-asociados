@@ -17,10 +17,15 @@ class DatabaseSeeder extends Seeder
             DiligenciamientoSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        
+        // \App\Models\User::create([
+        //     'name' => 'admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => 'admin123',
         // ]);
+
+        $this->call([
+            RolesPermissionSeeder::class,
+        ]);
     }
 }
