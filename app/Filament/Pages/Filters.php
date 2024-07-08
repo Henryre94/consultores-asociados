@@ -38,25 +38,40 @@ class Filters extends Page
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
-        $this->selectedColums[] = $this->selectedOption;
+        
     }
 
     public function resetFilter()
     {
+        $this->selectedColums[] = $this->selectedOption;
+        $this->filterValues[] = $this->inputValue;
         $this->choosedFilter = false; 
+        $this->selectedOption = '';
         $this->inputValue = ''; 
     }
-
-    public function setFilter()
-    {
-        $this->filterValues[] = $this->inputValue;
-        $this->selectedOption = '';
-    }
-
     public function resetFilterData()
     {
         $this->selectedColums = [];
         $this->filterValues = [];
+        $this->diligenciamientos = null;
+
+    }
+
+    public function removeFilter($index)
+    {
+        unset($this->selectedColums[$index]);
+        unset($this->filterValues[$index]);
+
+        // Re-index arrays to prevent gaps in the indices
+        $this->selectedColums = array_values($this->selectedColums);
+        $this->filterValues = array_values($this->filterValues);
+        if($this->selectedColums === [])
+        {
+            $this->diligenciamientos = null;  
+        }else
+        {
+            $this->getFilteredData();
+        }  
     }
 
     
@@ -66,30 +81,15 @@ class Filters extends Page
         $query = Diligenciamiento::query();
 
         if (count($this->selectedColums) === count($this->filterValues)) {
-            // Iterate over the arrays
+            
             foreach ($this->selectedColums as $index => $selectedColum) {
-                // Assuming column names are safe to use in SQL (e.g., they are validated or sanitized)
+                
                 $filterValue = $this->filterValues[$index];
 
-                // Add a where condition for each column-value pair
                 $query->where($selectedColum, '=', $filterValue);
             }
         }
       $this->diligenciamientos = $query->get();
     }
-
-    public function getListOfSelectedFilter()
-    {
-        foreach ($this->selectedColums as $index => $selectedColum) {
-            // Assuming column names are safe to use in SQL (e.g., they are validated or sanitized)
-            $filterValue = $this->filterValues[$index];
-
-            // Add a where condition for each column-value pair
-         
-        }
-    
-    }
-
-
 
 }
