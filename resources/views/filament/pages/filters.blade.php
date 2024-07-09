@@ -1,56 +1,57 @@
 <x-filament-panels::page>
 
-    <div class="overflow-hidden shadow-xl sm:rounded-lg">
-        <div class="flex justify-end mb-2">
+    <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-gray-200  ">
+        <div class="flex justify-end mb-2 ">
             <div>
-                <div class="mb-2">
-                    <x-filament::button wire:click="getFilteredData" color="info" class="me-1" style=" font-size: 14px; font-family: sans-serif; letter-spacing: 1px;">
+                <div class="mb-2 flex justify-around">
+                    <x-filament::button wire:click="getFilteredData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Aplicar filtros
                     </x-filament::button>
-                    <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 14px; font-family: sans-serif; letter-spacing: 1px;">
+                    <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Eliminar filtros
                     </x-filament::button>
-                    <x-filament::button wire:click="resetFilterData" color="danger" style=" font-size: 14px; font-family: sans-serif; letter-spacing: 1px;">
+                    <x-filament::button  color="danger" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Generar PDF
                     </x-filament::button>
                 </div>
-                <div>
+                <div class= "p-1">
                     @if (!empty($selectedColums) && !empty($filterValues) && count($selectedColums) === count($filterValues))
-                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; font-family: sans-serif; letter-spacing: 1px; border: 1px solid grey;">
-                        <thead>
-                            <tr style="background-color: #F0FFFF; color: #555;">
-                                <th style="padding: 12px 8px; text-align: left; background-color: black;"></th>
-                                <th style="border: 1px solid #ddd; padding: 12px 8px; text-align: left;">Tipo de filtro</th>
-                                <th style="border: 1px solid #ddd; padding: 12px 8px; text-align: left;">Valor</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($selectedColums as $index => $selectedColum)
-                                <tr style="background-color: #F0FFFF; color: #555;" >
-
-                                <td  style="border: 1px solid #ddd; padding: 12px 8px;">
-                                    <div class="flex justify-center items-center">
-                                        <x-filament::icon-button wire:click="removeFilter({{ $index }})" color="danger" icon="heroicon-s-minus" size="xs" >
-                                                
-                                        </x-filament::button>
-                                    </div>
-                                </td>
-                                    <td style="border: 1px solid #ddd; padding: 12px 8px;">{{ $selectedColum }}</td>
-                                    <td style="border: 1px solid #ddd; padding: 12px 8px;"> {{ $filterValues[$index] }}</td>
+                    <div class="bg-gray-400 p-1 rounded">
+                        <table class="text-left" style="width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 12px; color: #555;">
+                            <thead>
+                                <tr>
+                                    <th class="p-1"></th>
+                                    <th class="p-1">Tipo de filtro</th>
+                                    <th class="p-1">Valor</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($selectedColums as $index => $selectedColum)
+                                    <tr >
+    
+                                    <td  class="p-1">
+                                        <div class="flex justify-center items-center">
+                                            <x-filament::icon-button wire:click="removeFilter({{ $index }})" color="danger" icon="heroicon-s-minus" size="xs" >
+                                                    
+                                            </x-filament::button>
+                                        </div>
+                                    </td >
+                                        <td class="p-1">{{ $selectedColum }}</td>
+                                        <td class="p-1">{{ $filterValues[$index] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @else
-                    <p style="font-family: sans-serif; color: #555;">No hay filtros aplicados o se esta procesando un filtro</p>
+                    <p style="font-family: sans-serif; font-size: 16px; color: #555;">No hay filtros aplicados o se esta procesando un filtro</p>
                 @endif
                 </div>
             </div>
         </div>
         
         <div>
-            <div class="flex justify-between px-4 py-3 sm:px-6 rounded mb-2 bg-gray-300">
+            <div class="flex justify-between px-4 py-3 sm:px-6 rounded mb-2 bg-gray-400">
                 <div class="flex flex-row ">
                     @if (!$choosedFilter)
                     <div>
@@ -115,41 +116,32 @@
 
             <div class="flex justify-center items-center overflow-x-auto rounded">
                 @if ($diligenciamientos === null)
-                <div class="p-3" style="font-family: sans-serif; font-size: 18px; color: #555;">
+                <div class="p-3" style="font-family: sans-serif; font-size: 16px; color: #555;">
                     No hay Diligenciamientos correspondientes a los filtros aplicados
                 </div>
             @else
-            <table class="min-w-full w-full divide-y divide-gray-200">
-                <thead class="bg-gray-400">
+            <table class="divide-gray-200">
+                <thead class="bg-gray-400 text-left" style="font-family: sans-serif; font-size: 16px; color: #ffffff;">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Nombre</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Departamento</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Municipio</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Edad</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Genero</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Discapacidad</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Vulnerabilidad</th>
-                        <th scope="col" class="px-6 py-3 text-left text-m font-black text-white uppercase tracking-wider">Ficha No.</th>
+                        <th  class="px-6 py-3 ">Nombre</th>
+                        <th  class="px-6 py-3 ">Edad</th>
+                        <th  class="px-6 py-3 ">Genero</th>
+                        <th  class="px-6 py-3 ">Discapacidad</th>
+                        <th  class="px-6 py-3 ">Vulnerabilidad</th>
+                        <th  class="px-6 py-3 ">Ficha No.</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse ($diligenciamientos as $diligenciamiento)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->usuario_movil }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->departamento }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->municipio }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->edad }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->sexo }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->tipo_discapacidad }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->grupo_vulnerable }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-500 uppercase tracking-wider">{{ $diligenciamiento->ficha_no }}</td>
-                            
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="3" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">No hay diligenciamientos correspondientes a los filtros aplicados.</td>
-                        </tr>
-                    @endforelse
+                    @foreach ($diligenciamientos as $diligenciamiento)
+                        <tr style="font-family: sans-serif; font-size: 14px; color: #555;">
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->usuario_movil }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->tipo_discapacidad }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->grupo_vulnerable }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
+                        </tr>        
+                    @endforeach
                 </tbody>
             </table>
             @endif 
