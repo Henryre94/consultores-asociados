@@ -3,16 +3,17 @@
     <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-gray-200  ">
         <div class="flex justify-end mb-2 ">
             <div>
-                <div class="mb-2 flex justify-between">
+                <div class="mb-2 flex justify-end">
                     <x-filament::button wire:click="getFilteredData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Aplicar filtros
                     </x-filament::button>
                     <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Eliminar filtros
                     </x-filament::button>
-                    <x-filament::button  color="danger" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
-                        Generar PDF
+                    <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                        Generar Graficas
                     </x-filament::button>
+
                 </div>
                 <div class= "p-1">
                     @if (!empty($selectedColums) && !empty($filterValues) && count($selectedColums) === count($filterValues))
@@ -124,24 +125,28 @@
                 <thead class="bg-gray-400 text-left" style="font-family: sans-serif; font-size: 16px; color: #ffffff;">
                     <tr>
                         <th  class="px-6 py-3 ">Nombre</th>
+                        <th  class="px-6 py-3 ">Ficha No.</th>
                         <th  class="px-6 py-3 ">Edad</th>
                         <th  class="px-6 py-3 ">Genero</th>
-                        <th  class="px-6 py-3 ">Departamentos</th>
-                        <th  class="px-6 py-3 ">Discapacidad</th>
-                        <th  class="px-6 py-3 ">Vulnerabilidad</th>
-                        <th  class="px-6 py-3 ">Ficha No.</th>
+                        <th  class="px-6 py-3 ">Cedula</th>
+                        <th  class="px-6 py-3 ">Accion</th>
+                        
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($diligenciamientos as $diligenciamiento)
                         <tr style="font-family: sans-serif; font-size: 14px; color: #555;">
                             <td class="px-6 py-4 ">{{ $diligenciamiento->usuario_movil }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
-                            <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
-                            <td class="px-6 py-4 ">{{ $diligenciamiento->tipo_discapacidad }}</td>
-                            <td class="px-6 py-4 ">{{ $diligenciamiento->grupo_vulnerable }}</td>
-                            <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
+                            <td class="px-6 py-4 "> 
+                                <x-filament::button  color="danger" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                                    Generar PDF
+                                </x-filament::button>
+                            </td>
+                            
                         </tr>        
                     @endforeach
                 </tbody>
