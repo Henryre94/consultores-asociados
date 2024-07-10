@@ -3,7 +3,7 @@
     <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-gray-200  ">
         <div class="flex justify-end mb-2 ">
             <div>
-                <div class="mb-2 flex justify-around">
+                <div class="mb-2 flex justify-between">
                     <x-filament::button wire:click="getFilteredData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Aplicar filtros
                     </x-filament::button>
@@ -126,6 +126,7 @@
                         <th  class="px-6 py-3 ">Nombre</th>
                         <th  class="px-6 py-3 ">Edad</th>
                         <th  class="px-6 py-3 ">Genero</th>
+                        <th  class="px-6 py-3 ">Departamentos</th>
                         <th  class="px-6 py-3 ">Discapacidad</th>
                         <th  class="px-6 py-3 ">Vulnerabilidad</th>
                         <th  class="px-6 py-3 ">Ficha No.</th>
@@ -137,6 +138,7 @@
                             <td class="px-6 py-4 ">{{ $diligenciamiento->usuario_movil }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->tipo_discapacidad }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->grupo_vulnerable }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
