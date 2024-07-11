@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\PdfController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/pdf-view', function(){
     return view('pdf_view');
 });
+
+Route::get('/generate-pdf/{diligenciamiento}',[PdfController::class, 'generatePdf'])->name('generate-pdf');

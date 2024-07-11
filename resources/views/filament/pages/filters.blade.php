@@ -142,8 +142,8 @@
                             <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
                             <td class="px-6 py-4 "> 
-                                <x-filament::button  color="danger" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
-                                    Generar PDF
+                                <x-filament::button color="danger" tag="a" href="{{ route('generate-pdf',['diligenciamiento'=> $diligenciamiento->id]) }}" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                                    Generate PDF
                                 </x-filament::button>
                             </td>
                             

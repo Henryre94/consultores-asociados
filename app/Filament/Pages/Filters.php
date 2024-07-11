@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 use App\Models\Diligenciamiento;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use Filament\Pages\Page;
 
@@ -91,5 +92,13 @@ class Filters extends Page
         }
       $this->diligenciamientos = $query->get();
     }
+
+    public function generatePdf()
+    {
+        $pdf = Pdf::loadView('test');
+        return $pdf->download('invoice.pdf');
+    }
+
+
 
 }

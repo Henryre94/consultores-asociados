@@ -1,0 +1,33 @@
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.info-block p {
+    margin: 5px 0;
+}
+table {
+    width: 100%;
+}
+
+td {
+    padding: 8px;
+    border: 1px solid rgb(191, 191, 191);
+    border-collapse: collapse;
+}
+
+th {
+    padding: 8px;
+    background-color: rgb(58, 147, 177);
+    border-radius: 5px;
+}
