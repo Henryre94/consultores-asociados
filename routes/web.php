@@ -12,3 +12,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/pdf-view', function(){
+    return view('pdf_view');
+});
