@@ -1,6 +1,6 @@
 <x-filament-panels::page>
 
-    <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-gray-200  ">
+    <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-white  ">
         <div class="flex justify-end mb-2 ">
             <div>
                 <div class="mb-2 flex justify-end">
@@ -52,7 +52,7 @@
         </div>
         
         <div>
-            <div class="flex justify-between px-4 py-3 sm:px-6 rounded mb-2 bg-gray-400">
+            <div class="flex justify-between px-4 py-3 sm:px-6 rounded mb-2 bg-gray-200">
                 <div class="flex flex-row ">
                     @if (!$choosedFilter)
                     <div>
@@ -115,32 +115,34 @@
 
             
 
-            <div class="flex justify-center items-center overflow-x-auto rounded">
+            <div class="flex justify-center" style="width: 100%; overflow-x: auto;">
                 @if ($diligenciamientos === null)
                 <div class="p-3" style="font-family: sans-serif; font-size: 16px; color: #555;">
                     No hay Diligenciamientos correspondientes a los filtros aplicados
                 </div>
             @else
-            <table class="divide-gray-200">
-                <thead class="bg-gray-400 text-left" style="font-family: sans-serif; font-size: 16px; color: #ffffff;">
+            <table class="divide-gray-400">
+                <thead class="bg-gray-200 text-left" style="font-family: sans-serif; font-size: 16px; color: #000000;">
                     <tr>
-                        <th  class="px-6 py-3 ">Nombre</th>
                         <th  class="px-6 py-3 ">Ficha No.</th>
+                        <th  class="px-6 py-3 ">Nombres</th>
+                        <th  class="px-6 py-3 ">Apellidos</th>
+                        <th  class="px-6 py-3 ">Departamento</th>
                         <th  class="px-6 py-3 ">Edad</th>
                         <th  class="px-6 py-3 ">Genero</th>
-                        <th  class="px-6 py-3 ">Cedula</th>
                         <th  class="px-6 py-3 ">Accion</th>
                         
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($diligenciamientos as $diligenciamiento)
-                        <tr style="font-family: sans-serif; font-size: 14px; color: #555;">
-                            <td class="px-6 py-4 ">{{ $diligenciamiento->usuario_movil }}</td>
+                        <tr style="font-family: sans-serif; font-size: 14px; color: #555;white-space: no-wrap;">
                             <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->primer_nombre }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->segundo_nombre }}</td>
+                            <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
-                            <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
                             <td class="px-6 py-4 "> 
                                 <x-filament::button color="danger" tag="a" href="{{ route('generate-pdf',['diligenciamiento'=> $diligenciamiento->id]) }}" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                                     Generate PDF

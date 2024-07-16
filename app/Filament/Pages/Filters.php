@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 use App\Models\Diligenciamiento;
+use App\Models\Logo;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Filament\Pages\Page;
@@ -22,6 +23,8 @@ class Filters extends Page
     
     public $diligenciamientos;
 
+    public $appGeoValues;
+
     public $choosedFilter = false;
 
     public $selectedOption = '';
@@ -32,8 +35,9 @@ class Filters extends Page
 
     public function mount(){
 
-    
+        $this->appGeoValues = Logo::query()->get();
 
+   
     }
 
     public function choosedFilterFunction()
@@ -55,6 +59,9 @@ class Filters extends Page
         $this->selectedColums = [];
         $this->filterValues = [];
         $this->diligenciamientos = null;
+        $this->choosedFilter = false; 
+        $this->selectedOption = '';
+        $this->inputValue = '';
 
     }
 
@@ -92,13 +99,5 @@ class Filters extends Page
         }
       $this->diligenciamientos = $query->get();
     }
-
-    public function generatePdf()
-    {
-        $pdf = Pdf::loadView('test');
-        return $pdf->download('invoice.pdf');
-    }
-
-
 
 }

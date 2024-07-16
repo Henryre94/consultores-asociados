@@ -7,9 +7,11 @@ namespace App\Providers;
 use App\Models\Diligenciamiento;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Logo;
 use App\Policies\DiligenciamientoPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
+use App\Policies\LogoPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
         Diligenciamiento::class => DiligenciamientoPolicy::class,
         User::class => UserPolicy::class,
+        Logo::class => LogoPolicy::class,
     ];
 
     /**

@@ -11,14 +11,51 @@ class Dashboard extends Page
 
     protected static string $view = 'filament.pages.dashboard';
 
-    public $logo = "images/icon.png";
+    public $consultoresLogo = "storage/images/consultores_icon.png";
 
-    public $map = "images/map.png";
+    public $mapPath = "storage/images/departamento_map.jpg";
 
+    public $alcaldiaPath = "storage/images/alcaldia_icon.jpg";
+
+    public $mapExist;
+
+    public $alcaldiaLogoExist;
+
+    
 
     public function getTitle(): string | Htmlable
 {
     return __('');
 }
+
+
+
+public function mount(){
+
+    $mapPath = "storage/images/departamento_map.jpg";
+    $alcaldiaPath = "storage/images/alcaldia_icon.jpg";
+
+    if(file_exists(public_path($mapPath)) === true)
+    {
+        $this->mapExist = true;
+    }else
+    {
+        $this->mapExist = false;
+    }
+
+    if(file_exists(public_path($alcaldiaPath)) === true)
+    {
+        $this->alcaldiaLogoExist = true;
+    }else
+    {
+        $this->alcaldiaLogoExist = false;
+    }
+
+
+
+}
+
+
+
 
 }
