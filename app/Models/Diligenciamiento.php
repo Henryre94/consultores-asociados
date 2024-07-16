@@ -4,45 +4,50 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Diligenciamiento extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'usuario_movil',
+        'user_id',
         'fecha_operacion',
-        'gps_latitud',
-        'gps_longitud',
-        'gps_altitud',
+        'gps_latitude',
+        'gps_longitude',
+        'gps_altitude',
         'pdf',
         'version',
         'fuente',
-        'declaracion_legal',
+        'legal_declaration',
         'ficha_no',
         'foto_sticker',
+        'foto_unidad_residencial',
         'departamento',
         'municipio',
         'centro_poblado',
         'direccion',
+        'barrio',
         'informante_calificado',
-        'fecha_diligenciamiento',
+        'declaracion_juramentada',
         'primer_nombre',
         'segundo_nombre',
         'primer_apellido',
         'segundo_apellido',
         'excepciones',
         'firma',
+        'firma_link',
         'no_firma_por',
         'correo_electronico',
         'telefono_contacto',
         'tipo_vivienda',
-        'material_paredes',
         'material_pisos',
+        'material_paredes',
         'servicios_publicos',
         'cuartos',
         'grupos_presupuesto',
         'hogar_numero',
+        'de',
         'vivienda_ocupada',
         'tipo_sanitario',
         'agua_consumo',
@@ -55,6 +60,7 @@ class Diligenciamiento extends Model
         'tiene_cocina',
         'ubicacion_cocina',
         'combustible_cocina',
+        'bienes_servicios',
         'gasto_alimentacion',
         'gasto_transporte',
         'gasto_educacion',
@@ -70,7 +76,7 @@ class Diligenciamiento extends Model
         'total_documentos_validos',
         'mujeres_8_mas',
         'participo_elecciones',
-        'puesto_votacion',
+        'lugar_votacion',
         'tipo_ab',
         'apellidos_completos',
         'nombres_completos',
@@ -80,15 +86,15 @@ class Diligenciamiento extends Model
         'numero_documento',
         'fecha_nacimiento',
         'edad',
-        'clasificacion',
         'limitantes_permanentes',
-        'tipo_discapacidad',
         'regimen_salud',
         'problema_salud_30_dias',
         'acudio_servicios_salud',
         'fue_atendido',
+        'aplica_mujeres_8_59',
         'embarazada',
         'hijos_vivos',
+        'donde_permanece_semana',
         'desayuno_almuerzo',
         'sabe_leer_escribir',
         'actualmente_estudia',
@@ -101,4 +107,14 @@ class Diligenciamiento extends Model
         'experimento_discriminacion',
         'victima_violencia',
     ];
+
+    /**
+     * Get the user that owns the Diligenciamiento
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
