@@ -27,6 +27,10 @@ class Filters extends Page
 
     public $choosedFilter = false;
 
+    public $openModal = false;
+
+    public $noFilterApplied = false;
+
     public $selectedOption = '';
 
     public $selectedValue;
@@ -86,8 +90,15 @@ class Filters extends Page
     public function getFilteredData()
     {
 
-        $query = Diligenciamiento::query();
+     $query = Diligenciamiento::query();
 
+
+    if(count($this->selectedColums) === 0)
+    {
+        $this->noFilterApplied = true;
+        $this->openModal = true;
+    }else
+    {
         if (count($this->selectedColums) === count($this->filterValues)) {
             
             foreach ($this->selectedColums as $index => $selectedColum) {
@@ -96,8 +107,24 @@ class Filters extends Page
 
                 $query->where($selectedColum, '=', $filterValue);
             }
+            $this->diligenciamientos = $query->get();
         }
-      $this->diligenciamientos = $query->get();
+        
     }
+
+    }
+
+    public function generateModal()
+    {
+        $this->openModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->noFilterApplied = false;
+        $this->openModal = false;
+        
+    }
+
 
 }

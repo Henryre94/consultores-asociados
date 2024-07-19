@@ -1,6 +1,37 @@
 <x-filament-panels::page>
 
     <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-white  ">
+        @if ($openModal)
+        <div class=" alert" style="
+        background-color: #f8d7da; 
+        color: #721c24; 
+        border: 1px solid #f5c6cb; 
+        padding: 20px; 
+        margin-bottom: 15px; 
+        position: fixed;
+        top: 0;
+        left: 45%;
+        z-index: 1000; 
+        border-radius: 5px;
+        display: flex;
+        align-items: center;">
+            <div style="font-family:Arial, Helvetica, sans-serif">
+                @if ($noFilterApplied)
+                    <p>Por Favor seleccione filtros para iniciar la busqueda.</p>
+                @else
+                    <p>El filtro que ha escogido ya ha sido seleccionado.</p>
+                @endif
+            </div>
+            <div>
+                <x-filament::icon-button
+                     icon="heroicon-m-x-mark"
+                     color="danger" 
+                     wire:click="closeModal"
+                >
+                </x-filament::icon-button>
+            </div>
+          </div>
+        @endif
         <div class="flex justify-end mb-2 ">
             <div>
                 <div class="mb-2 flex justify-end">
@@ -10,11 +41,12 @@
                     <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Eliminar filtros
                     </x-filament::button>
-                    <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                    <x-filament::button wire:click="generateModal" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Generar Graficas
                     </x-filament::button>
 
                 </div>
+
                 <div class= "p-1">
                     @if (!empty($selectedColums) && !empty($filterValues) && count($selectedColums) === count($filterValues))
                     <div class="bg-gray-400 p-1 rounded">

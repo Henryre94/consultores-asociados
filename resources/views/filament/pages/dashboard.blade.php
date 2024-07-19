@@ -26,7 +26,5 @@
                  <img src="{{ $mapPath }}" alt="Mapa Departamento" class="h-32 w-auto"> 
             @endif
         </div>
-        
-
     </div>
 </x-filament-panels::page>

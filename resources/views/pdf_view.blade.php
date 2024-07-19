@@ -40,13 +40,22 @@
         }
     </style>
 </head>
-<body>
+<body style="font-family:Arial, Helvetica, sans-serif">
     <div class="container">
         <div >
             <div >
                 <div style="text-align: center;">
-                    <img src="{{ public_path('storage/images/consultores_icon.png') }}" alt="Consultores Asociados S.A.S. Logo" class="w-32 h-auto">
-                    <img src="{{ public_path('storage/images/alcaldia_icon.jpg') }}" alt="Mapa del departamento" class="w-32 h-32">
+                    @if (public_path('storage/images/consultores_icon.png'))
+                         <img src="{{ public_path('storage/images/consultores_icon.png') }}" alt="Consultores Asociados S.A.S. Logo" class="w-32 h-auto">
+                     @else
+                        <div></div>
+                    @endif
+                    @if (file_exists(public_path('storage/images/alcaldia_icon.jpg')))
+                        <img src="{{ public_path('storage/images/alcaldia_icon.jpg') }}" alt="Mapa de la alcaldia" class="w-32 h-32">
+                    @else
+                        <div></div>
+                    @endif
+                    
                 </div>
 
             </div>
@@ -99,7 +108,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: auto; margin-top: 8px;">
+            <div style="width: auto; margin-top: 8px; ">
                     <table>
                         <thead style="background-color: gray; text-align: left; ">
                             <tr>
@@ -569,7 +578,11 @@
             </div>
         </div>
         <div style="text-align: left;">
-            <img src="{{ public_path('storage/images/alcaldia_icon.jpg') }}" alt="Mapa del departamento" class="w-32 h-32">
+            @if (file_exists(public_path('storage/images/alcaldia_icon.jpg')))
+                <img src="{{ public_path('storage/images/alcaldia_icon.jpg') }}" alt="Mapa de la alcaldia" class="w-32 h-32">
+            @else
+                <div></div>
+             @endif
         </div>
 </body>
 </html>

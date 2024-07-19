@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
+use App\Models\Logo;
 
 class Dashboard extends Page
 {
@@ -21,6 +22,8 @@ class Dashboard extends Page
 
     public $alcaldiaLogoExist;
 
+    public $logos;
+
     
 
     public function getTitle(): string | Htmlable
@@ -31,6 +34,8 @@ class Dashboard extends Page
 
 
 public function mount(){
+
+    $this->logos = Logo::query()->get();
 
     $mapPath = "storage/images/departamento_map.jpg";
     $alcaldiaPath = "storage/images/alcaldia_icon.jpg";
