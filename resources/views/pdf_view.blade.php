@@ -96,12 +96,18 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Foto Sticker: </strong>
+                                <strong>Foto Sticker:</strong>
+                                <div style="text-align: center;">
+                                    <img src="{{ $diligenciamiento->foto_sticker }}" alt="Foto Sticker" class="w-64 h-64">
+                               </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Foto Unidad Residencial: </strong>                         
+                                <strong>Foto Unidad Residencial: </strong> 
+                                <div style="text-align: center;">
+                                    <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto Sticker" class="w-64 h-64">    
+                                </div>                        
                             </td>
                         </tr>
        
@@ -143,11 +149,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                      <strong>Declaración juramentada: bajo la gravedad de juramento declaro que la información suministrada es verdadera
-                                        y autorizo que sea verificada con otras fuentes de información y que se actualice de forma automática a través
-                                        del cruce de registros administrativos u otras fuentes que la Alcaldia Municipal defina. Cualquier presunta
-                                        falsedad identificada a través de cruces de bases de datos generará la exclusión del Sistema,
-                                        independientemente de las acciones legales que haya lugar.</strong>
+                                      <strong>Declaracion juramentada: </strong> {{ $diligenciamiento->declaracion_juramentada }}
                                 </td>
                             </tr>
                             <tr>
@@ -177,12 +179,20 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Firma :</strong> {{ $diligenciamiento->firma }}
+                                    <strong>Firma :</strong>
+                                        @if($diligenciamiento->firma === 1)
+                                            Si
+                                        @else 
+                                            No
+                                        @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Firma:</strong> Aqui imagen de la firma
+                                    <strong>Firma:</strong> 
+                                    <div style="text-align: center;">
+                                        <img src="{{ $diligenciamiento->firma_link }}" alt="Foto Firma" class="w-128 h-64">    
+                                    </div> 
                                 </td>
                             </tr>
                             <tr>
@@ -274,12 +284,22 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>¿El agua llega los siete dias de la semana?: </strong>{{ $diligenciamiento->agua_7_dias }}
+                                <strong>¿El agua llega los siete dias de la semana?: </strong>
+                                @if($diligenciamiento->agua_7_dias === 1)
+                                     Si
+                                @else 
+                                      No
+                                 @endif
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>En los días que llega el agua, ¿el suministro es de 24 horas?: </strong> {{ $diligenciamiento->agua_24_horas }}
+                                <strong>En los días que llega el agua, ¿el suministro es de 24 horas?: </strong>
+                                @if($diligenciamiento->agua_24_hora === 1)
+                                    Si
+                                @else 
+                                    No
+                                @endif
                             </td>
                         </tr>
                         <tr>
@@ -301,7 +321,12 @@
                             <td><strong>¿Cómo eliminan principalmente la basura en este hogar?: </strong> {{ $diligenciamiento->eliminacion_basura }}</td>
                         </tr>
                         <tr>
-                            <td><strong>¿El hogar tiene cocina?: </strong> {{ $diligenciamiento->tiene_cocina }}</td>
+                            <td><strong>¿El hogar tiene cocina?: </strong>
+                                @if($diligenciamiento->tiene_cocina === 1)
+                                    Si
+                                @else 
+                                    No
+                                @endif
                         </tr>
                         <tr>
                             <td><strong>La cocina o sitio para preparar los alimentos es: </strong> {{ $diligenciamiento->ubicacion_cocina }}</td>
@@ -382,7 +407,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Número de Orden: </strong> 1</td>
+                            <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
                         </tr>
                         <tr>
                             <td><strong>Apellidos Completos: </strong> {{ $diligenciamiento->apellidos_completos }}</td>
@@ -417,7 +442,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Número de Orden: </strong> 1</td>
+                            <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
                         </tr>
                         <tr>
                             <td><strong>¿Por enfermedad, accidente o de nacimiento tiene limitantes permanentes para?: </strong> {{ $diligenciamiento->limitantes_permanentes }}</td>
@@ -432,13 +457,30 @@
                             <td><strong>¿Acudió a una institución prestadora de servicios de salud, un médico general, especialista, odontólogo, terapeuta o profesional de la salud?: </strong> {{ $diligenciamiento->acudio_servicios_salud }}</td>
                         </tr>
                         <tr>
-                            <td><strong>¿Lo atendieron?: </strong> {{ $diligenciamiento->fue_atendido }}</td>
+                            <td><strong>¿Lo atendieron?: </strong>
+                                @if($diligenciamiento->fue_atendido === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Mujeres 8 años y más (aplica a mujeres entre 8 y 59 años)</strong></td>
+                            <td><strong>Mujeres 8 años y más (aplica a mujeres entre 8 y 59 años): </strong>
+                                @if($diligenciamiento->aplica_mujeres_8_59 === 1)
+                                    Si
+                                @else 
+                                    No
+                                @endif
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>¿Está embarazada?: </strong> {{ $diligenciamiento->embarazada }}</td>
+                            <td><strong>¿Está embarazada?: </strong>
+                                @if($diligenciamiento->embarazada === 1)
+                                    Si
+                                @else 
+                                    No
+                                @endif
                         </tr>
                         <tr>
                             <td><strong>¿Ha tenido hijos nacidos vivos?: </strong> {{ $diligenciamiento->hijos_vivos }}</td>
@@ -460,7 +502,13 @@
                             <td><strong>¿Dónde o con quién permanece durante la mayor parte del tiempo entre semana?: </strong> {{ $diligenciamiento->donde_permanece_semana }}</td>
                         </tr>
                         <tr>
-                            <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo entre semana?: </strong> {{ $diligenciamiento->desayuno_almuerzo }}</td>
+                            <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo entre semana?: </strong>
+                                @if($diligenciamiento->donde_permanece_semana === 1)
+                                    Si
+                                @else 
+                                    No
+                                @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -474,19 +522,36 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Número de Orden: </strong> 1</td>
+                            <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
                         </tr>
                         <tr>
-                            <td><strong>¿Sabe leer y escribir?: </strong> {{ $diligenciamiento->sabe_leer_escribir }}</td>
+                            <td><strong>¿Sabe leer y escribir?: </strong>
+                                @if($diligenciamiento->sabe_leer_escribir === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
                         </tr>
                         <tr>
-                            <td><strong>¿Actualmente estudia (asiste a preescolar, colegio o universidad)?: </strong> {{ $diligenciamiento->actualmente_estudia }}</td>
+                            <td><strong>¿Actualmente estudia (asiste a preescolar, colegio o universidad)?: </strong>
+                                @if($diligenciamiento->actualmente_estudia === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
+                                </td>
                         </tr>
                         <tr>
                             <td><strong>¿Cuál es el nivel educativo más alto alcanzado y el último año o grado aprobado en ese nivel?: </strong> {{ $diligenciamiento->nivel_educativo }}</td>
                         </tr>
                         <tr>
-                            <td><strong>¿Cotiza a un fondo de pensiones?: </strong> {{ $diligenciamiento->cotiza_pensiones }}</td>
+                            <td><strong>¿Cotiza a un fondo de pensiones?: </strong>
+                                @if($diligenciamiento->cotiza_pensiones === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -500,7 +565,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Número de Orden: </strong> 1</td>
+                            <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
                         </tr>
                         <tr>
                             <td><strong>¿Cuál fue su actividad principal en el último mes?: </strong> {{ $diligenciamiento->actividad_principal }}</td>
@@ -523,17 +588,29 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Número de Orden: </strong> 1</td>
+                            <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
                         </tr>
                         <tr>
                             <td><strong>Pertenece a algun grupo poblacional vulnerable?:</strong> {{ $diligenciamiento->grupo_vulnerable }}</td>
                         </tr>
                         <tr>
                             <td><strong>¿Ha experimentado usted o algún miembro de su hogar alguna forma de discriminación en los últimos 12
-                                meses? (racial, étnica, de género, orientación sexual, etc.):</strong>{{ $diligenciamiento->experimento_discriminacion }}</td>
+                                meses? (racial, étnica, de género, orientación sexual, etc.):</strong>
+                                @if($diligenciamiento->experimento_discriminacion === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>¿Ha sido víctima de violencia física, emocional o sexual en los últimos 12 meses?: </strong> {{ $diligenciamiento->victima_violencia }}</td>
+                            <td><strong>¿Ha sido víctima de violencia física, emocional o sexual en los últimos 12 meses?: </strong>
+                                @if($diligenciamiento->victima_violencian === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -547,7 +624,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Usted participo en las ultimas contiendas electorales?: </strong>{{ $diligenciamiento->participo_elecciones }}</td>
+                            <td><strong>Usted participo en las ultimas contiendas electorales?: </strong>
+                                @if($diligenciamiento->participo_elecciones  === 1)
+                                Si
+                                @else 
+                                No
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>¿En que lugar de Votación?: C</strong> {{ $diligenciamiento->lugar_votacion }} </td>
@@ -562,7 +645,7 @@
                             <td><strong>Fecha diligenciamiento: </strong>{{ $diligenciamiento->fecha_diligenciamiento }}</td>
                         </tr>
                         <tr>
-                            <td><strong>Usuario: </strong> {{ $diligenciamiento->usuario_movil }}</td>
+                            <td><strong>Usuario: </strong> {{ $diligenciamiento->user_id }}</td>
                         </tr>
                         <tr>
                             <td><strong>Latitud: </strong> {{ $diligenciamiento->gps_latitude }}</td>
