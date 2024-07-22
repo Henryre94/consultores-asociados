@@ -143,6 +143,8 @@
                 </div>
             </div>
 
+            @livewire(\App\Filament\Widgets\LineChart::class, ['prueba' => "test"])
+
             <!-- Table section -->
 
             

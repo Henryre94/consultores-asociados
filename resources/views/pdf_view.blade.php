@@ -46,7 +46,7 @@
             <div >
                 <div style="text-align: center;">
                     @if (public_path('storage/images/consultores_icon.png'))
-                         <img src="{{ public_path('storage/images/consultores_icon.png') }}" alt="Consultores Asociados S.A.S. Logo" class="w-32 h-auto">
+                         <img src="{{ public_path('storage/images/consultores_icon.jpg') }}" alt="Consultores Asociados S.A.S. Logo" class="w-32 h-auto">
                      @else
                         <div></div>
                     @endif

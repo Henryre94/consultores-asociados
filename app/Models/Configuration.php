@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Logo extends Model
+class Configuration extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'logo_consultores',
-        'logo_alcaldia',
-        'logo_departamento',
+        'departamento',
+        'alcaldia',
+        'alcaldia_logo_active',
+        'departamento_logo_active',
+        'status_complete'
     ];
 }

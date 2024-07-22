@@ -9,9 +9,7 @@
             </div>
             <div class="flex justify-center items-center">
                 @if (!$alcaldiaLogoExist)
-                <div class="flex justify-center items-center border-2 border-gray-200 h-32 p-4 rounded">
-                    <p style="color:lightgray">Por favor agregar logo de la alcaldia</p>
-                </div>
+                <div></div>
                  @else
                     <img src="{{ $alcaldiaPath }}" alt="Logo acaldia" class="h-32 w-auto"> 
                 @endif
@@ -19,9 +17,7 @@
         </div>
         <div class="flex justify-center items-center mt-2">
             @if (!$mapExist)
-                <div class="flex justify-center items-center border-2 border-gray-200 h-32 p-4 rounded">
-                    <p style="color:lightgray">Por favor agregar mapa del departamento</p>
-                </div>
+                <div></div>
              @else
                  <img src="{{ $mapPath }}" alt="Mapa Departamento" class="h-32 w-auto"> 
             @endif

@@ -12,7 +12,7 @@ class Dashboard extends Page
 
     protected static string $view = 'filament.pages.dashboard';
 
-    public $consultoresLogo = "storage/images/consultores_icon.png";
+    public $consultoresLogo = "storage/images/consultores_icon.jpg";
 
     public $mapPath = "storage/images/departamento_map.jpg";
 
@@ -23,7 +23,6 @@ class Dashboard extends Page
     public $alcaldiaLogoExist;
 
     public $logos;
-
     
 
     public function getTitle(): string | Htmlable

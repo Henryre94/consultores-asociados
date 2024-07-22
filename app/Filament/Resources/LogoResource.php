@@ -23,8 +23,6 @@ class LogoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('departamento'),
-                Forms\Components\TextInput::make('municipio'),
                 Forms\Components\FileUpload::make('logo_alcaldia')
                 ->preserveFilenames()
                 ->image()

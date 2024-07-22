@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('logos');
-        Schema::create('logos', function (Blueprint $table) {
+        Schema::create('configurations', function (Blueprint $table) {
             $table->id();
-            $table->string('logo_consultores')->default(false);
-            $table->string('logo_alcaldia')->default(false);
-            $table->string('logo_departamento')->default(false);
+            $table->string('departamento')->nullable();
+            $table->string('alcaldia')->nullable();
+            $table->boolean('alcaldia_logo_active')->nullable();
+            $table->boolean('departamento_logo_active')->nullable();
+            $table->boolean('status_complete')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logos');
+        Schema::dropIfExists('configurations');
     }
 };

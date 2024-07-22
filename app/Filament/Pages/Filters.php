@@ -37,13 +37,6 @@ class Filters extends Page
 
     public $filteredOptions = '';
 
-    public function mount(){
-
-        $this->appGeoValues = Logo::query()->get();
-
-   
-    }
-
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
