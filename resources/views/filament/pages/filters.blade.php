@@ -30,7 +30,7 @@
                 >
                 </x-filament::icon-button>
             </div>
-          </div>
+        </div>
         @endif
         <div class="flex justify-end mb-2 ">
             <div>

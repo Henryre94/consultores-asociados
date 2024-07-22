@@ -13,11 +13,12 @@ class Configuracion extends Page
     protected static string $view = 'filament.pages.Configuracion';
 
     public $configurations;
-
-    public $departamento;
-    public $municipio;
+    public $departamento = '';
+    public $municipio = '';
     public $activateAlcaldiaLogo = false;
     public $activateDepartamentoLogo = false;
+    public $isEntriesComplete;
+    public $alert = false;
 
     protected $rules = [
         'departamento' => 'required|string|max:255',
@@ -39,10 +40,15 @@ public function mount(): void
 
 public function saveConfiguration()
     {
-        $this->validate();
-
         $isComplete = $this->departamento !== null && $this->municipio !== null;
+        
 
+        if($this->departamento === '')
+        {
+            $this->alert = true;
+        }
+        else
+        {
         // Save to database
         // Assuming you have a Configuration model and table
         \App\Models\Configuration::create([
@@ -52,6 +58,9 @@ public function saveConfiguration()
             'departamento_logo_active' => $this->activateDepartamentoLogo,
             'status_complete' => $isComplete,
         ]);
+        }
+
+
 
         if($isComplete === true){
             $this->configurations = Configuration::query()->get();
@@ -62,4 +71,13 @@ public function saveConfiguration()
         session()->flash('message', 'Configuración guardada correctamente.');
     }
 
+    public function resetValues(){
+        Configuration::query()->delete();
+        $this->mount();
+        return redirect()->back()->with('success', 'Todos los valores han sido borrados.');
+    }
+
+    public function closeAlert() {
+        $this->alert = false;
+    }
 }
