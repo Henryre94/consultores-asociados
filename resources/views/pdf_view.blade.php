@@ -66,7 +66,7 @@
             </div>
             <div>
                 <p>
-                    Formulario FICHA DE CARACTERIZACIÓN POBLACIONAL - CHIBOLO
+                    Formulario FICHA DE CARACTERIZACIÓN POBLACIONAL - {{ $configuration->alcaldia }}
                 </p>
             </div>
             <div style="width: auto; margin-top: 8px;">

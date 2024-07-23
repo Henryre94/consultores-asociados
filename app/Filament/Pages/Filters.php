@@ -55,6 +55,7 @@ class Filters extends Page
     public function mount(){
 
         $this->configurations = Configuration::query()->get();
+
     }
 
     public function choosedFilterFunction()

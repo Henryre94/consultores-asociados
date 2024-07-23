@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ConfigurationController;
 
 
 /*
