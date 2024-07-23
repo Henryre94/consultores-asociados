@@ -43,7 +43,7 @@ public function saveConfiguration()
         $isComplete = $this->departamento !== null && $this->municipio !== null;
         
 
-        if($this->departamento === '')
+        if($this->departamento === '' || $this->municipio === '')
         {
             $this->alert = true;
         }

@@ -20,4 +20,4 @@ Route::get('/pdf-view', function(){
     return view('pdf_view');
 });
 
-Route::get('/generate-pdf/{diligenciamiento}/',[PdfController::class, 'generatePdf'])->name('generate-pdf');
+Route::get('/generate-pdf/{diligenciamiento}/{configuration}',[PdfController::class, 'generatePdf'])->name('generate-pdf');

@@ -41,7 +41,7 @@
                     <x-filament::button wire:click="resetFilterData" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Eliminar filtros
                     </x-filament::button>
-                    <x-filament::button wire:click="generateModal" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                    <x-filament::button wire:click="generateGraphics" color="info" class="me-1" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                         Generar Graficas
                     </x-filament::button>
 
@@ -49,7 +49,7 @@
 
                 <div class= "p-1">
                     @if (!empty($selectedColums) && !empty($filterValues) && count($selectedColums) === count($filterValues))
-                    <div class="bg-gray-400 p-1 rounded">
+                    <div class="bg-gray-200 p-1 rounded">
                         <table class="text-left" style="width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 12px; color: #555;">
                             <thead>
                                 <tr>
@@ -69,7 +69,13 @@
                                             </x-filament::button>
                                         </div>
                                     </td >
-                                        <td class="p-1">{{ $selectedColum }}</td>
+                                        <td class="p-1">
+                                            @if ($selectedColum === 'edad')
+                                            {{ $selectedColum }} {{ $conditions[$index] }}
+                                            @else
+                                            {{ $selectedColum }}
+                                            @endif
+                                        </td>
                                         <td class="p-1">{{ $filterValues[$index] }}</td>
                                     </tr>
                                 @endforeach
@@ -115,7 +121,7 @@
                             </x-filament::input.wrapper>
                         </div>
                         <div class="me-1">
-                            @if ($selectedOption === "edad" || $selectedOption === "ficha_no."  )
+                            @if ($selectedOption === "ficha_no.")
                                 <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
                                  <x-filament::input
                                    type="number"
@@ -123,6 +129,31 @@
                                    style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;"
                                 />
                                 </x-filament::input.wrapper>
+                            @elseif ($selectedOption === "edad")
+                            <div class="flex">
+                                <div class="me-1">
+                                    <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                        <x-filament::input.select wire:model="condition" style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;">
+                                            <option style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;" value="">Seleccione una condicion</option>
+                                            <option style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;" value="=">igual a</option>
+                                            <option style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;" value=">">Mayor</option>
+                                            <option style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;" value="<">Menor</option>
+                                            <option style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;" value=">=">Mayor o igual</option>
+                                            <option style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;" value="<=">Menor o igual</option>
+                                        </x-filament::input.select>
+                                        </x-filament::input.wrapper>
+                                </div>
+                                <div class="me-1">
+                                    <x-filament::input.wrapper  style="background-color: rgb(245, 245, 245);">
+                                        <x-filament::input
+                                          type="number"
+                                          wire:model="inputValue"
+                                          style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;"
+                                       />
+                                   </x-filament::input.wrapper>
+                                </div>
+                            </div>
+                            
                             @else
                             <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
                                 <x-filament::input
@@ -143,13 +174,13 @@
                 </div>
             </div>
 
-            @livewire(\App\Filament\Widgets\LineChart::class, ['prueba' => "test"])
+           
 
             <!-- Table section -->
 
             
 
-            <div class="flex justify-center" style="width: 100%; overflow-x: auto;">
+            <div class="flex justify-center" style="width: 100%; overflow-x: auto; max-height: 1000px;">
                 @if ($diligenciamientos === null)
                 <div class="p-3" style="font-family: sans-serif; font-size: 16px; color: #555;">
                     No hay Diligenciamientos correspondientes a los filtros aplicados
@@ -178,7 +209,7 @@
                             <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                             <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
                             <td class="px-6 py-4 "> 
-                                <x-filament::button color="danger" tag="a" href="{{ route('generate-pdf',['diligenciamiento'=> $diligenciamiento->id]) }}" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                                <x-filament::button color="danger" tag="a" href="{{ route('generate-pdf',['diligenciamiento'=> $diligenciamiento->id, 'configuration' => $configurations[0]]) }}" style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
                                     Generate PDF
                                 </x-filament::button>
                             </td>
@@ -190,5 +221,14 @@
             @endif 
             </div>
         </div>
+        @if ($showGraphics)
+        <div style="margin-top: 150px">
+            @livewire(\App\Filament\Widgets\PieChart::class, ['data' => $diligenciamientos])
+            @livewire(\App\Filament\Widgets\BarChart::class, ['data' => $diligenciamientos])
+        </div>
+        @else
+        <div></div>
+        @endif
+
     </div>
 </x-filament-panels::page>

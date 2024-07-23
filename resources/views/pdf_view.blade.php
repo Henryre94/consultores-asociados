@@ -61,7 +61,7 @@
             </div>
             <div>
                 <p style="text-align: center;">
-                    CARACTERIZACIÓN PROBLACIONAL CHIBOLO - MAGDALENA 2024
+                    CARACTERIZACIÓN PROBLACIONAL {{ $configuration->alcaldia }} - {{ $configuration->departamento }} 2024
                 </p>
             </div>
             <div>

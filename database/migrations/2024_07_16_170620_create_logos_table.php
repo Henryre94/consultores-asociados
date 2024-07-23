@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::dropIfExists('logos');
         Schema::create('logos', function (Blueprint $table) {
             $table->id();
-            $table->string('logo_consultores')->default(false);
-            $table->string('logo_alcaldia')->default(false);
-            $table->string('logo_departamento')->default(false);
+            $table->string('logo_consultores')->nullable();
+            $table->string('logo_alcaldia')->nullable();
+            $table->string('logo_departamento')->nullable();
             $table->timestamps();
         });
     }

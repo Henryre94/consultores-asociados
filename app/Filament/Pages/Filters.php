@@ -2,8 +2,10 @@
 
 namespace App\Filament\Pages;
 use App\Models\Diligenciamiento;
+use App\Models\Configuration;
 use App\Models\Logo;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\Support\Htmlable;
 
 use Filament\Pages\Page;
 
@@ -17,11 +19,17 @@ class Filters extends Page
 
     public $selectedColums = [];
 
+    public $conditions = [];
+
     public $inputValue = '';
+
+    public $condition = '';
 
     public $variable;
     
     public $diligenciamientos;
+
+    public $configurations;
 
     public $appGeoValues;
 
@@ -37,6 +45,18 @@ class Filters extends Page
 
     public $filteredOptions = '';
 
+    public $showGraphics = false;
+
+    public function getTitle(): string | Htmlable
+    {
+        return __('Filtros');
+    }
+
+    public function mount(){
+
+        $this->configurations = Configuration::query()->get();
+    }
+
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
@@ -47,25 +67,33 @@ class Filters extends Page
     {
         $this->selectedColums[] = $this->selectedOption;
         $this->filterValues[] = $this->inputValue;
+        $this->conditions[] = $this->condition;
         $this->choosedFilter = false; 
+        $this->showGraphics = false;
         $this->selectedOption = '';
         $this->inputValue = ''; 
+        $this->condition = '';
     }
     public function resetFilterData()
     {
         $this->selectedColums = [];
         $this->filterValues = [];
+        $this->conditions = [];
         $this->diligenciamientos = null;
         $this->choosedFilter = false; 
+        $this->showGraphics = false;
         $this->selectedOption = '';
         $this->inputValue = '';
+        $this->condition = '';
 
     }
 
     public function removeFilter($index)
     {
+        $this->showGraphics = false;
         unset($this->selectedColums[$index]);
         unset($this->filterValues[$index]);
+        unset($this->conditions[$index]);
 
         // Re-index arrays to prevent gaps in the indices
         $this->selectedColums = array_values($this->selectedColums);
@@ -77,6 +105,10 @@ class Filters extends Page
         {
             $this->getFilteredData();
         }  
+    }
+
+    public function generateGraphics() {
+        $this->showGraphics = true;
     }
 
     
@@ -95,10 +127,19 @@ class Filters extends Page
         if (count($this->selectedColums) === count($this->filterValues)) {
             
             foreach ($this->selectedColums as $index => $selectedColum) {
-                
-                $filterValue = $this->filterValues[$index];
 
-                $query->where($selectedColum, '=', $filterValue);
+                if($selectedColum === 'edad')
+                {
+                    $filterValue = $this->filterValues[$index];
+
+                    $condition = $this->conditions[$index];
+                    
+                    $query->where($selectedColum, $condition, $filterValue);
+                }else{
+                    $filterValue = $this->filterValues[$index];
+
+                    $query->where($selectedColum, '=', $filterValue);
+                }        
             }
             $this->diligenciamientos = $query->get();
         }
