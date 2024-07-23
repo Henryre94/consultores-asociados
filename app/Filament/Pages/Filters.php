@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Pages;
+
 use App\Models\Diligenciamiento;
 use App\Models\Configuration;
 use App\Models\Logo;
@@ -26,7 +27,7 @@ class Filters extends Page
     public $condition = '';
 
     public $variable;
-    
+
     public $diligenciamientos;
 
     public $configurations;
@@ -35,7 +36,7 @@ class Filters extends Page
 
     public $choosedFilter = false;
 
-    public $openModal = false;
+    public $openAlert = false;
 
     public $noFilterApplied = false;
 
@@ -47,12 +48,13 @@ class Filters extends Page
 
     public $showGraphics = false;
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         return __('Filtros');
     }
 
-    public function mount(){
+    public function mount()
+    {
 
         $this->configurations = Configuration::query()->get();
 
@@ -61,7 +63,7 @@ class Filters extends Page
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
-        
+
     }
 
     public function resetFilter()
@@ -69,10 +71,10 @@ class Filters extends Page
         $this->selectedColums[] = $this->selectedOption;
         $this->filterValues[] = $this->inputValue;
         $this->conditions[] = $this->condition;
-        $this->choosedFilter = false; 
+        $this->choosedFilter = false;
         $this->showGraphics = false;
         $this->selectedOption = '';
-        $this->inputValue = ''; 
+        $this->inputValue = '';
         $this->condition = '';
     }
     public function resetFilterData()
@@ -81,7 +83,7 @@ class Filters extends Page
         $this->filterValues = [];
         $this->conditions = [];
         $this->diligenciamientos = null;
-        $this->choosedFilter = false; 
+        $this->choosedFilter = false;
         $this->showGraphics = false;
         $this->selectedOption = '';
         $this->inputValue = '';
@@ -99,66 +101,57 @@ class Filters extends Page
         // Re-index arrays to prevent gaps in the indices
         $this->selectedColums = array_values($this->selectedColums);
         $this->filterValues = array_values($this->filterValues);
-        if($this->selectedColums === [])
-        {
-            $this->diligenciamientos = null;  
-        }else
-        {
+        if ($this->selectedColums === []) {
+            $this->diligenciamientos = null;
+        } else {
             $this->getFilteredData();
-        }  
+        }
     }
 
-    public function generateGraphics() {
+    public function generateGraphics()
+    {
         $this->showGraphics = true;
     }
 
-    
+
     public function getFilteredData()
     {
 
-     $query = Diligenciamiento::query();
+        $query = Diligenciamiento::query();
 
 
-    if(count($this->selectedColums) === 0)
-    {
-        $this->noFilterApplied = true;
-        $this->openModal = true;
-    }else
-    {
-        if (count($this->selectedColums) === count($this->filterValues)) {
-            
-            foreach ($this->selectedColums as $index => $selectedColum) {
+        if (count($this->selectedColums) === 0) {
+            $this->noFilterApplied = true;
+            $this->openAlert = true;
+        } else {
+            if (count($this->selectedColums) === count($this->filterValues)) {
 
-                if($selectedColum === 'edad')
-                {
-                    $filterValue = $this->filterValues[$index];
+                foreach ($this->selectedColums as $index => $selectedColum) {
 
-                    $condition = $this->conditions[$index];
-                    
-                    $query->where($selectedColum, $condition, $filterValue);
-                }else{
-                    $filterValue = $this->filterValues[$index];
+                    if ($selectedColum === 'edad') {
+                        $filterValue = $this->filterValues[$index];
 
-                    $query->where($selectedColum, '=', $filterValue);
-                }        
+                        $condition = $this->conditions[$index];
+
+                        $query->where($selectedColum, $condition, $filterValue);
+                    } else {
+                        $filterValue = $this->filterValues[$index];
+
+                        $query->where($selectedColum, '=', $filterValue);
+                    }
+                }
+                $this->diligenciamientos = $query->get();
             }
-            $this->diligenciamientos = $query->get();
+
         }
-        
-    }
 
     }
 
-    public function generateModal()
-    {
-        $this->openModal = true;
-    }
-
-    public function closeModal()
+    public function closeAlert()
     {
         $this->noFilterApplied = false;
-        $this->openModal = false;
-        
+        $this->openAlert = false;
+
     }
 
 

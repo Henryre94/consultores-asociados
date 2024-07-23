@@ -4,7 +4,6 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
-use App\Models\Logo;
 use App\Models\Configuration;
 
 class Dashboard extends Page
@@ -26,41 +25,38 @@ class Dashboard extends Page
     public $alcaldiaLogoExist;
 
     public $logos;
-    
-
-    public function getTitle(): string | Htmlable
-{
-    return __('');
-}
 
 
-
-public function mount(){
-
-    $this->configurations = Configuration::query()->get();
-
-    $mapPath = "storage/images/departamento_map.jpg";
-    $alcaldiaPath = "storage/images/alcaldia_icon.jpg";
-
-    if(file_exists(public_path($mapPath)) === true)
+    public function getTitle(): string|Htmlable
     {
-        $this->mapExist = true;
-    }else
-    {
-        $this->mapExist = false;
-    }
-
-    if(file_exists(public_path($alcaldiaPath)) === true)
-    {
-        $this->alcaldiaLogoExist = true;
-    }else
-    {
-        $this->alcaldiaLogoExist = false;
+        return __('');
     }
 
 
 
-}
+    public function mount()
+    {
+
+        $this->configurations = Configuration::query()->get();
+
+        $mapPath = "storage/images/departamento_map.jpg";
+        $alcaldiaPath = "storage/images/alcaldia_icon.jpg";
+
+        if (file_exists(public_path($mapPath)) === true) {
+            $this->mapExist = true;
+        } else {
+            $this->mapExist = false;
+        }
+
+        if (file_exists(public_path($alcaldiaPath)) === true) {
+            $this->alcaldiaLogoExist = true;
+        } else {
+            $this->alcaldiaLogoExist = false;
+        }
+
+
+
+    }
 
 
 

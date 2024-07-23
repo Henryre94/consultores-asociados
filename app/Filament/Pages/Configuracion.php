@@ -27,42 +27,39 @@ class Configuracion extends Page
         'activateDepartamentoLogo' => 'boolean',
     ];
 
-    public function getTitle(): string | Htmlable
-{
-    return __('Configuracion de la aplicacion');
-}
+    public function getTitle(): string|Htmlable
+    {
+        return __('Configuracion de la aplicacion');
+    }
 
-public function mount(): void
-{
-    $this->configurations = Configuration::query()->get();
-}
+    public function mount(): void
+    {
+        $this->configurations = Configuration::query()->get();
+    }
 
 
-public function saveConfiguration()
+    public function saveConfiguration()
     {
         $isComplete = $this->departamento !== null && $this->municipio !== null;
-        
 
-        if($this->departamento === '' || $this->municipio === '')
-        {
+
+        if ($this->departamento === '' || $this->municipio === '') {
             $this->alert = true;
-        }
-        else
-        {
-        // Save to database
-        // Assuming you have a Configuration model and table
-        \App\Models\Configuration::create([
-            'departamento' => $this->departamento,
-            'alcaldia' => $this->municipio,
-            'alcaldia_logo_active' => $this->activateAlcaldiaLogo,
-            'departamento_logo_active' => $this->activateDepartamentoLogo,
-            'status_complete' => $isComplete,
-        ]);
+        } else {
+            // Save to database
+            // Assuming you have a Configuration model and table
+            \App\Models\Configuration::create([
+                'departamento' => $this->departamento,
+                'alcaldia' => $this->municipio,
+                'alcaldia_logo_active' => $this->activateAlcaldiaLogo,
+                'departamento_logo_active' => $this->activateDepartamentoLogo,
+                'status_complete' => $isComplete,
+            ]);
         }
 
 
 
-        if($isComplete === true){
+        if ($isComplete === true) {
             $this->configurations = Configuration::query()->get();
         }
 
@@ -71,13 +68,15 @@ public function saveConfiguration()
         session()->flash('message', 'Configuración guardada correctamente.');
     }
 
-    public function resetValues(){
+    public function resetValues()
+    {
         Configuration::query()->delete();
         $this->mount();
         return redirect()->back()->with('success', 'Todos los valores han sido borrados.');
     }
 
-    public function closeAlert() {
+    public function closeAlert()
+    {
         $this->alert = false;
     }
 }
