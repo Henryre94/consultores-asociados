@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RoleResource\Pages;
-use App\Filament\Resources\RoleResource\RelationManagers;
-use App\Models\Role;
+use App\Filament\Resources\LogoResource\Pages;
+use App\Filament\Resources\LogoResource\RelationManagers;
+use App\Models\Logo;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,13 +14,11 @@ use App\Models\Configuration;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class RoleResource extends Resource
+class LogoResource extends Resource
 {
-    protected static ?string $model = Role::class;
+    protected static ?string $model = Logo::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
-
-    protected static ?string $navigationGroup = 'Administración de usuarios';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function shouldRegisterNavigation(): bool
     {
@@ -30,20 +27,22 @@ class RoleResource extends Resource
         return $configurations->count()>0;
     }
 
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
-                    ->required()
-                    ->maxLength(191),
-                Select::make('permissions')
-                    ->label('Permisos')
-                    ->preload()
-                    ->multiple()
-                    ->relationship('permissions', 'name')
+                Forms\Components\FileUpload::make('logo_alcaldia')
+                ->preserveFilenames()
+                ->image()
+                ->acceptedFileTypes(['image/jpeg'])
+                ->disk('public')
+                ->directory('images'),
+                Forms\Components\FileUpload::make('logo_departamento')
+                ->preserveFilenames()
+                ->image()
+                ->acceptedFileTypes(['image/jpeg'])
+                ->disk('public')
+                ->directory('images'),
             ]);
     }
 
@@ -51,8 +50,16 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('logo_consultores')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('logo_alcaldia')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('logo_departamento')
+                    ->searchable(),
+                    Tables\Columns\TextColumn::make('departamento')
+                    ->searchable(),
+                    Tables\Columns\TextColumn::make('municipio')
+                    ->searchable(),    
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -85,9 +92,9 @@ class RoleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRoles::route('/'),
-            'create' => Pages\CreateRole::route('/create'),
-            'edit' => Pages\EditRole::route('/{record}/edit'),
+            'index' => Pages\ListLogos::route('/'),
+            'create' => Pages\CreateLogo::route('/create'),
+            'edit' => Pages\EditLogo::route('/{record}/edit'),
         ];
     }
 }

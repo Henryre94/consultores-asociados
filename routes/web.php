@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ConfigurationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/pdf-view', function(){
+    return view('pdf_view');
+});
+
+Route::get('/generate-pdf/{diligenciamiento}/{configuration}',[PdfController::class, 'generatePdf'])->name('generate-pdf');

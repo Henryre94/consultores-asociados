@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            DiligenciamientoSeeder::class,
-        ]);
+        // $this->call([
+        //     DiligenciamientoSeeder::class,
+        // ]);
         // \App\Models\User::factory(10)->create();
-        
+
         // \App\Models\User::create([
         //     'name' => 'admin',
         //     'email' => 'admin@gmail.com',
@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RolesPermissionSeeder::class,
+            DiligenciamientoSeeder::class,
+
         ]);
     }
 }

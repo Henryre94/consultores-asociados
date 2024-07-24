@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Filament\Pages;
+
 use App\Models\Diligenciamiento;
+use App\Models\Configuration;
+use App\Models\Logo;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\Support\Htmlable;
 
 use Filament\Pages\Page;
 
@@ -15,13 +20,25 @@ class Filters extends Page
 
     public $selectedColums = [];
 
+    public $conditions = [];
+
     public $inputValue = '';
 
+    public $condition = '';
+
     public $variable;
-    
+
     public $diligenciamientos;
 
+    public $configurations;
+
+    public $appGeoValues;
+
     public $choosedFilter = false;
+
+    public $openAlert = false;
+
+    public $noFilterApplied = false;
 
     public $selectedOption = '';
 
@@ -29,67 +46,125 @@ class Filters extends Page
 
     public $filteredOptions = '';
 
-    public function mount(){
+    public $showGraphics = false;
 
+    public $loadingPdf = false;
+
+    public function getTitle(): string|Htmlable
+    {
+        return __('Filtros');
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configurations = Configuration::get();
     
+        return $configurations->count()>0;
+    }
+
+    public function mount()
+    {
+
+        $this->configurations = Configuration::query()->get();
+
+        $this->openAlert = true;
+        $this->loadingPdf = true;
 
     }
 
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
-        $this->selectedColums[] = $this->selectedOption;
+
     }
 
     public function resetFilter()
     {
-        $this->choosedFilter = false; 
-        $this->inputValue = ''; 
-    }
-
-    public function setFilter()
-    {
+        $this->selectedColums[] = $this->selectedOption;
         $this->filterValues[] = $this->inputValue;
+        $this->conditions[] = $this->condition;
+        $this->choosedFilter = false;
+        $this->showGraphics = false;
         $this->selectedOption = '';
+        $this->inputValue = '';
+        $this->condition = '';
     }
-
     public function resetFilterData()
     {
         $this->selectedColums = [];
         $this->filterValues = [];
+        $this->conditions = [];
+        $this->diligenciamientos = null;
+        $this->choosedFilter = false;
+        $this->showGraphics = false;
+        $this->selectedOption = '';
+        $this->inputValue = '';
+        $this->condition = '';
+
     }
 
-    
+    public function removeFilter($index)
+    {
+        $this->showGraphics = false;
+        unset($this->selectedColums[$index]);
+        unset($this->filterValues[$index]);
+        unset($this->conditions[$index]);
+
+        // Re-index arrays to prevent gaps in the indices
+        $this->selectedColums = array_values($this->selectedColums);
+        $this->filterValues = array_values($this->filterValues);
+        if ($this->selectedColums === []) {
+            $this->diligenciamientos = null;
+        } else {
+            $this->getFilteredData();
+        }
+    }
+
+    public function generateGraphics()
+    {
+        $this->showGraphics = true;
+    }
+
     public function getFilteredData()
     {
 
         $query = Diligenciamiento::query();
 
-        if (count($this->selectedColums) === count($this->filterValues)) {
-            // Iterate over the arrays
-            foreach ($this->selectedColums as $index => $selectedColum) {
-                // Assuming column names are safe to use in SQL (e.g., they are validated or sanitized)
-                $filterValue = $this->filterValues[$index];
 
-                // Add a where condition for each column-value pair
-                $query->where($selectedColum, '=', $filterValue);
+        if (count($this->selectedColums) === 0) {
+            
+            $this->noFilterApplied = true;
+            $this->openAlert = true;
+        } else {
+            if (count($this->selectedColums) === count($this->filterValues)) {
+
+                foreach ($this->selectedColums as $index => $selectedColum) {
+
+                    if ($selectedColum === 'edad') {
+                        $filterValue = $this->filterValues[$index];
+
+                        $condition = $this->conditions[$index];
+
+                        $query->where($selectedColum, $condition, $filterValue);
+                    } else {
+                        $filterValue = $this->filterValues[$index];
+
+                        $query->where($selectedColum, '=', $filterValue);
+                    }
+                }
+                $this->diligenciamientos = $query->get();
             }
+
         }
-      $this->diligenciamientos = $query->get();
+
     }
 
-    public function getListOfSelectedFilter()
+    public function closeAlert()
     {
-        foreach ($this->selectedColums as $index => $selectedColum) {
-            // Assuming column names are safe to use in SQL (e.g., they are validated or sanitized)
-            $filterValue = $this->filterValues[$index];
+        $this->noFilterApplied = false;
+        $this->openAlert = false;
+        $this->loadingPdf = false;
 
-            // Add a where condition for each column-value pair
-         
-        }
-    
     }
-
-
 
 }
