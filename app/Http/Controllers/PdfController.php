@@ -12,6 +12,6 @@ class PdfController extends Controller
     public function generatePdf(Diligenciamiento $diligenciamiento, Configuration $configuration)
     {
         $pdf = Pdf::loadView('pdf_view',compact('diligenciamiento', 'configuration'));
-        return $pdf->download();
+        return $pdf->stream();
     }
 }

@@ -48,6 +48,8 @@ class Filters extends Page
 
     public $showGraphics = false;
 
+    public $loadingPdf = false;
+
     public function getTitle(): string|Htmlable
     {
         return __('Filtros');
@@ -64,6 +66,9 @@ class Filters extends Page
     {
 
         $this->configurations = Configuration::query()->get();
+
+        $this->openAlert = true;
+        $this->loadingPdf = true;
 
     }
 
@@ -120,7 +125,6 @@ class Filters extends Page
         $this->showGraphics = true;
     }
 
-
     public function getFilteredData()
     {
 
@@ -128,6 +132,7 @@ class Filters extends Page
 
 
         if (count($this->selectedColums) === 0) {
+            
             $this->noFilterApplied = true;
             $this->openAlert = true;
         } else {
@@ -158,8 +163,8 @@ class Filters extends Page
     {
         $this->noFilterApplied = false;
         $this->openAlert = false;
+        $this->loadingPdf = false;
 
     }
-
 
 }
