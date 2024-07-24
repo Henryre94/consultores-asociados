@@ -31,7 +31,7 @@ class DiligenciamientoFactory extends Factory
             'ficha_no' => $this->faker->unique()->numberBetween(1000, 9999),
             'foto_sticker' => $this->faker->imageUrl,
             'departamento' => $this->faker->randomElement(['Magdalena', 'Cundinamarca','Sucre']),
-            'municipio' => $this->faker->randomElement(['Sincelejo', 'Chivolo','´Monteria']),
+            'municipio' => $this->faker->randomElement(['Sincelejo', 'Chivolo','Monteria']),
             'centro_poblado' => $this->faker->city,
             'direccion' => $this->faker->address,
             'informante_calificado' => $this->faker->boolean,
@@ -102,7 +102,7 @@ class DiligenciamientoFactory extends Factory
             'actividad_principal' => $this->faker->word,
             'condicion_trabajo' => $this->faker->word,
             'recibe_subsidio' => $this->faker->numberBetween(1, 10),
-            'grupo_vulnerable' => $this->faker->numberBetween(1, 10),
+            'grupo_vulnerable' => $this->faker->randomElement(['Indígenas', 'Afrocolombiano','Rrom y Población LGTBI','Reinsertado','Desplazado por la Violencia','Desplazado por desastres naturales','Adulto Mayor','Madre cabeza de familia','Población Migrante','Niños y Adolescentes','Expresidiario']),
             'experimento_discriminacion' => $this->faker->numberBetween(1, 10),
             'victima_violencia' => $this->faker->numberBetween(1, 10),
         ];

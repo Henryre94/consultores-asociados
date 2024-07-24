@@ -183,6 +183,87 @@
                                             </x-filament::input.wrapper>
                                         </div>
                                     </div>
+                                @elseif ($selectedOption === 'sexo')
+                                <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                    <x-filament::input.select wire:model="inputValue"
+                                    style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;">
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="">Seleccione una condicion</option>
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Hombre">Hombre</option>
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Mujer">Mujer</option>
+                                </x-filament::input.select>
+                                </x-filament::input.wrapper>
+                                @elseif ($selectedOption === 'tipo_vivienda')
+                                <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                    <x-filament::input.select wire:model="inputValue"
+                                    style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;">
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="">Seleccione una condicion</option>
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Casa">Casa</option>
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Apartamente">Apartamento</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Cuarto">Cuarto</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Otro tipo de vivienda">Otro</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Vivienda indigena">Vivienda indigena</option>
+                                </x-filament::input.select>
+                                </x-filament::input.wrapper>
+                                @elseif ($selectedOption === 'grupo_vulnerable')
+                                <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                    <x-filament::input.select wire:model="inputValue"
+                                    style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;">
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="">Seleccione una condicion</option>
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Indigenas">Indigenas</option>
+                                    <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Afrocolombiano">Afrocolombiano</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Rrom y Población LGTBI">Rrom y Población LGTBI</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Reinsertado">Reinsertado</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Desplazado por la Violencia">Desplazado por la Violencia</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Desplazado por desastres naturales">Desplazado por desastres naturales</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Adulto Mayor">Adulto Mayor</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Madre cabeza de familia">Madre cabeza de familia</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Poblacion Migrante">Poblacion Migrante</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Niños y Adolescentes">Niños y Adolescentes</option>
+                                        <option
+                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        value="Expresidiario">Expresidiario</option>
+                                </x-filament::input.select>
+                                </x-filament::input.wrapper>
                                 @else
                                     <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
                                         <x-filament::input type="text" wire:model="inputValue"
