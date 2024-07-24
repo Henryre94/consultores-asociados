@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Models\Configuration;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -21,6 +22,13 @@ class RoleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationGroup = 'Administración de usuarios';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configurations = Configuration::get();
+    
+        return $configurations->count()>0;
+    }
 
 
     public static function form(Form $form): Form

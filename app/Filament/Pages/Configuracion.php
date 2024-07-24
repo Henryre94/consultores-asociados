@@ -32,8 +32,14 @@ class Configuracion extends Page
         return __('Configuracion de la aplicacion');
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasRole('Superadmin');
+    }
+
     public function mount(): void
     {
+
         $this->configurations = Configuration::query()->get();
     }
 

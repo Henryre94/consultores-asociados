@@ -32,12 +32,19 @@ class Dashboard extends Page
         return __('');
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configurations = Configuration::get();
+    
+        return $configurations->count()>0;
+    }
+
 
 
     public function mount()
     {
 
-        $this->configurations = Configuration::query()->get();
+        $this->configurations = Configuration::get();
 
         $mapPath = "storage/images/departamento_map.jpg";
         $alcaldiaPath = "storage/images/alcaldia_icon.jpg";

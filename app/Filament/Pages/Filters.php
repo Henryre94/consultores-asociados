@@ -53,6 +53,13 @@ class Filters extends Page
         return __('Filtros');
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configurations = Configuration::get();
+    
+        return $configurations->count()>0;
+    }
+
     public function mount()
     {
 
