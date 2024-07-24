@@ -28,116 +28,65 @@
                 </div>
             </div>
         @endif
-        <div class="flex-row justify-center ">
-            <div class="rounded p-1" style="background-color: rgb(231, 139, 139);">
-                <p>
-                    <strong>Por favor, proporcione los siguientes valores para comenzar la configuración de la
-                        aplicación:</strong>
-                </p>
-
-                <hr>
-
-                <p>
-                    <strong>Departamento:</strong>
-                    <br>
-                    Departamento en el cual se están diligenciando los documentos. Este valor aparecerá en la generación
-                    de los PDFs. Si no se proporciona, el campo quedará en blanco.
-                </p>
-
-                <hr>
-
-                <p>
-                    <strong>Municipio:</strong>
-                    <br>
-                    Municipio en el cual se están diligenciando los documentos. Este valor aparecerá en la generación de
-                    los PDFs. Si no se proporciona, el campo quedará en blanco.
-                </p>
-
-                <hr>
-
-                <p>
-                    <strong>Activar Logo del Departamento:</strong>
-                    <br>
-                    Opción para habilitar el logo en la página de bienvenida. No afecta la generación de los archivos
-                    PDF.
-                </p>
-
-                <hr>
-
-                <p>
-                    <strong>Activar Logo de la Alcaldía:</strong>
-                    <br>
-                    Opción para habilitar el logo en la página de bienvenida. No afecta la generación de los PDFs. (El
-                    logo debe ser cargado en el panel Logos para que aparezca en la creación de los PDFs. Si no se
-                    proporciona, no aparecerá.)
-                </p>
-
-            </div>
-            <div class="flex-row justify-center items-center mt-1 rounded p-1"
-                style="background-color: rgb(205, 205, 205)">
+        <div>
+            <div class="flex-row justify-center items-center mt-1 rounded p-1">
                 @if ($configurations->count() === 0)
-                    <div class="p-1">
-                        <label>Departamento</label>
-                        <div style="width: 200px">
-                            <x-filament::input.wrapper>
-                                <x-filament::input type="text" wire:model="departamento" />
-                            </x-filament::input.wrapper>
+                <div class="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-md space-y-6">
+                    <div class="flex flex-col space-y-4">
+                        <!-- Departamento Input -->
+                        <div class="flex flex-col">
+                            <label for="departamento" class="text-sm font-semibold text-gray-700 mb-2">Departamento</label>
+                            <div class="relative">
+                                <x-filament::input.wrapper>
+                                    <x-filament::input id="departamento" type="text" wire:model="departamento" class="w-full" />
+                                </x-filament::input.wrapper>
+                            </div>
+                        </div>
+                
+                        <!-- Municipio Input -->
+                        <div class="flex flex-col">
+                            <label for="municipio" class="text-sm font-semibold text-gray-700 mb-2">Municipio</label>
+                            <div class="relative">
+                                <x-filament::input.wrapper>
+                                    <x-filament::input id="municipio" type="text" wire:model="municipio" class="w-full" />
+                                </x-filament::input.wrapper>
+                            </div>
+                        </div>
+                
+                        <!-- Activar Logo de la Alcaldía -->
+                        <div class="flex items-center space-x-2">
+                            <x-filament::input.checkbox id="activateAlcaldiaLogo" wire:model="activateAlcaldiaLogo" class="h-4 w-4 text-blue-600" />
+                            <label for="activateAlcaldiaLogo" class="text-sm text-gray-700">Activar Logo de la Alcaldía</label>
+                        </div>
+                
+                        <!-- Activar Logo del Departamento -->
+                        <div class="flex items-center space-x-2">
+                            <x-filament::input.checkbox id="activateDepartamentoLogo" wire:model="activateDepartamentoLogo" class="h-4 w-4 text-blue-600" />
+                            <label for="activateDepartamentoLogo" class="text-sm text-gray-700">Activar Logo del Departamento</label>
                         </div>
                     </div>
-                    <hr>
-                    <div class="p-1">
-                        <label>Municipio</label>
-                        <div style="width: 200px">
-                            <x-filament::input.wrapper>
-                                <x-filament::input type="text" wire:model="municipio" />
-                            </x-filament::input.wrapper>
-                        </div>
+                    <div class="flex justify-end mt-1">
+                        @if ($configurations->count() === 0)
+                            <x-filament::button wire:click="saveConfiguration">
+                                Guardar Configuracion
+                            </x-filament::button>
+                        @else
+                            <div></div>
+                        @endif
                     </div>
-                    <hr>
-                    <div class="mt-1 mb-1">
-
-                        <div class="p-1">
-                            <label>
-                                <x-filament::input.checkbox wire:model="activateAlcaldiaLogo" />
-
-                                <span>
-                                    Activar Logo de la Alcaldia
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="mt-1">
-                        <div class="p-1">
-                            <label>
-                                <x-filament::input.checkbox wire:model="activateDepartamentoLogo" />
-                                <span>
-                                    Activar Logo del Departamento
-                                </span>
-                            </label>
-                        </div>
-                    </div>
+                </div>
                 @else
                     <div></div>
                 @endif
-                <div class="mt-1">
-                    @if ($configurations->count() === 0)
-                        <x-filament::button wire:click="saveConfiguration">
-                            Guardar Configuracion
-                        </x-filament::button>
-                    @else
-                        <div></div>
-                    @endif
-
-                </div>
             </div>
+        
             <div class="flex justify-center items-center mt-1">
                 @if ($configurations->count() === 0)
                     <div></div>
                 @else
-                    <table class="divide-gray-400">
+                    <table class="divide-gray-200">
                         <thead class="bg-gray-200 text-left"
-                            style="font-family: sans-serif; font-size: 16px; color: #000000;">
+                            style="font-family: sans-serif; font-size: 14px; color: #000000;">
                             <tr>
                                 <th class="px-6 py-3 ">Departamento</th>
                                 <th class="px-6 py-3 ">Municipio</th>
@@ -149,7 +98,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($configurations as $configuration)
-                                <tr style="font-family: sans-serif; font-size: 14px; color: #555;white-space: no-wrap;">
+                                <tr style="font-family: sans-serif; font-size: 12px; color: #555;white-space: no-wrap;">
                                     <td class="px-6 py-4 ">{{ $configuration->departamento }}</td>
                                     <td class="px-6 py-4 ">{{ $configuration->alcaldia }}</td>
                                     <td class="px-6 py-4 ">

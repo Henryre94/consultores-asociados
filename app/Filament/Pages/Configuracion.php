@@ -61,6 +61,8 @@ class Configuracion extends Page
                 'departamento_logo_active' => $this->activateDepartamentoLogo,
                 'status_complete' => $isComplete,
             ]);
+
+            redirect()->route('filament.admin.pages.configuracion');
         }
 
 
@@ -70,15 +72,13 @@ class Configuracion extends Page
         }
 
 
-        // Optionally, add a session flash message or any other feedback
-        session()->flash('message', 'Configuración guardada correctamente.');
     }
 
     public function resetValues()
     {
         Configuration::query()->delete();
         $this->mount();
-        return redirect()->back()->with('success', 'Todos los valores han sido borrados.');
+        return redirect()->route('filament.admin.pages.configuracion');
     }
 
     public function closeAlert()
