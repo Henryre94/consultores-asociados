@@ -1,6 +1,6 @@
 <x-filament-panels::page>
 
-    <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-white  ">
+    <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-white  " style="font-family:Arial, Helvetica, sans-serif">
         @if ($openAlert)
             <div class=" alert"
                 style="
@@ -33,15 +33,15 @@
             <div>
                 <div class="mb-2 flex justify-end">
                     <x-filament::button wire:click="getFilteredData" color="info" class="me-1"
-                        style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                        style=" font-size: 12px; letter-spacing: 1px;">
                         Aplicar filtros
                     </x-filament::button>
                     <x-filament::button wire:click="resetFilterData" color="info" class="me-1"
-                        style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                        style=" font-size: 12px; letter-spacing: 1px;">
                         Eliminar filtros
                     </x-filament::button>
                     <x-filament::button wire:click="generateGraphics" color="info" class="me-1"
-                        style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                        style=" font-size: 12px;  letter-spacing: 1px;">
                         Generar Graficas
                     </x-filament::button>
 
@@ -51,7 +51,7 @@
                     @if (!empty($selectedColums) && !empty($filterValues) && count($selectedColums) === count($filterValues))
                         <div class="bg-gray-200 p-1 rounded">
                             <table class="text-left"
-                                style="width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 12px; color: #555;">
+                                style="width: 100%; border-collapse: collapse; font-size: 12px; color: #555;">
                                 <thead>
                                     <tr>
                                         <th class="p-1"></th>
@@ -86,7 +86,7 @@
                             </table>
                         </div>
                     @else
-                        <p style="font-family: sans-serif; font-size: 16px; color: #555;">No hay filtros aplicados o se
+                        <p style="font-size: 16px; color: #555;">No hay filtros aplicados o se
                             esta procesando un filtro</p>
                     @endif
                 </div>
@@ -101,36 +101,36 @@
                             <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
                                 <x-filament::input.select wire:model="selectedOption"
                                     wire:change="choosedFilterFunction"
-                                    style="color: #0a0101; font-family: sans-serif; font-size: 14px; letter-spacing: 1px;">
+                                    style="color: #0a0101; font-size: 14px; letter-spacing: 1px;">
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="">Seleccione un filtro</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="grupo_vulnerable">Tipo de Vulnerabilidad</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="tipo_discapacidad">Tipo de discapacidad</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="edad">Edad</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="sexo">Genero</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="ficha_no.">Ficha No.</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="centro_poblado">Centro Poblado</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="departamento">Departamento</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="municipio">Municipio</option>
                                     <option
-                                        style="background-color: rgb(245, 245, 245); font-family: sans-serif; font-size: 12px;"
+                                        style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="tipo_vivienda">Tipo de Vivienda</option>
                                 </x-filament::input.select>
                             </x-filament::input.wrapper>
@@ -229,7 +229,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($diligenciamientos as $diligenciamiento)
                                 <tr
-                                    style="font-family: sans-serif; font-size: 14px; color: #555;white-space: no-wrap;">
+                                    style="font-size: 14px; color: #555;white-space: no-wrap;">
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->primer_nombre }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->segundo_nombre }}</td>
@@ -239,7 +239,7 @@
                                     <td class="px-6 py-4 ">
                                         <x-filament::button color="danger" tag="a"
                                             href="{{ route('generate-pdf', ['diligenciamiento' => $diligenciamiento->id, 'configuration' => $configurations[0]]) }}"
-                                            style=" font-size: 12px; font-family: sans-serif; letter-spacing: 1px;">
+                                            style=" font-size: 12px; letter-spacing: 1px;">
                                             Generate PDF
                                         </x-filament::button>
                                     </td>

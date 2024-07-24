@@ -112,8 +112,15 @@
                             <td>
                                 <strong>Foto Sticker:</strong>
                                 <div style="text-align: center;">
-                                    <img src="{{ $diligenciamiento->foto_sticker }}" alt="Foto Sticker"
-                                        class="w-64 h-64">
+                                    @if (strpos($diligenciamiento->foto_sticker, 'https://') !== false)
+                                        <img src="{{ $diligenciamiento->foto_sticker }}" alt="Foto Sticker"
+                                            class="w-64 h-64">
+                                    @elseif ($diligenciamiento->foto_sticker === null)
+                                        <div></div>
+                                    @else
+                                        <img src="{{ public_path('storage/') . $diligenciamiento->foto_sticker }}"
+                                            alt="Foto del sticler" class="w-64 h-64">
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -121,8 +128,15 @@
                             <td>
                                 <strong>Foto Unidad Residencial: </strong>
                                 <div style="text-align: center;">
-                                    <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto Sticker"
-                                        class="w-64 h-64">
+                                    @if (strpos($diligenciamiento->foto_unidad_residencial, 'https://') !== false)
+                                        <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto Sticker"
+                                            class="w-64 h-64">
+                                    @elseif ($diligenciamiento->foto_unidad_residencial === null)
+                                        <div></div>
+                                    @else
+                                        <img src="{{ public_path('storage/') . $diligenciamiento->foto_unidad_residencial }}"
+                                            alt="Foto del sticler" class="w-64 h-64">
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -208,7 +222,15 @@
                             <td>
                                 <strong>Firma:</strong>
                                 <div style="text-align: center;">
-                                    <img src="{{ $diligenciamiento->firma_link }}" alt="Foto Firma" class="w-128 h-64">
+                                    @if (strpos($diligenciamiento->firma_link, 'https://') !== false)
+                                        <img src="{{ $diligenciamiento->firma_link }}" alt="Foto Sticker"
+                                            class="w-64 h-64">
+                                    @elseif ($diligenciamiento->firma_link === null)
+                                        <div></div>
+                                    @else
+                                        <img src="{{ public_path('storage/') . $diligenciamiento->firma_link }}"
+                                            alt="Foto del sticler" class="w-64 h-64">
+                                    @endif
                                 </div>
                             </td>
                         </tr>

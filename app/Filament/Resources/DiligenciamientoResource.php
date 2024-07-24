@@ -63,13 +63,11 @@ class DiligenciamientoResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('foto_sticker')
-                    ->required()
                     ->image()
                     ->acceptedFileTypes(['image/jpeg'])
                     ->disk('public')
                     ->directory('images'),
                 Forms\Components\FileUpload::make('foto_unidad_residencial')
-                    ->required()
                     ->image()
                     ->acceptedFileTypes(['image/jpeg'])
                     ->disk('public')
@@ -120,7 +118,6 @@ class DiligenciamientoResource extends Resource
                 Forms\Components\Toggle::make('firma')
                     ->required(),
                 Forms\Components\FileUpload::make('firma_link')
-                    ->required()
                     ->image()
                     ->acceptedFileTypes(['image/jpeg'])
                     ->disk('public')

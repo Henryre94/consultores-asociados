@@ -22,10 +22,10 @@ class BarChart extends ChartWidget
             $indefinedCount = 0;
 
             foreach($this->data as $item){
-                if($item['sexo'] === 'M'){
-                    $menCount++;
-                }elseif($item['sexo'] === 'F'){
+                if($item['sexo'] === 'Mujer'){
                     $womenCount++;
+                }elseif($item['sexo'] === 'Hombre'){
+                    $menCount++;
                 }else{
                     $indefinedCount++;
                 }
