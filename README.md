@@ -51,12 +51,14 @@ Los recursos creados con Filamentphp asumen la responsabilidad del funcionamient
 - `getTitle()`: Cambia el título que se muestra en la vista.
 
 **Filtros**
-- `mount()`
-- `choosedFilterFunction()`
-- `resetFilter()`
-- `resetFilterData()`
-- `removeFilter($index)`
-- `generateGraphics()`
-- `getFilteredData()`
-- `generateModal()`
-- `closeModal()`
+- `shouldRegisterNavigation()`: Verifica que los parámetros de configuración de la base de datos estén presentes antes de permitir el uso del módulo.
+- `mount()`: Obtiene los parámetros de configuración de la base de datos y ejecuta el módulo mostrando alertas informativas según sea necesario.
+- `choosedFilterFunction()`: Asegura que los filtros han sido seleccionados correctamente mediante el uso de un valor booleano.
+- `resetFilter()`: Añade los valores a la lista de filtros y restablece los valores de entrada a su estado original para permitir la selección de filtros adicionales.
+- `resetFilterData()`: Elimina todos los parámetros de búsqueda para reiniciar el proceso desde cero.
+- `removeFilter($index)`: Elimina un filtro previamente seleccionado del array de filtros.
+- `generateGraphics()`: Genera gráficos de pastel y de barras basados en la información filtrada.
+- `getFilteredData()`: Utiliza el array de filtros seleccionados para formar una consulta (query) a la base de datos con todos los parámetros deseados.
+- `generateModal()`: Abre las alertas informativas.
+- `closeModal()`: Cierra las alertas informativas.
+
