@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use App\Models\Configuration;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -30,7 +31,7 @@ class UserResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         $configurations = Configuration::get();
-    
+
         return $configurations->count()>0;
     }
 
@@ -49,6 +50,8 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
                     ->maxLength(191),
                 Select::make('role')
                     ->relationship('roles', 'name')
