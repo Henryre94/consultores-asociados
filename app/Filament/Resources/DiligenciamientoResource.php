@@ -19,6 +19,7 @@ class DiligenciamientoResource extends Resource
     protected static ?string $model = Diligenciamiento::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 2;
 
     public static function shouldRegisterNavigation(): bool
     {

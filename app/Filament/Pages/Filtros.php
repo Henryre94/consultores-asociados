@@ -10,9 +10,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 use Filament\Pages\Page;
 
-class Filters extends Page
+class Filtros extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
+    protected static ?int $navigationSort = 3;
 
     protected static string $view = 'filament.pages.filters';
 

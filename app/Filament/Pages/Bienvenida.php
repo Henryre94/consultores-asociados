@@ -6,9 +6,10 @@ use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use App\Models\Configuration;
 
-class Dashboard extends Page
+class Bienvenida extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static ?int $navigationSort = 1;
 
     protected static string $view = 'filament.pages.dashboard';
 
