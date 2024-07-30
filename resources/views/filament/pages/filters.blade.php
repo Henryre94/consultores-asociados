@@ -3,20 +3,22 @@
     <div class="overflow-hidden shadow-xl sm:rounded-lg p-1 rounded bg-white  "
         style="font-family:Arial, Helvetica, sans-serif">
         @if ($openAlert)
+
             <div class=" alert"
-                style="
-        background-color: #f8d7da; 
-        color: #721c24; 
-        border: 1px solid #f5c6cb; 
-        padding: 20px; 
-        margin-bottom: 15px; 
-        position: fixed;
-        top: 0;
-        left: 45%;
-        z-index: 1000; 
-        border-radius: 5px;
-        display: flex;
-        align-items: center;">
+            style="
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            position: fixed;
+            top: 0;
+            left: 45%;
+            z-index: 1000; 
+            border-radius: 5px;
+            display: flex;
+            align-items: center;"
+            >
                 <div style="font-family:Arial, Helvetica, sans-serif">
                     @if ($noFilterApplied)
                         <p>Por Favor seleccione filtros para iniciar la busqueda.</p>
@@ -248,6 +250,11 @@
                             <div>
                                 <x-filament::button wire:click="resetFilter" color="success">
                                     <x-heroicon-c-plus class="w-5 h-5" />
+                                </x-filament::button>
+                            </div>
+                            <div class="ms-1">
+                                <x-filament::button wire:click="resetValues" color="danger">
+                                    <x-heroicon-c-minus class="w-5 h-5" />
                                 </x-filament::button>
                             </div>
                         </div>
