@@ -26,8 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RolesPermissionSeeder::class,
-            DiligenciamientoSeeder::class,
-
+            //DiligenciamientoSeeder::class,
         ]);
     }
 }
