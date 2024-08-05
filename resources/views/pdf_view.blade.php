@@ -129,13 +129,13 @@
                                 <strong>Foto Unidad Residencial: </strong>
                                 <div style="text-align: center;">
                                     @if (strpos($diligenciamiento->foto_unidad_residencial, 'https://') !== false)
-                                        <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto Sticker"
+                                        <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto de Unidad residencial"
                                             class="w-64 h-64">
-                                    @elseif ($diligenciamiento->foto_unidad_residencial === null)
+                                    @elseif ($diligenciamiento->foto_unidad_residencial === "N/A")
                                         <div></div>
                                     @else
-                                        <img src="{{ public_path('storage/') . $diligenciamiento->foto_unidad_residencial }}"
-                                            alt="Foto del sticler" class="w-64 h-64">
+                                        '<img src="{{ public_path('storage/') . $diligenciamiento->foto_unidad_residencial }}"
+                                            alt="Foto del sticler" class="w-64 h-64">'
                                     @endif
                                 </div>
                             </td>
@@ -225,7 +225,7 @@
                                     @if (strpos($diligenciamiento->firma_link, 'https://') !== false)
                                         <img src="{{ $diligenciamiento->firma_link }}" alt="Foto Sticker"
                                             class="w-64 h-64">
-                                    @elseif ($diligenciamiento->firma_link === null)
+                                    @elseif ($diligenciamiento->foto_unidad_residencial === "N/A")
                                         <div></div>
                                     @else
                                         <img src="{{ public_path('storage/') . $diligenciamiento->firma_link }}"

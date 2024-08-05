@@ -13,7 +13,7 @@
             margin-bottom: 15px; 
             position: fixed;
             top: 0;
-            left: 45%;
+            left: 35%;
             z-index: 1000; 
             border-radius: 5px;
             display: flex;
@@ -118,7 +118,7 @@
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="sexo">Genero</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                        value="ficha_no.">Ficha No.</option>
+                                        value="ficha_no">Ficha No.</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="centro_poblado">Centro Poblado</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
