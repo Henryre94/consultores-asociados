@@ -71,6 +71,12 @@
                     CARACTERIZACIÓN PROBLACIONAL {{ $configuration->alcaldia }} - {{ $configuration->departamento }}
                     2024
                 </p>
+                @foreach ($diligenciamientos as $member )
+                    <p>
+                        Edad : {{ $member->edad }}
+                    </p>
+                @endforeach
+                
             </div>
             <div>
                 <p>
