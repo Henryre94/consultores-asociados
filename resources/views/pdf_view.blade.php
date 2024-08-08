@@ -30,24 +30,24 @@
 
         table {
             width: 100%;
-            page-break-inside: avoid;
-            page-break-after: auto;
         }
 
         td {
             padding: 8px;
             border: 1px solid rgb(191, 191, 191);
             border-collapse: collapse;
-            page-break-after: auto;
+        
         }
 
-        th {
+        thead {
             padding: 8px;
             background-color: rgb(58, 147, 177);
             border-radius: 5px;
-            page-break-after: auto;
-            
+
         }
+
+
+
     </style>
 </head>
 
@@ -87,7 +87,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>USO Y TRATAMIENTO DE DATOS</th>
                         </tr>
@@ -99,7 +99,7 @@
                                     registro en la base de datos
                                     Municipal. Los datos de carácter personal serán objeto de tratamiento por parte de
                                     la Alcaldía Municipal de
-                                    Chibolo - Departamento del Magdalena de acuerdo con lo establecido en la Ley 1581 de
+                                    {{ $configuration->alcaldia }} - Departamento del {{ $configuration->departamento }} de acuerdo con lo establecido en la Ley 1581 de
                                     2012 y el Decreto 1377
                                     de 2013 o las normas que lo modifiquen. El Municipio actuará como responsable del
                                     tratamiento de datos
@@ -154,7 +154,7 @@
             </div>
             <div style="width: auto; margin-top: 8px; ">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>SECCION A</th>
                         </tr>
@@ -257,7 +257,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección B. Datos de la Vivienda</th>
                         </tr>
@@ -304,7 +304,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección C. Datos del hogar (diligencie esta sección para cada uno de los hogares de la
                                 vivienda)</th>
@@ -441,7 +441,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección C. Datos del hogar (condiciones o factores relacionados con riesgo de desastres)
                             </th>
@@ -472,7 +472,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección D. Antecedentes sociodemográficos. Los miembros del hogar se diligencian en el
                                 mismo orden de las
@@ -541,7 +541,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección E. Salud y fecundidad</th>
                         </tr>
@@ -691,7 +691,7 @@
             <div style="width: auto; margin-top: 8px;">
                 @if ($diligenciamiento->edad < 5)
                     <table>
-                        <thead style="background-color: gray; text-align: left; ">
+                        <thead >
                             <tr>
                                 <th>Sección F. Atención a menores de 5 años</th>
                             </tr>
@@ -723,7 +723,7 @@
                 @foreach ($diligenciamientos as $member)
                     @if ($member->edad < 5)
                         <table>
-                            <thead style="background-color: gray; text-align: left; ">
+                            <thead >
                                 <tr>
                                     <th>Sección F. Atención a menores de 5 años</th>
                                 </tr>
@@ -757,7 +757,7 @@
             <div style="width: auto; margin-top: 8px;">
                 @if ($diligenciamiento->edad >= 5)
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección G. Educación - Persona de 5 años y más</th>
                         </tr>
@@ -802,7 +802,7 @@
                 @foreach ($diligenciamientos as $member)
                     @if ($member->edad >= 5)
                         <table>
-                            <thead style="background-color: gray; text-align: left; ">
+                            <thead >
                                 <tr>
                                     <th>Sección G. Educación - Persona de 5 años y más</th>
                                 </tr>
@@ -849,7 +849,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección H. Ocupación e Ingresos - Persona de 8 años y más</th>
                         </tr>
@@ -890,7 +890,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Sección I. Vulnerabilidad Social</th>
                         </tr>
@@ -959,7 +959,7 @@
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
-                    <thead style="background-color: gray; text-align: left; ">
+                    <thead >
                         <tr>
                             <th>Información Adicional</th>
                         </tr>
