@@ -318,8 +318,8 @@
                         <thead class="bg-gray-200 text-left" style=" font-size: 16px; color: #000000;">
                             <tr>
                                 <th class="px-6 py-3 ">Ficha No.</th>
-                                <th class="px-6 py-3 ">Nombres</th>
-                                <th class="px-6 py-3 ">Apellidos</th>
+                                <th class="px-6 py-3 ">Tipo Documento</th>
+                                <th class="px-6 py-3 ">Numero Documento</th>
                                 <th class="px-6 py-3 ">Departamento</th>
                                 <th class="px-6 py-3 ">Edad</th>
                                 <th class="px-6 py-3 ">Genero</th>
@@ -331,8 +331,8 @@
                             @foreach ($diligenciamientos as $diligenciamiento)
                                 <tr style="font-size: 14px; color: #555;white-space: no-wrap;">
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
-                                    <td class="px-6 py-4 ">{{ $diligenciamiento->primer_nombre }}</td>
-                                    <td class="px-6 py-4 ">{{ $diligenciamiento->segundo_nombre }}</td>
+                                    <td class="px-6 py-4 " style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $diligenciamiento->tipo_documento_nacionales }}</td>
+                                    <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
@@ -340,7 +340,7 @@
                                         <x-filament::button color="danger" tag="a"
                                             href="{{ route('generate-pdf', ['diligenciamiento' => $diligenciamiento->id, 'configuration' => $configurations[0]]) }}"
                                             target="_blank" style=" font-size: 12px; letter-spacing: 1px;">
-                                            Generate PDF
+                                            PDF
                                         </x-filament::button>
                                     </td>
                                 </tr>

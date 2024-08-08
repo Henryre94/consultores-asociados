@@ -11,7 +11,7 @@ class PdfController extends Controller
 {
     public function generatePdf(Diligenciamiento $diligenciamiento, Configuration $configuration)
     {
-        $diligenciamientos = Diligenciamiento::where('ficha_no',  $diligenciamiento->ficha_no)->get();
+        $diligenciamientos = Diligenciamiento::where('ficha_no',  $diligenciamiento->ficha_no)->where('id', '!=', $diligenciamiento->id)->get();
         
         $pdf = Pdf::loadView('pdf_view',compact('diligenciamiento', 'configuration', 'diligenciamientos'));
         
