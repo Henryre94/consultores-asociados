@@ -6,15 +6,15 @@
 
             <div class=" alert"
             style="
-            background-color: #f8d7da; 
-            color: #721c24; 
-            border: 1px solid #f5c6cb; 
-            padding: 20px; 
-            margin-bottom: 15px; 
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 20px;
+            margin-bottom: 15px;
             position: fixed;
             top: 0;
-            left: 45%;
-            z-index: 1000; 
+            left: 35%;
+            z-index: 1000;
             border-radius: 5px;
             display: flex;
             align-items: center;"
@@ -112,13 +112,13 @@
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="grupo_vulnerable">Tipo de Vulnerabilidad</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                        value="tipo_discapacidad">Tipo de discapacidad</option>
+                                        value="limitantes_permanentes">Tipo de discapacidad</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="edad">Edad</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="sexo">Genero</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                        value="ficha_no.">Ficha No.</option>
+                                        value="ficha_no">Ficha No.</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="centro_poblado">Centro Poblado</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
@@ -127,6 +127,8 @@
                                         value="municipio">Municipio</option>
                                     <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                         value="tipo_vivienda">Tipo de Vivienda</option>
+                                    <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                        value="numero_documento">Numero de documento</option>
                                 </x-filament::input.select>
                             </x-filament::input.wrapper>
                         </div>
@@ -199,7 +201,7 @@
                                             <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                                 value="Casa">Casa</option>
                                             <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                                value="Apartamente">Apartamento</option>
+                                                value="Apartamento">Apartamento</option>
                                             <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                                 value="Cuarto">Cuarto</option>
                                             <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
@@ -207,6 +209,45 @@
                                             <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
                                                 value="Vivienda indigena">Vivienda indigena</option>
                                         </x-filament::input.select>
+                                    </x-filament::input.wrapper>
+                                @elseif ($selectedOption === 'limitantes_permanentes')
+                                <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                    <x-filament::input.select wire:model="inputValue"
+                                        style="color: #0a0101; font-size: 14px; letter-spacing: 1px;">
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="">Seleccione una condicion</option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Fisica">Discapacidad Fisica
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Intelectual">Discapacidad Intelectual
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Mental">Discapacidad Mental
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Psicosocial">Discapacidad Psicosocial
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Auditiva">Discapacidad Auditiva
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Visual">Discapacidad Visual
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Sistémica">Discapacidad Sistémica
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Afonía">Discapacidad Afonía
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="Discapacidad Multiple">Discapacidad Multiple
+                                        </option>
+                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                            value="N/A">Ninguna de las anteriores
+                                        </option>
+
+                                    </x-filament::input.select>
                                     </x-filament::input.wrapper>
                                 @elseif ($selectedOption === 'grupo_vulnerable')
                                     <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
