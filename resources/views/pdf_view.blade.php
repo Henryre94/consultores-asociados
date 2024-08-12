@@ -156,7 +156,7 @@
                 <table>
                     <thead >
                         <tr>
-                            <th>SECCION A</th>
+                            <th>SECCIÓN A</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,7 +167,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Municpio : </strong> {{ $diligenciamiento->municipio }}
+                                <strong>Municipio : </strong> {{ $diligenciamiento->municipio }}
                             </td>
                         </tr>
                         <tr>
@@ -177,7 +177,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Direccion : </strong> {{ $diligenciamiento->direccion }}
+                                <strong>Dirección : </strong> {{ $diligenciamiento->direccion }}
                             </td>
                         </tr>
                         <tr>
@@ -187,7 +187,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Declaracion juramentada: </strong>
+                                <strong>Declaración juramentada: </strong>
                                 {{ $diligenciamiento->declaracion_juramentada }}
                             </td>
                         </tr>
@@ -220,9 +220,9 @@
                             <td>
                                 <strong>Firma :</strong>
                                 @if ($diligenciamiento->firma === 1)
-                                    Si
+                                    SI
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -244,12 +244,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Correo Electronico:</strong> {{ $diligenciamiento->correo_electronico }}
+                                <strong>Correo Electrónico:</strong> {{ $diligenciamiento->correo_electronico }}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Telefono de Contacto:</strong> {{ $diligenciamiento->telefono_contacto }}
+                                <strong>Teléfono de Contacto:</strong> {{ $diligenciamiento->telefono_contacto }}
                             </td>
                         </tr>
                     </tbody>
@@ -282,20 +282,20 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>¿Con cuales de los siguientes servicios públicos, privados o comunales cuenta la
-                                    vivienda?: </strong> {{ $diligenciamiento->servicios_publicos }}
+                                <strong>¿Con cuáles de los siguientes servicios públicos, privados o comunales cuenta la
+                                    vivienda?:<</strong> {{ $diligenciamiento->servicios_publicos }}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>¿Con cuantos cuartos, excluyendo sala comedor, cuenta la vivienda? (excluida
+                                <strong>¿Con cuántos cuartos, excluyendo sala comedor, cuenta la vivienda? (excluida
                                     cocina, baños, garajes y cuartos
                                     destinados a negocio): </strong> {{ $diligenciamiento->cuartos }}
 
                         </tr>
                         <tr>
                             <td>
-                                <strong>¿Cuántos grupos de personas que manejan su propio presupuesto (hogares)hay en
+                                <strong>¿Cuántos grupos de personas que manejan su propio presupuesto (hogares) hay en
                                     esta vivienda?: </strong> {{ $diligenciamiento->grupos_presupuesto }}
                             </td>
                         </tr>
@@ -313,7 +313,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <strong>Hogar Numero: </strong> {{ $diligenciamiento->hogar_numero }}
+                                <strong>Hogar Número: </strong> {{ $diligenciamiento->hogar_numero }}
                             </td>
                         </tr>
                         <tr>
@@ -340,11 +340,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>¿El agua llega los siete dias de la semana?: </strong>
+                                <strong>¿El agua llega los siete días de la semana?:</strong>
                                 @if ($diligenciamiento->agua_7_dias === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -352,15 +352,15 @@
                             <td>
                                 <strong>En los días que llega el agua, ¿el suministro es de 24 horas?: </strong>
                                 @if ($diligenciamiento->agua_24_hora === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>¿Donde se encuentra el sanitario que usan las personas de este hogar?: </strong>
+                                <strong>¿Dónde se encuentra el sanitario que usan las personas de este hogar?:</strong>
                                 {{ $diligenciamiento->ubicacion_sanitario }}
                             </td>
                         </tr>
@@ -382,9 +382,9 @@
                         <tr>
                             <td><strong>¿El hogar tiene cocina?: </strong>
                                 @if ($diligenciamiento->tiene_cocina === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                         </tr>
                         <tr>
@@ -397,7 +397,7 @@
                         </tr>
                         <tr>
                             <td><strong>¿Cuáles de los siguientes bienes o servicios posee este hogar?: </strong>
-                                Ninguna de las Anteriores</td>
+                                {{ $diligenciamiento->bienes_servicios }}</td>
                         </tr>
                         <tr>
                             <td><strong>¿Cuál es el gasto mensual de este hogar en estos conceptos (estime un valor
@@ -456,9 +456,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Durante el tiempo que lleva habitando su vivienda ha sido afectada por alguno de
-                                    los siguientes eventos? (si el
-                                    hogar ha sido afectado): </strong> {{ $diligenciamiento->eventos_afectado }}
+                                <strong>Durante el tiempo que lleva habitando su vivienda, ¿ha sido afectada por alguno de
+                                    los siguientes eventos? (si el hogar ha sido afectado): </strong> {{ $diligenciamiento->eventos_afectado }}
                             </td>
                         </tr>
                         <tr>
@@ -474,9 +473,7 @@
                 <table>
                     <thead >
                         <tr>
-                            <th>Sección D. Antecedentes sociodemográficos. Los miembros del hogar se diligencian en el
-                                mismo orden de las
-                                variables de parentesco</th>
+                            <th>Sección D. Antecedentes sociodemográficos. Los miembros del hogar se diligencian en el mismo orden de las variables de parentesco</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -572,9 +569,9 @@
                         <tr>
                             <td><strong>¿Lo atendieron?: </strong>
                                 @if ($diligenciamiento->fue_atendido === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -604,9 +601,9 @@
                         <tr>
                             <td><strong>¿Lo atendieron?: </strong>
                                 @if ($member->fue_atendido === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -627,9 +624,9 @@
                                 <tr>
                                     <td><strong>¿Está embarazada?: </strong>
                                         @if ($diligenciamiento->embarazada === 1)
-                                            Si
+                                            SÍ
                                         @else
-                                            No
+                                            NO
                                         @endif
                                 </tr>
                                 <tr>
@@ -640,9 +637,9 @@
                                     <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
                                             entre semana?: </strong>
                                         @if ($diligenciamiento->donde_permanece_semana === 1)
-                                            Si
+                                            SÍ
                                         @else
-                                            No
+                                            NO
                                         @endif
                                     </td>
                                 </tr>
@@ -655,16 +652,16 @@
                                 <tr>
                                     <td><strong>Mujeres 8 años y más (aplica a mujeres entre 8 y 59 años): </strong>
                                         @if ($member->aplica_mujeres_8_59 === 1)
-                                            SI
+                                            SÍ
                                         @else
-                                            NO
+                                            SÍ
                                         @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>¿Está embarazada?: </strong>
                                         @if ($member->embarazada === 1)
-                                            SI
+                                            SÍ
                                         @else
                                             NO
                                         @endif
@@ -677,7 +674,7 @@
                                     <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
                                             entre semana?: </strong>
                                         @if ($member->donde_permanece_semana === 1)
-                                            SI
+                                            SÍ
                                         @else
                                             NO
                                         @endif
@@ -711,9 +708,9 @@
                                 <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
                                         entre semana?: </strong>
                                     @if ($diligenciamiento->donde_permanece_semana === 1)
-                                        Si
+                                        SÍ
                                     @else
-                                        No
+                                        NO
                                     @endif
                                 </td>
                             </tr>
@@ -743,9 +740,9 @@
                                     <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
                                             entre semana?: </strong>
                                         @if ($diligenciamiento->donde_permanece_semana === 1)
-                                            Si
+                                            SÍ
                                         @else
-                                            No
+                                            NO
                                         @endif
                                     </td>
                                 </tr>
@@ -769,17 +766,17 @@
                         <tr>
                             <td><strong>¿Sabe leer y escribir?: </strong>
                                 @if ($diligenciamiento->sabe_leer_escribir === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                         </tr>
                         <tr>
                             <td><strong>¿Actualmente estudia (asiste a preescolar, colegio o universidad)?: </strong>
                                 @if ($diligenciamiento->actualmente_estudia === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -790,9 +787,9 @@
                         <tr>
                             <td><strong>¿Cotiza a un fondo de pensiones?: </strong>
                                 @if ($diligenciamiento->cotiza_pensiones === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -814,17 +811,17 @@
                                 <tr>
                                     <td><strong>¿Sabe leer y escribir?: </strong>
                                         @if ($member->sabe_leer_escribir === 1)
-                                            Si
+                                            SÍ
                                         @else
-                                            No
+                                            NO
                                         @endif
                                 </tr>
                                 <tr>
                                     <td><strong>¿Actualmente estudia (asiste a preescolar, colegio o universidad)?: </strong>
                                         @if ($member->actualmente_estudia === 1)
-                                            Si
+                                            SÍ
                                         @else
-                                            No
+                                            NO
                                         @endif
                                     </td>
                                 </tr>
@@ -835,9 +832,9 @@
                                 <tr>
                                     <td><strong>¿Cotiza a un fondo de pensiones?: </strong>
                                         @if ($member->cotiza_pensiones === 1)
-                                            Si
+                                            SÍ
                                         @else
-                                            No
+                                            NO
                                         @endif
                                     </td>
                                 </tr>
@@ -908,7 +905,7 @@
                                     discriminación en los últimos 12
                                     meses? (racial, étnica, de género, orientación sexual, etc.):</strong>
                                 @if ($diligenciamiento->experimento_discriminacion === 1)
-                                    SI
+                                    SÍ
                                 @else
                                     NO
                                 @endif
@@ -918,7 +915,7 @@
                             <td><strong>¿Ha sido víctima de violencia física, emocional o sexual en los últimos 12
                                     meses?: </strong>
                                 @if ($diligenciamiento->victima_violencian === 1)
-                                    Si
+                                    SÍ
                                 @else
                                     NO
                                 @endif
@@ -937,7 +934,7 @@
                                         discriminación en los últimos 12
                                         meses? (racial, étnica, de género, orientación sexual, etc.):</strong>
                                     @if ($member->experimento_discriminacion === 1)
-                                        SI
+                                        SÍ
                                     @else
                                         NO
                                     @endif
@@ -947,7 +944,7 @@
                                 <td><strong>¿Ha sido víctima de violencia física, emocional o sexual en los últimos 12
                                         meses?: </strong>
                                     @if ($member->victima_violencian === 1)
-                                        SI
+                                        SÍ
                                     @else
                                         NO
                                     @endif
@@ -968,9 +965,9 @@
                         <tr>
                             <td><strong>Usted participo en las ultimas contiendas electorales?: </strong>
                                 @if ($diligenciamiento->participo_elecciones === 1)
-                                    Si
+                                    SÍ
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
