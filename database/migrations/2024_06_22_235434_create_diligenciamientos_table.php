@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id(); // ID Diligenciamiento
             $table->foreignId('user_id')->nullable()->constrained(); // Usuario Móvil
             $table->dateTime('fecha_operacion')->nullable(); // Fecha de operación
-            $table->integer('gps_latitude')->nullable(); // Gps latitude
-            $table->integer('gps_longitude')->nullable(); // Gps longitude
-            $table->integer('gps_altitude')->nullable(); // Gps altitude
+            $table->string('gps_latitude')->nullable(); // Gps latitude
+            $table->string('gps_longitude')->nullable(); // Gps longitude
+            $table->string('gps_altitude')->nullable(); // Gps altitude
             $table->text('pdf')->nullable(); // Pdf
             $table->integer('version')->nullable(); // Versión
             $table->text('fuente')->nullable(); // Fuente
@@ -46,10 +46,10 @@ return new class extends Migration
             $table->string('material_pisos')->nullable(); // Material predominante en los pisos
             $table->string('material_paredes')->nullable(); // Material predominante de las paredes exteriores
             $table->text('servicios_publicos')->nullable(); // ¿Con cuales de los siguientes servicios públicos, privados o comunales cuenta la vivienda?
-            $table->integer('cuartos')->nullable(); // ¿Con cuantos cuartos, excluyendo sala comedor, cuenta la vivienda?
-            $table->integer('grupos_presupuesto')->nullable(); // ¿Cuántos grupos de personas que manejan su propio presupuesto (hogares) hay en esta vivienda?
-            $table->integer('hogar_numero')->nullable(); // Hogar Numero
-            $table->integer('de')->nullable(); // De
+            $table->string('cuartos')->nullable(); // ¿Con cuantos cuartos, excluyendo sala comedor, cuenta la vivienda?
+            $table->string('grupos_presupuesto')->nullable(); // ¿Cuántos grupos de personas que manejan su propio presupuesto (hogares) hay en esta vivienda?
+            $table->string('hogar_numero')->nullable(); // Hogar Numero
+            $table->string('de')->nullable(); // De
             $table->text('vivienda_ocupada')->nullable(); // ¿La vivienda donde reside su hogar es?
             $table->text('tipo_sanitario')->nullable(); // ¿Qué tipo de sanitario utiliza este hogar?
             $table->text('agua_consumo')->nullable(); // El agua para el consumo o preparación de alimentos la obtienen principalmente de…
@@ -85,7 +85,7 @@ return new class extends Migration
             $table->string('sexo')->nullable(); // Sexo
             $table->string('tipo_documento_nacionales')->nullable(); // Tipo de documento de identidad Nacionales
             $table->string('tipo_documento_extranjeros')->nullable(); // Tipo de documento de identidad Extranjeros
-            $table->integer('numero_documento')->nullable(); // Número de documento de identidad
+            $table->string('numero_documento')->nullable(); // Número de documento de identidad
             $table->date('fecha_nacimiento')->nullable(); // Fecha de Naciemiento
             $table->integer('edad')->nullable(); // Edad
             $table->text('limitantes_permanentes')->nullable(); // ¿Por enfermedad, accidente o de nacimiento tiene limitantes permanentes para?

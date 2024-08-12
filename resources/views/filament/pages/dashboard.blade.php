@@ -6,7 +6,7 @@
         </div>
         <div class="flex justify-center mt-2">
             <div class="flex justify-center items-center me-1">
-                <img src="{{ $consultoresLogo }}" alt="Consultores Asociados S.A.S. Logo" class="h-32 w-auto">
+                <img src="{{ $consultoresLogo }}" alt="C&B CONSULTORES ASOCIADOS S.A.S." class="h-32 w-auto">
             </div>
             <div class="flex justify-center items-center">
                 @if ($configurations->count() === 0)

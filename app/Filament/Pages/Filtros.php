@@ -10,9 +10,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 use Filament\Pages\Page;
 
-class Filters extends Page
+class Filtros extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
+    protected static ?int $navigationSort = 3;
 
     protected static string $view = 'filament.pages.filters';
 
@@ -78,28 +79,35 @@ class Filters extends Page
 
     }
 
-    public function resetFilter()
-    {
-        $this->selectedColums[] = $this->selectedOption;
-        $this->filterValues[] = $this->inputValue;
-        $this->conditions[] = $this->condition;
-        $this->choosedFilter = false;
-        $this->showGraphics = false;
+    public function resetValues(){
         $this->selectedOption = '';
         $this->inputValue = '';
         $this->condition = '';
+        $this->choosedFilter = false;
+        $this->showGraphics = false;
     }
+
+    public function resetFilter(){
+
+        if(in_array($this->selectedOption, $this->selectedColums)) {
+            $this->openAlert = true;
+        } else {
+            $this->selectedColums[] = $this->selectedOption;
+            $this->filterValues[] = $this->inputValue;
+            $this->conditions[] = $this->condition;
+        }
+    
+        $this->resetValues();
+
+    }
+        
     public function resetFilterData()
     {
         $this->selectedColums = [];
         $this->filterValues = [];
         $this->conditions = [];
         $this->diligenciamientos = null;
-        $this->choosedFilter = false;
-        $this->showGraphics = false;
-        $this->selectedOption = '';
-        $this->inputValue = '';
-        $this->condition = '';
+        $this->resetValues();
 
     }
 

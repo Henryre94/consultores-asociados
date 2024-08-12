@@ -4,6 +4,7 @@ namespace App\Filament\Resources\DiligenciamientoResource\Pages;
 
 use App\Filament\Resources\DiligenciamientoResource;
 use App\Imports\DiligenciamientoImport;
+use App\Imports\DiligenciamientosImport;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -18,8 +19,8 @@ class ListDiligenciamientos extends ListRecords
                 ->label('Importar')
                 ->color("primary")
                 ->modalHeading('Importar Diligenciamientos')
-                ->modalDescription('Subir archivo excel para registrar diligenciamientos')
-                ->use(DiligenciamientoImport::class)
+                ->modalDescription('Sube un archivo Excel para registrar diligenciamientos. Ten en cuenta que la carga masiva de información puede tomar un tiempo, por lo que te recomendamos tener paciencia durante el proceso.')
+                ->use(DiligenciamientosImport::class)
                 ->modalSubmitActionLabel('Importar')
                 ->modalWidth('md')
                 ->color('success')

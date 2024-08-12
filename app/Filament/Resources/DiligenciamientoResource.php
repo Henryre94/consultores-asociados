@@ -19,17 +19,21 @@ class DiligenciamientoResource extends Resource
     protected static ?string $model = Diligenciamiento::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 2;
 
     public static function shouldRegisterNavigation(): bool
     {
         $configurations = Configuration::get();
-    
-        return $configurations->count()>0;
+
+        return $configurations->count() > 0;
     }
 
 
     public static function form(Form $form): Form
     {
+
+        $record = $form->getRecord();
+
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')->label('Usuario que realizo el diligenciamiento')
@@ -62,12 +66,22 @@ class DiligenciamientoResource extends Resource
                 Forms\Components\TextInput::make('ficha_no')
                     ->required()
                     ->numeric(),
-                Forms\Components\FileUpload::make('foto_sticker')
+                $record && $record->foto_sticker ?
+                    Forms\Components\TextInput::make('foto_sticker')
+                    ->default($record->foto_sticker)
+                    ->required()
+                    ->label('Foto Sticker (URL)')
+                    : Forms\Components\FileUpload::make('foto_sticker')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg'])
                     ->disk('public')
                     ->directory('images'),
-                Forms\Components\FileUpload::make('foto_unidad_residencial')
+                $record && $record->foto_unidad_residencial ?
+                    Forms\Components\TextInput::make('foto_unidad_residencial')
+                    ->default($record->foto_unidad_residencial)
+                    ->required()
+                    ->label('Foto Unidad Residencial (URL)')
+                    : Forms\Components\FileUpload::make('foto_unidad_residencial')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg'])
                     ->disk('public')
@@ -117,7 +131,12 @@ class DiligenciamientoResource extends Resource
                     ]),
                 Forms\Components\Toggle::make('firma')
                     ->required(),
-                Forms\Components\FileUpload::make('firma_link')
+                $record && $record->firma_link ?
+                    Forms\Components\TextInput::make('firma_link')
+                    ->default($record->firma_link)
+                    ->required()
+                    ->label('Firma Link (URL)')
+                    : Forms\Components\FileUpload::make('firma_link')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg'])
                     ->disk('public')
