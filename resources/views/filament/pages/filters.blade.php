@@ -5,7 +5,7 @@
         @if ($openAlert)
 
             <div class=" alert"
-            style="
+                style="
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
@@ -17,8 +17,7 @@
             z-index: 1000;
             border-radius: 5px;
             display: flex;
-            align-items: center;"
-            >
+            align-items: center;">
                 <div style="font-family:Arial, Helvetica, sans-serif">
                     @if ($noFilterApplied)
                         <p>Por Favor seleccione filtros para iniciar la busqueda.</p>
@@ -211,43 +210,43 @@
                                         </x-filament::input.select>
                                     </x-filament::input.wrapper>
                                 @elseif ($selectedOption === 'limitantes_permanentes')
-                                <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
-                                    <x-filament::input.select wire:model="inputValue"
-                                        style="color: #0a0101; font-size: 14px; letter-spacing: 1px;">
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="">Seleccione una condicion</option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Fisica">Discapacidad Fisica
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Intelectual">Discapacidad Intelectual
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Mental">Discapacidad Mental
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Psicosocial">Discapacidad Psicosocial
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Auditiva">Discapacidad Auditiva
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Visual">Discapacidad Visual
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Sistémica">Discapacidad Sistémica
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Afonía">Discapacidad Afonía
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="Discapacidad Multiple">Discapacidad Multiple
-                                        </option>
-                                        <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
-                                            value="N/A">Ninguna de las anteriores
-                                        </option>
+                                    <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
+                                        <x-filament::input.select wire:model="inputValue"
+                                            style="color: #0a0101; font-size: 14px; letter-spacing: 1px;">
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="">Seleccione una condicion</option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Fisica">Discapacidad Fisica
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Intelectual">Discapacidad Intelectual
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Mental">Discapacidad Mental
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Psicosocial">Discapacidad Psicosocial
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Auditiva">Discapacidad Auditiva
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Visual">Discapacidad Visual
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Sistémica">Discapacidad Sistémica
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Afonía">Discapacidad Afonía
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="Discapacidad Multiple">Discapacidad Multiple
+                                            </option>
+                                            <option style="background-color: rgb(245, 245, 245); font-size: 12px;"
+                                                value="N/A">Ninguna de las anteriores
+                                            </option>
 
-                                    </x-filament::input.select>
+                                        </x-filament::input.select>
                                     </x-filament::input.wrapper>
                                 @elseif ($selectedOption === 'grupo_vulnerable')
                                     <x-filament::input.wrapper style="background-color: rgb(245, 245, 245);">
@@ -319,8 +318,8 @@
                         <thead class="bg-gray-200 text-left" style=" font-size: 16px; color: #000000;">
                             <tr>
                                 <th class="px-6 py-3 ">Ficha No.</th>
-                                <th class="px-6 py-3 ">Nombres</th>
-                                <th class="px-6 py-3 ">Apellidos</th>
+                                <th class="px-6 py-3 ">Tipo Documento</th>
+                                <th class="px-6 py-3 ">Numero Documento</th>
                                 <th class="px-6 py-3 ">Departamento</th>
                                 <th class="px-6 py-3 ">Edad</th>
                                 <th class="px-6 py-3 ">Genero</th>
@@ -332,8 +331,10 @@
                             @foreach ($diligenciamientos as $diligenciamiento)
                                 <tr style="font-size: 14px; color: #555;white-space: no-wrap;">
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
-                                    <td class="px-6 py-4 ">{{ $diligenciamiento->primer_nombre }}</td>
-                                    <td class="px-6 py-4 ">{{ $diligenciamiento->segundo_nombre }}</td>
+                                    <td class="px-6 py-4 "
+                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        {{ $diligenciamiento->tipo_documento_nacionales }}</td>
+                                    <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
@@ -341,7 +342,7 @@
                                         <x-filament::button color="danger" tag="a"
                                             href="{{ route('generate-pdf', ['diligenciamiento' => $diligenciamiento->id, 'configuration' => $configurations[0]]) }}"
                                             target="_blank" style=" font-size: 12px; letter-spacing: 1px;">
-                                            Generate PDF
+                                            PDF
                                         </x-filament::button>
                                     </td>
                                 </tr>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
@@ -29,21 +30,28 @@
 
         table {
             width: 100%;
+            page-break-inside: avoid;
+            page-break-after: auto;
         }
 
         td {
             padding: 8px;
             border: 1px solid rgb(191, 191, 191);
             border-collapse: collapse;
+            page-break-after: auto;
         }
 
         th {
             padding: 8px;
             background-color: rgb(58, 147, 177);
             border-radius: 5px;
+            page-break-after: auto;
+            
         }
     </style>
 </head>
+
+
 
 <body style="font-family:Arial, Helvetica, sans-serif">
     <div class="container">
@@ -129,13 +137,13 @@
                                 <strong>Foto Unidad Residencial: </strong>
                                 <div style="text-align: center;">
                                     @if (strpos($diligenciamiento->foto_unidad_residencial, 'https://') !== false)
-                                        <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto Sticker"
+                                        <img src="{{ $diligenciamiento->foto_unidad_residencial }}" alt="Foto de Unidad residencial"
                                             class="w-64 h-64">
-                                    @elseif ($diligenciamiento->foto_unidad_residencial === null)
+                                    @elseif ($diligenciamiento->foto_unidad_residencial === "N/A")
                                         <div></div>
                                     @else
-                                        <img src="{{ public_path('storage/') . $diligenciamiento->foto_unidad_residencial }}"
-                                            alt="Foto del sticler" class="w-64 h-64">
+                                        '<img src="{{ public_path('storage/') . $diligenciamiento->foto_unidad_residencial }}"
+                                            alt="Foto del sticler" class="w-64 h-64">'
                                     @endif
                                 </div>
                             </td>
@@ -195,12 +203,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <strong>Primer Apellido:</strong> {{ $diligenciamiento->primer_nombre }}
+                                <strong>Primer Apellido:</strong> {{ $diligenciamiento->primer_apellido }}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Segundo Apellido: </strong> {{ $diligenciamiento->primer_apellido }}
+                                <strong>Segundo Apellido: </strong> {{ $diligenciamiento->segundo_apellido }}
                             </td>
                         </tr>
                         <tr>
@@ -225,7 +233,7 @@
                                     @if (strpos($diligenciamiento->firma_link, 'https://') !== false)
                                         <img src="{{ $diligenciamiento->firma_link }}" alt="Foto Sticker"
                                             class="w-64 h-64">
-                                    @elseif ($diligenciamiento->firma_link === null)
+                                    @elseif ($diligenciamiento->foto_unidad_residencial === "N/A")
                                         <div></div>
                                     @else
                                         <img src="{{ public_path('storage/') . $diligenciamiento->firma_link }}"
@@ -499,6 +507,35 @@
                         <tr>
                             <td><strong>Edad: </strong> {{ $diligenciamiento->edad }}</td>
                         </tr>
+                        @foreach ($diligenciamientos as $member)
+                            <tr>
+                                <td style="background-color: gray;"><strong>Número de Orden: </strong> {{ $loop->iteration + 1 }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Apellidos Completos: </strong> {{ $member->apellidos_completos }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nombres Completos: </strong> {{ $member->nombres_completos }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sexo: </strong> {{ $member->sexo }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tipo de documento de identidad Nacionales: </strong>
+                                    {{ $member->tipo_documento_nacionales }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Número de documento de identidad: </strong>
+                                    {{ $member->numero_documento }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fecha de Nacimiento: </strong> {{ $member->fecha_nacimiento }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edad: </strong> {{ $member->edad }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -541,58 +578,184 @@
                                 @endif
                             </td>
                         </tr>
+                        @foreach ($diligenciamientos as $member)
                         <tr>
-                            <td><strong>Mujeres 8 años y más (aplica a mujeres entre 8 y 59 años): </strong>
-                                @if ($diligenciamiento->aplica_mujeres_8_59 === 1)
+                            <td style="background-color: gray;"><strong>Número de Orden: </strong> {{ $loop->iteration + 1 }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>¿Por enfermedad, accidente o de nacimiento tiene limitantes permanentes para?:
+                                </strong> {{ $member->limitantes_permanentes }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>¿Cuál de los siguientes regímenes de seguridad social en salud está afiliado
+                                    como cotizante o beneficiario?: </strong> {{ $member->regimen_salud }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>En los últimos 30 días, ¿tuvo alguna enfermedad, accidente, problema
+                                    odontológico, o algún problema de salud que no haya implicado hospitalización?:
+                                </strong> {{ $member->problema_salud_30_dias }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>¿Acudió a una institución prestadora de servicios de salud, un médico general,
+                                    especialista, odontólogo, terapeuta o profesional de la salud?: </strong>
+                                {{ $member->acudio_servicios_salud }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>¿Lo atendieron?: </strong>
+                                @if ($member->fue_atendido === 1)
                                     Si
                                 @else
                                     No
                                 @endif
                             </td>
                         </tr>
-                        <tr>
-                            <td><strong>¿Está embarazada?: </strong>
-                                @if ($diligenciamiento->embarazada === 1)
-                                    Si
-                                @else
-                                    No
-                                @endif
-                        </tr>
-                        <tr>
-                            <td><strong>¿Ha tenido hijos nacidos vivos?: </strong> {{ $diligenciamiento->hijos_vivos }}
-                            </td>
+                        @endforeach
+                            @if ($diligenciamiento->aplica_mujeres_8_59 === 1)
+                                <tr>
+                                    <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mujeres 8 años y más (aplica a mujeres entre 8 y 59 años): </strong>
+                                        @if ($diligenciamiento->aplica_mujeres_8_59 === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Está embarazada?: </strong>
+                                        @if ($diligenciamiento->embarazada === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Ha tenido hijos nacidos vivos?: </strong> {{ $diligenciamiento->hijos_vivos }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
+                                            entre semana?: </strong>
+                                        @if ($diligenciamiento->donde_permanece_semana === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
+                        @foreach ($diligenciamientos as $membersGroup)
+                            @if ($member->aplica_mujeres_8_59 === 1)
+                                <tr>
+                                    <td style="background-color: gray;"><strong>Número de Orden: </strong>{{ $loop->iteration + 1 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mujeres 8 años y más (aplica a mujeres entre 8 y 59 años): </strong>
+                                        @if ($member->aplica_mujeres_8_59 === 1)
+                                            SI
+                                        @else
+                                            NO
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Está embarazada?: </strong>
+                                        @if ($member->embarazada === 1)
+                                            SI
+                                        @else
+                                            NO
+                                        @endif
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Ha tenido hijos nacidos vivos?: </strong> {{ $member->hijos_vivos }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
+                                            entre semana?: </strong>
+                                        @if ($member->donde_permanece_semana === 1)
+                                            SI
+                                        @else
+                                            NO
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <div style="width: auto; margin-top: 8px;">
-                <table>
-                    <thead style="background-color: gray; text-align: left; ">
-                        <tr>
-                            <th>Sección F. Atención a menores de 5 años</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Atención a menores de 5 años: </strong> 1</td>
-                        </tr>
-                        <tr>
-                            <td><strong>¿Dónde o con quién permanece durante la mayor parte del tiempo entre semana?:
-                                </strong> {{ $diligenciamiento->donde_permanece_semana }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
-                                    entre semana?: </strong>
-                                @if ($diligenciamiento->donde_permanece_semana === 1)
-                                    Si
-                                @else
-                                    No
-                                @endif
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                @if ($diligenciamiento->edad < 5)
+                    <table>
+                        <thead style="background-color: gray; text-align: left; ">
+                            <tr>
+                                <th>Sección F. Atención a menores de 5 años</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="background-color: gray;"><strong>Número de Orden: </strong> 1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Atención a menores de 5 años: </strong> 1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Dónde o con quién permanece durante la mayor parte del tiempo entre semana?:
+                                    </strong> {{ $diligenciamiento->donde_permanece_semana }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
+                                        entre semana?: </strong>
+                                    @if ($diligenciamiento->donde_permanece_semana === 1)
+                                        Si
+                                    @else
+                                        No
+                                    @endif
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                @endif
+                @foreach ($diligenciamientos as $member)
+                    @if ($member->edad < 5)
+                        <table>
+                            <thead style="background-color: gray; text-align: left; ">
+                                <tr>
+                                    <th>Sección F. Atención a menores de 5 años</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="background-color: gray;"><strong>Número de Orden: </strong>{{ $loop->iteration + 1 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Atención a menores de 5 años: </strong> 1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Dónde o con quién permanece durante la mayor parte del tiempo entre semana?:
+                                        </strong> {{ $diligenciamiento->donde_permanece_semana }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Recibe o toma desayuno o almuerzo donde permanece la mayor parte del tiempo
+                                            entre semana?: </strong>
+                                        @if ($diligenciamiento->donde_permanece_semana === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @endif
+                @endforeach
             </div>
             <div style="width: auto; margin-top: 8px;">
+                @if ($diligenciamiento->edad >= 5)
                 <table>
                     <thead style="background-color: gray; text-align: left; ">
                         <tr>
@@ -635,6 +798,54 @@
                         </tr>
                     </tbody>
                 </table>
+                @endif
+                @foreach ($diligenciamientos as $member)
+                    @if ($member->edad >= 5)
+                        <table>
+                            <thead style="background-color: gray; text-align: left; ">
+                                <tr>
+                                    <th>Sección G. Educación - Persona de 5 años y más</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="background-color: gray;"><strong>Número de Orden: </strong>{{ $loop->iteration + 1 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Sabe leer y escribir?: </strong>
+                                        @if ($member->sabe_leer_escribir === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Actualmente estudia (asiste a preescolar, colegio o universidad)?: </strong>
+                                        @if ($member->actualmente_estudia === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Cuál es el nivel educativo más alto alcanzado y el último año o grado aprobado
+                                            en ese nivel?: </strong> {{ $member->nivel_educativo }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>¿Cotiza a un fondo de pensiones?: </strong>
+                                        @if ($member->cotiza_pensiones === 1)
+                                            Si
+                                        @else
+                                            No
+                                        @endif
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @endif
+                @endforeach
+                
             </div>
             <div style="width: auto; margin-top: 8px;">
                 <table>
@@ -658,6 +869,22 @@
                             <td><strong>¿Recibe algún subsidio o ayudas del Estado?: </strong>
                                 {{ $diligenciamiento->recibe_subsidio }}</td>
                         </tr>
+                        @foreach ($diligenciamientos as $member)
+                            <tr>
+                                <td style="background-color: gray;"><strong>Número de Orden: </strong>{{ $loop->iteration + 1 }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Cuál fue su actividad principal en el último mes?: </strong>
+                                    {{ $member->actividad_principal }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>En ese trabajo… es: </strong> {{ $member->condicion_trabajo }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Recibe algún subsidio o ayudas del Estado?: </strong>
+                                    {{ $member->recibe_subsidio }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -681,9 +908,9 @@
                                     discriminación en los últimos 12
                                     meses? (racial, étnica, de género, orientación sexual, etc.):</strong>
                                 @if ($diligenciamiento->experimento_discriminacion === 1)
-                                    Si
+                                    SI
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
@@ -693,10 +920,40 @@
                                 @if ($diligenciamiento->victima_violencian === 1)
                                     Si
                                 @else
-                                    No
+                                    NO
                                 @endif
                             </td>
                         </tr>
+                        @foreach ($diligenciamientos as $member)
+                            <tr>
+                                <td style="background-color: gray;"><strong>Número de Orden: </strong>{{ $loop->iteration + 1 }} </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pertenece a algun grupo poblacional vulnerable?:</strong>
+                                    {{ $member->grupo_vulnerable }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Ha experimentado usted o algún miembro de su hogar alguna forma de
+                                        discriminación en los últimos 12
+                                        meses? (racial, étnica, de género, orientación sexual, etc.):</strong>
+                                    @if ($member->experimento_discriminacion === 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>¿Ha sido víctima de violencia física, emocional o sexual en los últimos 12
+                                        meses?: </strong>
+                                    @if ($member->victima_violencian === 1)
+                                        SI
+                                    @else
+                                        NO
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
                     </tbody>
                 </table>
             </div>
