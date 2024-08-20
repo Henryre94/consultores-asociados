@@ -1,66 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+**ComProfiler**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Un software para la optimización de la generación y mantenimiento de diligenciamientos.
 
-## About Laravel
+### Módulos Incluidos en la Versión 1.0.0:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Módulo de Diligenciamientos**: Incluye los métodos CRUD (Crear, Editar, Borrar y Ver). También permite la importación de archivos Excel.
+- **Módulo de Filtros**: Responsable de filtrar los diligenciamientos según los parámetros definidos por el usuario. Además, facilita la creación de archivos PDF y la generación de gráficos (torta y barras).
+- **Módulo de Administración de Usuarios**: Accesible únicamente para usuarios con el rol "superAdmin". Este módulo gestiona a los usuarios de la aplicación.
+- **Módulo de Logos**: Permite la carga de logos en la aplicación, los cuales se utilizan en diversas secciones del proyecto.
+- **Módulo de Configuración**: Proporciona información básica necesaria para el óptimo funcionamiento de la aplicación.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Techstack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Framework**: PHP 8.3, Laravel y Filamentphp 3.0
+- **Bibliotecas**: TailwindCSS
 
-## Learning Laravel
+### Descripción Técnica del Proyecto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Vistas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Filamentphp, a través de los recursos, maneja gran parte del aspecto de la UI. Los recursos y vistas generados por Filamentphp incluyen:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Diligenciamientos**: Vista y Componentes.
+- **Logos**: Vista y Componentes.
+- **Usuarios**: Vista y Componentes.
+- **Roles**: Vista y Componentes.
 
-## Laravel Sponsors
+También hay vistas personalizadas desarrolladas por el equipo, que incluyen contenido HTML, CSS y JS:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Configuración**: Vista y Componentes.
+- **Dashboard**: Vista y Componentes.
+- **Filtros**: Vista y Componentes.
+- **PDF_view**: Vista no accesible al usuario, pero necesaria para la creación de los PDFs.
 
-### Premium Partners
+### Sección de Documentación de Desarrollo
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Esta sección está destinada a facilitar el trabajo y la comprensión de cualquier desarrollador que trabaje en el proyecto.
 
-## Contributing
+#### Funciones
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Los recursos creados con Filamentphp asumen la responsabilidad del funcionamiento y métodos CRUD. Las vistas personalizadas contienen sus propias funciones originales, desarrolladas por el equipo de desarrollo.
 
-## Code of Conduct
+**Configuración**
+- `saveConfiguration()`: Guarda los valores en la base de datos. Cuando se cumplen las condiciones, ejecuta un método GET para obtener los valores guardados de la base de datos.
+- `resetValues()`: Elimina todas las entradas de la tabla `Configuracion` de la base de datos.
+- `closeAlert()`: Cierra cualquier alerta generada al intentar guardar los datos.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Dashboard**
+- `mount()`: Al cargar la vista, obtiene la información de configuración mediante un método GET. Dependiendo de las condiciones y valores agregados, muestra los logos deseados y el formato de la vista adecuado.
+- `getTitle()`: Cambia el título que se muestra en la vista.
 
-## Security Vulnerabilities
+**Filtros**
+- `shouldRegisterNavigation()`: Verifica que los parámetros de configuración de la base de datos estén presentes antes de permitir el uso del módulo.
+- `mount()`: Obtiene los parámetros de configuración de la base de datos y ejecuta el módulo mostrando alertas informativas según sea necesario.
+- `choosedFilterFunction()`: Asegura que los filtros han sido seleccionados correctamente mediante el uso de un valor booleano.
+- `resetFilter()`: Añade los valores a la lista de filtros y restablece los valores de entrada a su estado original para permitir la selección de filtros adicionales.
+- `resetFilterData()`: Elimina todos los parámetros de búsqueda para reiniciar el proceso desde cero.
+- `removeFilter($index)`: Elimina un filtro previamente seleccionado del array de filtros.
+- `generateGraphics()`: Genera gráficos de pastel y de barras basados en la información filtrada.
+- `getFilteredData()`: Utiliza el array de filtros seleccionados para formar una consulta (query) a la base de datos con todos los parámetros deseados.
+- `generateModal()`: Abre las alertas informativas.
+- `closeModal()`: Cierra las alertas informativas.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
