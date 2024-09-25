@@ -17,4 +17,19 @@ class PdfController extends Controller
         
         return $pdf->stream();
     }
+
+
+        public function generateReport()
+    {
+
+        $diligenciamientos = Diligenciamiento::query()->get();
+
+        $count = count($diligenciamientos);
+
+        $pdf = PDF::loadView('report_view', compact('count'))
+        ->setPaper('A3', 'portrait');
+        return $pdf->stream();
+
+    }
+
 }

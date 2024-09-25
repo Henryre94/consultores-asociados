@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Diligenciamiento;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Diligenciamiento>
@@ -19,7 +20,7 @@ class DiligenciamientoFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 2),
+            'user_id' => User::inRandomOrder()->first()->id,
             'fecha_operacion' => $this->faker->date,
             'gps_latitude' => $this->faker->latitude,
             'gps_longitude' => $this->faker->latitude,
