@@ -9,7 +9,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Support\Htmlable;
 
 use Filament\Pages\Page;
-
+use App\Exports\DiligenciamientoExport;
+use Maatwebsite\Excel\Facades\Excel;
 class Filtros extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
@@ -59,8 +60,8 @@ class Filtros extends Page
     public static function shouldRegisterNavigation(): bool
     {
         $configurations = Configuration::get();
-    
-        return $configurations->count()>0;
+
+        return $configurations->count() > 0;
     }
 
     public function mount()
@@ -70,16 +71,15 @@ class Filtros extends Page
 
         $this->openAlert = true;
         $this->loadingPdf = true;
-
     }
 
     public function choosedFilterFunction()
     {
         $this->choosedFilter = true;
-
     }
 
-    public function resetValues(){
+    public function resetValues()
+    {
         $this->selectedOption = '';
         $this->inputValue = '';
         $this->condition = '';
@@ -87,20 +87,20 @@ class Filtros extends Page
         $this->showGraphics = false;
     }
 
-    public function resetFilter(){
+    public function resetFilter()
+    {
 
-        if(in_array($this->selectedOption, $this->selectedColums)) {
+        if (in_array($this->selectedOption, $this->selectedColums)) {
             $this->openAlert = true;
         } else {
             $this->selectedColums[] = $this->selectedOption;
             $this->filterValues[] = $this->inputValue;
             $this->conditions[] = $this->condition;
         }
-    
-        $this->resetValues();
 
+        $this->resetValues();
     }
-        
+
     public function resetFilterData()
     {
         $this->selectedColums = [];
@@ -108,7 +108,6 @@ class Filtros extends Page
         $this->conditions = [];
         $this->diligenciamientos = null;
         $this->resetValues();
-
     }
 
     public function removeFilter($index)
@@ -140,7 +139,7 @@ class Filtros extends Page
 
 
         if (count($this->selectedColums) === 0) {
-            
+
             $this->noFilterApplied = true;
             $this->openAlert = true;
         } else {
@@ -162,9 +161,7 @@ class Filtros extends Page
                 }
                 $this->diligenciamientos = $query->get();
             }
-
         }
-
     }
 
     public function closeAlert()
@@ -172,7 +169,11 @@ class Filtros extends Page
         $this->noFilterApplied = false;
         $this->openAlert = false;
         $this->loadingPdf = false;
-
     }
 
+    public function generarExcel()
+    {
+        $diligenciamientos = $this->diligenciamientos; // O filtra según sea necesario
+        return Excel::download(new DiligenciamientoExport($diligenciamientos), 'diligenciamientos.xlsx');
+    }
 }

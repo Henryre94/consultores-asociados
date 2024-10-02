@@ -300,6 +300,14 @@
                         </div>
                     @endif
                 </div>
+                <div>
+                    @if ($diligenciamientos)
+                    <x-filament::button wire:click="generarExcel()" color="success">
+                        Generar excel
+                    </x-filament::button>
+                    @endif
+
+                </div>
             </div>
 
 
@@ -320,11 +328,12 @@
                                 <th class="px-6 py-3 ">Ficha No.</th>
                                 <th class="px-6 py-3 ">Tipo Documento</th>
                                 <th class="px-6 py-3 ">Numero Documento</th>
+                                <th class="px-6 py-3 ">Nombres</th>
+                                <th class="px-6 py-3 ">Apellidos</th>
                                 <th class="px-6 py-3 ">Departamento</th>
                                 <th class="px-6 py-3 ">Edad</th>
                                 <th class="px-6 py-3 ">Genero</th>
                                 <th class="px-6 py-3 ">Accion</th>
-
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -335,6 +344,9 @@
                                         style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                         {{ $diligenciamiento->tipo_documento_nacionales }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
+                                    <td class="px-6 py-4 ">{{ $diligenciamiento->nombres_completos }}</td>
+                                    <td class="px-6 py-4 ">{{ $diligenciamiento->apellidos_completos }}</td>
+
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>
