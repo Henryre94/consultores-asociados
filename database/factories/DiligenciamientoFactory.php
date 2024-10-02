@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Diligenciamiento;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Diligenciamiento>
@@ -19,7 +20,7 @@ class DiligenciamientoFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 2),
+            'user_id' => User::inRandomOrder()->first()->id,
             'fecha_operacion' => $this->faker->date,
             'gps_latitude' => $this->faker->latitude,
             'gps_longitude' => $this->faker->latitude,
@@ -47,7 +48,7 @@ class DiligenciamientoFactory extends Factory
             'tipo_vivienda' => $this->faker->word,
             'material_paredes' => $this->faker->word,
             'material_pisos' => $this->faker->word,
-            'servicios_publicos' => $this->faker->word,
+            'servicios_publicos' => $this->faker->randomElement(['Energía Electrica', 'Alcantarillado','Gas natural domiciliario',' Acueducto', 'Recolección de Basuras']),
             'cuartos' => $this->faker->numberBetween(1, 10),
             'grupos_presupuesto' => $this->faker->numberBetween(1, 10),
             'hogar_numero' => $this->faker->numberBetween(1, 10),
@@ -87,7 +88,7 @@ class DiligenciamientoFactory extends Factory
             'numero_documento' => $this->faker->unique()->randomNumber(9),
             'fecha_nacimiento' => $this->faker->date,
             'edad' => $this->faker->numberBetween(0, 100),
-            'limitantes_permanentes' => $this->faker->word,
+            'limitantes_permanentes' => $this->faker->randomElement(['Discapacidad Fisica', 'Discapacidad Multiple','Ninguna de las anteriores','Discapacidad Sistémica', 'Dispacidad Psicosocial', 'Discapacidad Auditiva']),
             'regimen_salud' => $this->faker->word,
             'problema_salud_30_dias' => $this->faker->numberBetween(1, 10),
             'acudio_servicios_salud' => $this->faker->boolean,

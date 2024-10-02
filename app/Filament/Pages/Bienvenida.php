@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use App\Models\Configuration;
+use App\Models\Diligenciamiento;
 
 class Bienvenida extends Page
 {
@@ -25,6 +26,7 @@ class Bienvenida extends Page
 
     public $alcaldiaLogoExist;
 
+
     public $logos;
 
 
@@ -36,7 +38,7 @@ class Bienvenida extends Page
     public static function shouldRegisterNavigation(): bool
     {
         $configurations = Configuration::get();
-    
+
         return $configurations->count()>0;
     }
 
@@ -46,6 +48,8 @@ class Bienvenida extends Page
     {
 
         $this->configurations = Configuration::get();
+
+    
 
         $mapPath = "storage/images/departamento_map.jpg";
         $alcaldiaPath = "storage/images/alcaldia_icon.jpg";

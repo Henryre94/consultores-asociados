@@ -48,6 +48,7 @@
 
 
 
+
     </style>
 </head>
 
@@ -58,7 +59,7 @@
         <div>
             <div>
                 <div style="text-align: center;">
-                    @if (public_path('storage/images/consultores_icon.png'))
+                    @if (public_path('storage/images/consultores_icon.jpg'))
                         <img src="{{ public_path('storage/images/consultores_icon.jpg') }}"
                             alt="Consultores Asociados S.A.S. Logo" class="w-32 h-auto">
                     @else
@@ -255,6 +256,7 @@
                     </tbody>
                 </table>
             </div>
+
             <div style="width: auto; margin-top: 8px;">
                 <table>
                     <thead >
