@@ -41,13 +41,5 @@
                 @endif
             @endif
         </div>
-        <x-filament::button 
-            color="danger" 
-            tag="a"
-            href="{{ route('generate-report') }}"
-            target="_blank" 
-            style=" font-size: 12px; letter-spacing: 1px;">
-            PDF
-        </x-filament::button>
     </div>
 </x-filament-panels::page>

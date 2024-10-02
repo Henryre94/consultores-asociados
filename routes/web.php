@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\GraphicController;
 
 
 /*
@@ -28,3 +29,4 @@ Route::get('/report-view', function(){
 Route::get('/generate-pdf/{diligenciamiento}/{configuration}',[PdfController::class, 'generatePdf'])->name('generate-pdf');
 
 Route::get('/generate-report',[PdfController::class, 'generateReport'])->name('generate-report');
+
