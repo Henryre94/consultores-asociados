@@ -18,6 +18,11 @@ use App\Http\Controllers\GraphicController;
 |
 */
 
+
+Route::get('/test', function(){
+    return view('aux_report');
+});
+
 Route::get('/pdf-view', function(){
     return view('pdf_view');
 });

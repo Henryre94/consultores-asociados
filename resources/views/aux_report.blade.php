@@ -5,13 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <title>Report File</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
             font-family: font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             font-size: 12px;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f4f4f4;
         }
 
@@ -79,7 +78,6 @@
         }
 
         .bar-fill {
-            width: {{ $omisionCabeceraPercentage }}%;
             height: 100%;
             background-color: green;
         }
@@ -160,11 +158,61 @@
             height: 100%;
             background-color: green;
         }
+
+        @media print {
+
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Asegurar que el contenido se imprima sin márgenes */
+            @page {
+                margin: 0;
+                size: A4;
+                /* Tamaño de página A4 */
+            }
+
+            /* Asegurar que el gráfico se ajuste bien en la impresión */
+            canvas {
+                display: block;
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            /* Ajustar el zoom para optimizar el tamaño de impresión */
+            body {
+                zoom: 90%;
+                /* Ajuste del zoom para escalar bien en la hoja A4 */
+            }
+
+            /* Ocultar el botón de impresión al imprimir */
+            button {
+                display: none;
+            }
+        }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body class="container">
+    <button onclick="window.print()"
+        style="background-color: #28a745; /* Verde */
+           color: white;
+           padding: 10px 20px;
+           font-size: 16px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+           transition: background-color 0.3s ease, box-shadow 0.3s ease;">
+        Imprimir Gráfico
+    </button>
     <div>
         <div>
             <div>
@@ -181,14 +229,6 @@
                         <td style="text-align: center;">
                             @if (file_exists(public_path('storage/images/alcaldia_icon.jpg')))
                                 <img src="storage/images/alcaldia_icon.jpg" alt="Mapa de la alcaldia"
-                                    style="width: auto; height: 12rem;">
-                            @else
-                                <div></div>
-                            @endif
-                        </td>
-                        <td style="text-align: center;">
-                            @if (file_exists(public_path('storage/images/departamento_map.jpg')))
-                                <img src="storage/images/departamento_map.jpg" alt="Mapa de la alcaldia"
                                     style="width: auto; height: 12rem;">
                             @else
                                 <div></div>
@@ -221,8 +261,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: 2px solid #4A5568; padding: 0.5rem; text-align: center;">
-                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;">
-                                            {{ $count }}</p>
+                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;"></p>
                                     </td>
                                 </tr>
                             </table>
@@ -234,8 +273,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: 2px solid #4A5568; padding: 0.5rem; text-align: center;">
-                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;">
-                                            {{ $omision }}</p>
+                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;"></p>
                                     </td>
                                 </tr>
                             </table>
@@ -249,7 +287,7 @@
                                                     <img src="storage/images/woman.png" alt="Logo Mujer"
                                                         style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                                                 </td>
-                                                <td style="font-size: 1.0rem; color: #4A5568;">{{ $womenCount }}</td>
+                                                <td style="font-size: 1.0rem; color: #4A5568;"></td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 1.0rem;">Son mujeres</td>
@@ -263,7 +301,7 @@
                                                     <img src="storage/images/man.png" alt="Logo Hombre"
                                                         style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                                                 </td>
-                                                <td style="font-size: 1.0rem; color: #4A5568;">{{ $menCount }}</td>
+                                                <td style="font-size: 1.0rem; color: #4A5568;"></td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 1.0rem;">Son hombres</td>
@@ -281,7 +319,7 @@
                             </div>
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem; text-align: center;">
-
+                                <canvas id="chartGruposEdad" style="width: 100%; height: 20rem;"></canvas>
                             </div>
                         </td>
                     </tr>
@@ -294,16 +332,14 @@
                         <td style="padding: 1rem; text-align: center; width: 50%;">
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem;">
-                                Adicionar gráfica
+                                <canvas id="piramide_uno" style="height: 20rem; width: 100%"></canvas>
                             </div>
-                            <div>Caracterización de Población Vulnerable 2024</div>
                         </td>
                         <td style="padding: 0.5rem; text-align: center; width: 50%;">
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem;">
-                                Adicionar gráfica
+                                <canvas id="piramide_dos" style="height: 20rem; width: 100%"></canvas>
                             </div>
-                            <div>Población Ajustada por Omisión 2024</div>
                         </td>
                     </tr>
                 </table>
@@ -324,29 +360,29 @@
                                 <tr>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">Indígenas</p>
-                                        <p class="poblacion-etnica-valor">{{ $percentageIndigena }}%</p>
+                                        <p class="poblacion-etnica-valor">%</p>
                                     </td>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">ROM (Gitanos)</p>
-                                        <p class="poblacion-etnica-valor">{{ $percentageGitanos }}%</p>
+                                        <p class="poblacion-etnica-valor">%</p>
                                     </td>
                                     <td style="text-align: center; border-bottom: 2px solid #CBD5E0;">
                                         <p class="poblacion-etnica">Raizales</p>
-                                        <p class="poblacion-etnica-valor">{{ $percentageRaizales }}%</p>
+                                        <p class="poblacion-etnica-valor">%</p>
                                     </td>
                                     <td style="text-align: center; border-bottom: 2px solid #CBD5E0;">
                                         <p class="poblacion-etnica">Palenqueros</p>
-                                        <p class="poblacion-etnica-valor">{{ $percentagePalenqueros }}%</p>
+                                        <p class="poblacion-etnica-valor">%</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">Afrocolombianos</p>
-                                        <p class="poblacion-etnica-valor">{{ $percentageAfroColombiano }}%</p>
+                                        <p class="poblacion-etnica-valor">%</p>
                                     </td>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">Ningún grupo étnico</p>
-                                        <p class="poblacion-etnica-valor">{{ $percentageResto }}%</p>
+                                        <p class="poblacion-etnica-valor">%</p>
                                     </td>
                                     <td colspan="2" style="text-align: left; padding-left: 1rem;">
                                         <p>1 del archipiélago de San Andrés y 1.193 Providencia</p>
@@ -372,147 +408,12 @@
             <div style="border-bottom: 2px solid #A0AEC0;">
                 <table style="width: 100%; border-spacing: 1rem;">
                     <tr>
-                        <td style="padding: 1rem; text-align: center">
-                            <div
-                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem;">
-                                Adicionar gráfica
-                            </div>
+                        <td style="padding: 1rem; text-align: center; width: 50%;">
+                            <canvas id="tortaChart"
+                                style="width: 100% !important; height: 20rem !important; display: inline;"></canvas>
                         </td>
                         <td style="padding: 1rem; text-align: center;">
-                            <div class="graphic-container">
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Discapacidad Mental - Discapacidad...</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-mental-fisica"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Discapacidad Nula</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-mental"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Discapacidad Orgánica</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-organica"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Discapacidad Sensorial</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-sensorial"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Pluridiscapacidad</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-pluri"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Discapacidad Motora - Discapacidad..</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-motora"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr style="margin-bottom: 1rem">
-                                        <td style="width: 20%">Discapacidad Nula</td>
-                                        <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                            <div class="bar-container-third">
-                                                <div class="discapacidad-nula"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr>
-                                        <td style="width: 20%">
-
-                                        </td>
-                                        <td style="width: 5%">
-                                            0
-                                        </td>
-                                        <td>
-                                            2000
-                                        </td>
-                                        <td>
-                                            4000
-                                        </td>
-                                        <td>
-                                            6000
-                                        </td>
-                                        <td>
-                                            8000
-                                        </td>
-                                        <td>
-                                            10000
-                                        </td>
-                                        <td>
-                                            120000
-                                        </td>
-                                        <td>
-                                            14000
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                    <tr>
-                                        <td>
-                                            Cabecera Municipal
-                                        </td>
-                                        <td>
-                                            La Loma
-                                        </td>
-                                        <td>
-                                            Potrenillo
-                                        </td>
-                                        <td>
-                                            Cuatro Vientos
-                                        </td>
-                                        <td>
-                                            El Valito
-                                        </td>
-                                        <td>
-                                            El carmen
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                            <canvas id="chartCentrosPoblados" style="width: 100%; height: 20rem;"></canvas>
                         </td>
                     </tr>
                 </table>
@@ -543,7 +444,8 @@
                         <td colspan="2" style="text-align: center; padding-top: 1rem;">
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem;">
-                                Adicionar gráfica
+                                <canvas id="chartLeerEscribir"
+                                    style="width: 100% !important; height: 20rem;"></canvas>
                             </div>
                         </td>
                     </tr>
@@ -570,165 +472,16 @@
                         </td>
                     </tr>
                     <tr>
+
+                        <td class="graphic-container">
+                            <canvas id="chartAsistenciaEscolar"
+                                style="height: 20rem !important; width: 100%;"></canvas>
                         </td>
-                        <div class="graphic-container">
-                            <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                <tr>
-                                    <td style="width: 10%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        <div class="bar-container-second">
-                                            <div class="man-fill-one"></div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        5000
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        19%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        65 y + años
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem;">
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        <div class="bar-container-second">
-                                            <div class="woman-fill-one"></div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        5000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        19%
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                <tr style="margin-bottom: 1rem">
-                                    <td style="width: 10%;"> </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        <div class="bar-container-second">
-                                            <div class="man-fill-one"></div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        5000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        19%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        15-65 años
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem;">
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%; margin-bottom: 1rem"></td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        <div class="bar-container-second">
-                                            <div class="woman-fill-one"></div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        5000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        19%
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <table style="width: 100%; margin-top: 2rem; margin-bottom: 2rem;">
-                                <tr style="margin-bottom: 1rem">
-                                    <td style="width: 10%"></td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        <div class="bar-container-second">
-                                            <div class="man-fill-one"></div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        5000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        19%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        5-14 años
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem;">
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%"></td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        <div class="bar-container-second">
-                                            <div class="woman-fill-one"></div>
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        5000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-
-                                    </td>
-                                    <td style="border-left: 2px solid gray; padding-left: 1rem">
-                                        19%
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                     </tr>
                 </table>
             </div>
 
-            <div style="margin-top: 2rem; border-bottom: 2px solid #A0AEC0; padding-bottom: 1rem">
+            <div style="margin-top: 2rem; border-bottom: 2px solid #A0AEC0; padding-bottom: 1rem; width: 100%;">
                 <table style="width: 100%">
                     <tr>
                         <td style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">¿Dónde estamos?</td>
@@ -759,10 +512,8 @@
                                 <table style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                                     <tr>
                                         <td style="width: 20%"></td>
-                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: left;">
-                                            {{ $omisionCabeceraPercentage }}% </td>
-                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: right;">
-                                            {{ $omisionPobladoPercentage }}% </td>
+                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: left;"> % </td>
+                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: right;"> % </td>
                                     </tr>
                                     <tr>
                                         <td style="width: 20%">
@@ -885,7 +636,7 @@
                             </div>
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem; text-align: center;">
-
+                                <canvas id="chartUsoVivienda" style="width: 100%; height: 20rem;"></canvas>
                             </div>
                         </td>
                     </tr>
@@ -1025,7 +776,7 @@
                         <td>
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem; text-align: center;">
-
+                                <canvas id="chartServiciosPublicos" style="width: 100%; height: 20rem;"></canvas>
                             </div>
                         </td>
                     </tr>
@@ -1204,6 +955,418 @@
         </div>
     </div>
 
+    <script>
+        //Grupos de edad chart
+        const ctxGruposEdad = document.getElementById('chartGruposEdad').getContext('2d');
+        const chartGruposEdad = new Chart(ctxGruposEdad, {
+            type: 'bar',
+            data: {
+                labels: ['0-14 años', '15-59 años', '60 o más años'], // Grupos de edad
+                datasets: [{
+                        label: 'Caracterización',
+                        data: [10000, 15000, 3000], // Datos de caracterización
+                        backgroundColor: 'rgba(14,150,52,255)', // Color sólido
+                    },
+                    {
+                        label: 'Población por Omisión',
+                        data: [12000, 18000, 4000], // Datos de omisión
+                        backgroundColor: 'rgba(131,199,152,255)', // Color con patrón o transparencia
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Grandes Grupos de Edad'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true // Apilar en el eje X
+                    },
+                    y: {
+                        stacked: true, // Apilar en el eje Y
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        // piramide uno
+        const ctxPiramideUno = document.getElementById('piramide_uno').getContext('2d');
+        const chartPiramideUno = new Chart(ctxPiramideUno, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '90-94 años', '80-84 años', '70-74 años', '60-64 años',
+                    '50-54 años', '40-44 años', '30-34 años', '20-24 años',
+                    '10-14 años', '0-4 años'
+                ],
+                datasets: [{
+                        label: 'Hombres',
+                        data: [-2, -3, -5, -8, -10, -12, -14, -10, -8, -5],
+                        backgroundColor: 'rgba(14,150,52,255)',
+                    },
+                    {
+                        label: 'Mujeres',
+                        data: [2, 3, 5, 8, 10, 12, 14, 10, 8, 5],
+                        backgroundColor: 'rgba(131,199,152,255)',
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y', // Eje horizontal
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return Math.abs(value) + '%';
+                            }
+                        }
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Caracterización de Población Vulnerable 2024'
+                    }
+                }
+            }
+        });
+        // piramide dos
+        const ctxPiramideDos = document.getElementById('piramide_dos').getContext('2d');
+        const chartPiramideDos = new Chart(ctxPiramideDos, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '90-94 años', '80-84 años', '70-74 años', '60-64 años',
+                    '50-54 años', '40-44 años', '30-34 años', '20-24 años',
+                    '10-14 años', '0-4 años'
+                ],
+                datasets: [{
+                        label: 'Hombres',
+                        data: [-2, -3, -5, -8, -10, -12, -14, -10, -8, -5],
+                        backgroundColor: 'rgba(14,150,52,255)',
+                    },
+                    {
+                        label: 'Mujeres',
+                        data: [2, 3, 5, 8, 10, 12, 14, 10, 8, 5],
+                        backgroundColor: 'rgba(131,199,152,255)',
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y', // Eje horizontal
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return Math.abs(value) + '%';
+                            }
+                        }
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Caracterización de Población Vulnerable 2024'
+                    }
+                }
+            }
+        });
+
+        // torta
+        const ctxTortaChart = document.getElementById('tortaChart').getContext('2d');
+        const chartTortaChart = new Chart(ctxTortaChart, {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Discapacidad Nula',
+                    'Discapacidad Motora - Discapacidad Sensorial',
+                    'Pluridiscapacidad',
+                    'Discapacidad Sensorial',
+                    'Discapacidad Orgánica',
+                    'Discapacidad Mental'
+                ],
+                datasets: [{
+                    data: [52.39, 39.57, 5.07, 1.82, 0.79, 0.37],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 255, 102, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 205, 86, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 255, 102, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'left'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const data = tooltipItem.raw;
+                                return data + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // centros poblados
+        const ctxChartCentrosPoblados = document.getElementById('chartCentrosPoblados').getContext('2d');
+        const chartChartCentrosPoblados = new Chart(ctxChartCentrosPoblados, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Discapacidad Mental',
+                    'Discapacidad Orgánica',
+                    'Discapacidad Sensorial',
+                    'Pluridiscapacidad',
+                    'Discapacidad Motora',
+                    'Discapacidad Nula'
+                ],
+                datasets: [{
+                        label: 'Cabecera Municipal',
+                        data: [100, 12000, 400, 10, 300, 8000],
+                        backgroundColor: 'rgba(0, 128, 0, 0.7)' // Verde oscuro
+                    },
+                    {
+                        label: 'La Loma',
+                        data: [50, 9000, 300, 5, 200, 7000],
+                        backgroundColor: 'rgba(173, 255, 47, 0.7)' // Verde claro
+                    },
+                    {
+                        label: 'Potrerillo',
+                        data: [30, 8000, 200, 8, 150, 6000],
+                        backgroundColor: 'rgba(34, 139, 34, 0.7)' // Otro tono de verde
+                    },
+                    {
+                        label: 'Cuatro Vientos',
+                        data: [25, 6000, 100, 4, 100, 5000],
+                        backgroundColor: 'rgba(0, 250, 154, 0.7)' // Verde medio
+                    },
+                    {
+                        label: 'El Vallito',
+                        data: [20, 4000, 50, 2, 50, 3000],
+                        backgroundColor: 'rgba(144, 238, 144, 0.7)' // Verde claro
+                    },
+                    {
+                        label: 'El Carmen',
+                        data: [15, 2000, 30, 1, 20, 1000],
+                        backgroundColor: 'rgba(0, 255, 127, 0.7)' // Verde claro neón
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Leer escribir
+        const ctx2ChartLeerEscribir = document.getElementById('chartLeerEscribir').getContext('2d');
+        const chartChartLeerEscribir = new Chart(ctx2ChartLeerEscribir, {
+            type: 'bar',
+            data: {
+                labels: ['Categoría 1', 'Categoría 2', 'Categoría 3',
+                    'Categoría 4'
+                ],
+                datasets: [{
+                        label: '5-14 años',
+                        data: [5540, 5200, 5610, 5270],
+                        backgroundColor: 'rgba(0, 128, 0, 0.8)'
+                    },
+                    {
+                        label: '15-64 años',
+                        data: [9523, 10187, 9267, 9939],
+                        backgroundColor: 'rgba(0, 128, 0, 0.5)',
+                        borderWidth: 1,
+                        borderColor: 'rgba(0, 128, 0, 1)',
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: '65 y + años',
+                        data: [467, 438, 777, 724],
+                        backgroundColor: 'rgba(0, 128, 0, 0.3)',
+                        borderWidth: 1,
+                        borderColor: 'rgba(0, 128, 0, 1)',
+                        borderDash: [10, 5]
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // El eje Y comienza en 0
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom' // Leyenda en la parte inferior
+                    }
+                }
+            }
+        });
+
+        // Asistencia escolar
+        const ctxChartAsistenciaEscolar = document.getElementById('chartAsistenciaEscolar').getContext('2d');
+        const chartChartAsistenciaEscolar = new Chart(ctxChartAsistenciaEscolar, {
+            type: 'bar',
+            data: {
+                labels: ['65 y + años', '15-64 años', '5-14 años'], // Grupos de edad
+                datasets: [{
+                        label: 'Hombres',
+                        data: [3, 1880, 5551], // Datos para hombres en cada grupo de edad
+                        backgroundColor: 'rgba(0, 128, 0, 0.8)' // Color sólido para los hombres
+                    },
+                    {
+                        label: 'Mujeres',
+                        data: [2, 1538, 5915], // Datos para mujeres en cada grupo de edad
+                        backgroundColor: 'rgba(0, 128, 0, 0.5)', // Color más claro para las mujeres
+                        borderWidth: 1,
+                        borderColor: 'rgba(0, 128, 0, 1)', // Bordes para mayor claridad
+                        borderDash: [5, 5] // Patrón discontinuo (opcional)
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y', // Hace que el gráfico sea horizontal
+                scales: {
+                    x: {
+                        beginAtZero: true // El eje X comienza en 0
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'right' // La leyenda se coloca a la derecha
+                    }
+                }
+            }
+        });
+
+        //Uso de vivienda
+        const ctxChartUsoVivienda = document.getElementById('chartUsoVivienda').getContext('2d');
+        const chartChartUsoVivienda = new Chart(ctxChartUsoVivienda, {
+            type: 'bar',
+            data: {
+                labels: ['Residencial', 'No residencial', 'Mixto'],
+                datasets: [{
+                    label: 'Porcentaje de uso',
+                    data: [74.1, 22.4, 3.5],
+                    backgroundColor: [
+                        'green', // Puedes cambiar el color si lo deseas
+                        'green',
+                        'green'
+                    ],
+                    borderColor: [
+                        'green',
+                        'green',
+                        'green'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + "%";
+                            } // Añade el símbolo de porcentaje en el eje Y
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.raw + "%"; // Añade el símbolo de porcentaje en el tooltip
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctxChartServiciosPublicos = document.getElementById('chartServiciosPublicos').getContext('2d');
+        const chartChartServiciosPublicos = new Chart(ctxChartServiciosPublicos, {
+            type: 'bar',
+            data: {
+                labels: ['Energía Eléctrica', 'Acueducto', 'Alcantarillado', 'Gas Natural',
+                    'Recolección de Basuras', 'Internet'
+                ],
+                datasets: [{
+                    label: 'Porcentaje de uso',
+                    data: [98.7, 86.4, 72.8, 36.6, 61.1, 8.1],
+                    backgroundColor: [
+                        'green', 'green', 'green', 'green', 'green', 'green'
+                    ],
+                    borderColor: [
+                        'green', 'green', 'green', 'green', 'green', 'green'
+                    ],
+                    borderWidth: 1,
+                    // Para el patrón de puntos, podrías necesitar una librería externa para patrones
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + "%";
+                            } // Añade el símbolo de porcentaje en el eje Y
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.raw + "%"; // Añade el símbolo de porcentaje en el tooltip
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
