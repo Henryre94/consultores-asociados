@@ -6,15 +6,15 @@
 
             <div class=" alert"
                 style="
-            background-color: #f8d7da; 
-            color: #721c24; 
-            border: 1px solid #f5c6cb; 
-            padding: 20px; 
-            margin-bottom: 15px; 
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 20px;
+            margin-bottom: 15px;
             position: fixed;
             top: 0;
             left: 35%;
-            z-index: 1000; 
+            z-index: 1000;
             border-radius: 5px;
             display: flex;
             align-items: center;">
@@ -300,6 +300,14 @@
                         </div>
                     @endif
                 </div>
+                <div>
+                    @if ($diligenciamientos)
+                    <x-filament::button wire:click="generarExcel()" color="success">
+                        Generar excel
+                    </x-filament::button>
+                    @endif
+
+                </div>
             </div>
 
 
@@ -320,19 +328,25 @@
                                 <th class="px-6 py-3 ">Ficha No.</th>
                                 <th class="px-6 py-3 ">Tipo Documento</th>
                                 <th class="px-6 py-3 ">Numero Documento</th>
+                                <th class="px-6 py-3 ">Nombres</th>
+                                <th class="px-6 py-3 ">Apellidos</th>
                                 <th class="px-6 py-3 ">Departamento</th>
                                 <th class="px-6 py-3 ">Edad</th>
                                 <th class="px-6 py-3 ">Genero</th>
                                 <th class="px-6 py-3 ">Accion</th>
-
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($diligenciamientos as $diligenciamiento)
                                 <tr style="font-size: 14px; color: #555;white-space: no-wrap;">
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->ficha_no }}</td>
-                                    <td class="px-6 py-4 " style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $diligenciamiento->tipo_documento_nacionales }}</td>
+                                    <td class="px-6 py-4 "
+                                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        {{ $diligenciamiento->tipo_documento_nacionales }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->numero_documento }}</td>
+                                    <td class="px-6 py-4 ">{{ $diligenciamiento->nombres_completos }}</td>
+                                    <td class="px-6 py-4 ">{{ $diligenciamiento->apellidos_completos }}</td>
+
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->departamento }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->edad }}</td>
                                     <td class="px-6 py-4 ">{{ $diligenciamiento->sexo }}</td>

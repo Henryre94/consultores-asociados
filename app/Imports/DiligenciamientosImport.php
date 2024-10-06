@@ -4,13 +4,14 @@ namespace App\Imports;
 
 use App\Models\Diligenciamiento;
 use App\Models\User;
+use DateInterval;
 use DateTime;
+use Exception;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class DiligenciamientosImport implements ToModel, WithStartRow
 {
-
     /**
      * @return int
      */
@@ -31,8 +32,8 @@ class DiligenciamientosImport implements ToModel, WithStartRow
 
         return new Diligenciamiento([
             'user_id' => $user_id,
-            'fecha_operacion' => DateTime::createFromFormat('d/m/Y h:i a', $row[2]) ? DateTime::createFromFormat('d/m/Y h:i a', $row[2])->format('Y-m-d H:i:s') : null,
-            'gps_latitude' => $row[3],
+            'fecha_operacion' => $this->convertToSqlDate($row[2]),
+            'gps_latitude' => $row[2],
             'gps_longitude' => $row[4],
             'gps_altitude' => $row[5],
             'pdf' => $row[6],
@@ -103,7 +104,7 @@ class DiligenciamientosImport implements ToModel, WithStartRow
             'tipo_documento_nacionales' => $row[73],
             'tipo_documento_extranjeros' => $row[74],
             'numero_documento' => $row[75],
-            'fecha_nacimiento' => DateTime::createFromFormat('d/m/Y h:i a', $row[76]) ? DateTime::createFromFormat('d/m/Y h:i a', $row[76])->format('Y-m-d H:i:s') : null,
+            'fecha_nacimiento' => $this->convertToSqlDate($row[76]),
             'edad' => $row[77],
             'limitantes_permanentes' => $row[78],
             'regimen_salud' => $row[79],
@@ -126,5 +127,61 @@ class DiligenciamientosImport implements ToModel, WithStartRow
             'experimento_discriminacion' => $row[96] == 'NO' ? false : true,
             'victima_violencia' => $row[97] == 'NO' ? false : true,
         ]);
+    }
+
+    function convertToSqlDate($dateInput) {
+        // Primero, intenta convertir el número de serie de Excel
+        if (is_numeric($dateInput)) {
+            return $this->convertExcelDateToSqlDate((float)$dateInput);
+        }
+
+        // Luego, intenta convertir los formatos de fecha proporcionados
+        $formats = [
+            'd/m/Y h:i a', // Formato con "a.m." y "p.m."
+            'd/m/Y h:i A', // Formato con "AM" y "PM"
+            'd/m/Y h:i:s', // Formato con "p. m."
+            'd/m/Y h:i', // Formato con "p. m."
+        ];
+
+        foreach ($formats as $format) {
+            $date = DateTime::createFromFormat($format, $dateInput);
+            if ($date !== false) {
+                return $date->format('Y-m-d H:i:s');
+            }
+        }
+
+        return null;
+    }
+
+    function convertExcelDateToSqlDate($excelDate) {
+        try {
+            // La fecha base de Excel es el 1 de enero de 1900
+            $baseDate = new DateTime('1899-12-30'); // Ajustamos la base a 30-12-1899 para compensar el día 1 y el error de Excel
+
+            // Ajustar la fecha base por el número de días de Excel
+            $days = (int)$excelDate;
+            $fractionalDay = $excelDate - $days;
+
+            // Crear un intervalo de días
+            $interval = new DateInterval('P' . abs($days) . 'D');
+            if ($days >= 0) {
+                $baseDate->add($interval);
+            } else {
+                $baseDate->sub($interval);
+            }
+
+            // Obtener la fracción del día (hora)
+            $hours = $fractionalDay * 24;
+            $minutes = ($hours - floor($hours)) * 60;
+            $seconds = ($minutes - floor($minutes)) * 60;
+
+            // Ajustar la hora a la fecha base
+            $baseDate->setTime((int)$hours, (int)$minutes, (int)$seconds);
+
+            // Formatear la fecha en formato SQL
+            return $baseDate->format('Y-m-d H:i:s');
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }

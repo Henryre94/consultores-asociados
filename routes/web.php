@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\GraphicController;
 
 
 /*
@@ -17,8 +18,20 @@ use App\Http\Controllers\ConfigurationController;
 |
 */
 
+
+Route::get('/test', function(){
+    return view('aux_report');
+});
+
 Route::get('/pdf-view', function(){
     return view('pdf_view');
 });
 
+Route::get('/report-view', function(){
+    return view('report_view');
+});
+
 Route::get('/generate-pdf/{diligenciamiento}/{configuration}',[PdfController::class, 'generatePdf'])->name('generate-pdf');
+
+Route::get('/generate-report',[PdfController::class, 'generateReport'])->name('generate-report');
+

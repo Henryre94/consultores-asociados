@@ -17,16 +17,10 @@ class RolesPermissionSeeder extends Seeder
     {
         $user1 = User::create([
             'name' => 'superadmin',
-            'email' => 'superadmin@gmail.com',
-            'password' =>  'superadmin123'
+            'email' => 'cbconsultoresa@gmail.com',
+            'password' =>  'CYBConsultores2024'
         ]);
     
-        $user2 = User::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => 'admin123'
-        ]);
-
         $role1 = Role::create(['name' => 'Superadmin']);
         $role2 = Role::create(['name' => 'Admin']);
 
@@ -43,7 +37,6 @@ class RolesPermissionSeeder extends Seeder
         Permission::create(['name'=>'eliminar diligencimiento'])->syncRoles([$role1, $role2]);
 
         $user1->assignRole($role1);
-        $user2->assignRole($role2);
-        
+
     }
 }
