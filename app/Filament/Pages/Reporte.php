@@ -34,7 +34,7 @@ class Reporte extends Page
 
     public function mount(): void
     {
-        $this->diligenciamientos = Diligenciamiento::all();
+        $diligenciamientos = Diligenciamiento::all();
 
     }
 
@@ -48,11 +48,6 @@ class Reporte extends Page
     public function generateGraphics()
     {
         $this->showGraphics = true;
-    }
-
-    public function generateReport()
-    {
-        return redirect()->route('generate-report', ['omision' => $this->omision]);
     }
 
 }
