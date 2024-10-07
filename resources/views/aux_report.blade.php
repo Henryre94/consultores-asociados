@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            font-size: 12px;
+            font-size: 14px;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
@@ -29,19 +29,19 @@
 
         .poblacion-etnica {
             color: black;
-            font-size: 1.0rem;
+            font-size: 1.3rem;
         }
 
         .poblacion-etnica-valor {
             color: #4B5563;
             font-weight: bold;
-            font-size: 1.0rem;
+            font-size: 1.3rem;
         }
 
         .poblacion-etnica-valor-tipo-vivienda {
             color: #4B5563;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
 
@@ -78,6 +78,7 @@
         }
 
         .bar-fill {
+            width: {{ $omisionCabeceraPercentage }}%;
             height: 100%;
             background-color: green;
         }
@@ -238,13 +239,13 @@
                 </table>
 
                 <div
-                    style="text-align: center; font-size: 1.0rem; font-weight: bold; border-bottom: 1px solid black; padding: 0.5rem;">
+                    style="text-align: center; font-size: 1.5rem; font-weight: bold; border-bottom: 1px solid black; padding: 0.5rem;">
                     Caracterización de Población Vulnerable
-                    El Paso Departamento del Cesar 2024
+                    {{$municipio}} Departamento del {{$departamento}} 2024
                 </div>
 
-                <div style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.25rem;">
-                    El Paso/Cesar
+                <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.25rem;">
+                  {{$departamento}}  / {{$municipio}}
                 </div>
             </div>
             <div>
@@ -252,7 +253,7 @@
                     <tr>
                         <td style="padding: 0.5rem; width: 50%; ">
                             <div
-                                style="text-align: center; font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                style="text-align: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
                                 ¿Cuántos somos?
                             </div>
                             <table style="width: 100%; height: margin-top: 1rem; margin-bottom: 1rem;">
@@ -261,7 +262,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: 2px solid #4A5568; padding: 0.5rem; text-align: center;">
-                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;"></p>
+                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;">{{ $count }}</p>
                                     </td>
                                 </tr>
                             </table>
@@ -273,7 +274,7 @@
                                 </tr>
                                 <tr>
                                     <td style="border: 2px solid #4A5568; padding: 0.5rem; text-align: center;">
-                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;"></p>
+                                        <p style="font-size: 1.0rem; font-weight: bold; color: #4A5568;"> {{ $omision }}</p>
                                     </td>
                                 </tr>
                             </table>
@@ -287,7 +288,7 @@
                                                     <img src="storage/images/woman.png" alt="Logo Mujer"
                                                         style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                                                 </td>
-                                                <td style="font-size: 1.0rem; color: #4A5568;"></td>
+                                                <td style="font-size: 1.0rem; color: #4A5568;">{{$womenCount}}</td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 1.0rem;">Son mujeres</td>
@@ -301,7 +302,7 @@
                                                     <img src="storage/images/man.png" alt="Logo Hombre"
                                                         style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                                                 </td>
-                                                <td style="font-size: 1.0rem; color: #4A5568;"></td>
+                                                <td style="font-size: 1.0rem; color: #4A5568;">{{$menCount}}</td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 1.0rem;">Son hombres</td>
@@ -314,8 +315,8 @@
 
                         <td style="padding: 0.5rem; width: 50%;">
                             <div
-                                style="text-align: center; font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">
-                                Omisión total: 7,8%
+                                style="text-align: center; font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                Omisión total: {{ $omisionPorcentaje }}%
                             </div>
                             <div
                                 style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem; text-align: center;">
@@ -349,40 +350,40 @@
                 <table style="width: 100%; height: 100%">
                     <tr>
                         <td style="padding: 0.5rem;">
-                            <div style="font-size: 1.0rem; font-weight: bold;">
-                                La población étnica en El Paso se autoreconoció como:
+                            <div style="font-size: 1.5rem; font-weight: bold;">
+                                La población étnica en {{$municipio}} se autoreconoció como:
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 1rem;">
                             <table style="width: 100%; border-spacing: 1rem;">
-                                <tr>
+                            <tr>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">Indígenas</p>
-                                        <p class="poblacion-etnica-valor">%</p>
+                                        <p class="poblacion-etnica-valor">{{ $percentageIndigena }}%</p>
                                     </td>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">ROM (Gitanos)</p>
-                                        <p class="poblacion-etnica-valor">%</p>
+                                        <p class="poblacion-etnica-valor">{{ $percentageGitanos }}%</p>
                                     </td>
                                     <td style="text-align: center; border-bottom: 2px solid #CBD5E0;">
                                         <p class="poblacion-etnica">Raizales</p>
-                                        <p class="poblacion-etnica-valor">%</p>
+                                        <p class="poblacion-etnica-valor">{{ $percentageRaizales }}%</p>
                                     </td>
                                     <td style="text-align: center; border-bottom: 2px solid #CBD5E0;">
                                         <p class="poblacion-etnica">Palenqueros</p>
-                                        <p class="poblacion-etnica-valor">%</p>
+                                        <p class="poblacion-etnica-valor">{{ $percentagePalenqueros }}%</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">Afrocolombianos</p>
-                                        <p class="poblacion-etnica-valor">%</p>
+                                        <p class="poblacion-etnica-valor">{{ $percentageAfroColombiano }}%</p>
                                     </td>
                                     <td style="text-align: center;">
                                         <p class="poblacion-etnica">Ningún grupo étnico</p>
-                                        <p class="poblacion-etnica-valor">%</p>
+                                        <p class="poblacion-etnica-valor">{{ $percentageResto }}%</p>
                                     </td>
                                     <td colspan="2" style="text-align: left; padding-left: 1rem;">
                                         <p>1 del archipiélago de San Andrés y 1.193 Providencia</p>
@@ -396,8 +397,8 @@
                     <tr>
                         <td style="padding: 1rem;">
                             Nota: el porcentaje de población (denominador) no incluye a las personas que no respondieron
-                            esta pregunta, es decir, no incluye “sin información”. De un total de 34.620 personas
-                            efectivamente censadas, 153 (0,4%) no respondieron esta pregunta de autorreconocimiento
+                            esta pregunta, es decir, no incluye “sin información”. De un total de {{ $count }} personas
+                            efectivamente censadas, {{$noAutoreconocimiento}} ({{$percentageNoAutoreconocimiento}}%) no respondieron esta pregunta de autorreconocimiento
                             (pertenencia étnica).
                         </td>
                     </tr>
@@ -422,7 +423,7 @@
             <div>
                 <table style="width: 100%">
                     <tr>
-                        <td style="font-size: 1.0rem; font-weight: bold; width: 70%;">
+                        <td style="font-size: 1.8rem; font-weight: bold; width: 70%;">
                             Alfabetismo: leer y escribir
                         </td>
                         <td style="text-align: center;">
@@ -453,7 +454,7 @@
 
                 <table style="width: 100%; margin-top: 1rem;">
                     <tr>
-                        <td style="font-size: 1.0rem; font-weight: bold; width: 70%;">
+                        <td style="font-size: 1.8rem; font-weight: bold; width: 70%;">
                             Asistencia escolar
                         </td>
                         <td style="text-align: center;">
@@ -484,17 +485,17 @@
             <div style="margin-top: 2rem; border-bottom: 2px solid #A0AEC0; padding-bottom: 1rem; width: 100%;">
                 <table style="width: 100%">
                     <tr>
-                        <td style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">¿Dónde estamos?</td>
+                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">¿Dónde estamos?</td>
                     </tr>
                     <tr>
                         <td style="width: 60%; font-size: 1.0rem;">Población ajustada por omisión en cabecera
-                            municipal: <span class="poblacion-etnica-valor"> 6.922</span></td>
+                            municipal: <span class="poblacion-etnica-valor"> {{ $omisionCabecera }}</span></td>
                         <td><img src="storage/images/building.png" alt="Logo Hombre"
                                 style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;"></td>
                     </tr>
                     <tr>
                         <td style="width: 60%; font-size: 1.0rem;">Población ajustada por omisión en centros poblados y
-                            rural disperso: <span class="poblacion-etnica-valor"> 30900</span></td>
+                            rural disperso: <span class="poblacion-etnica-valor">  {{ $omisionPoblado }}</span></td>
                         <td><img src="storage/images/home.png" alt="Logo Hombre"
                                 style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;"></td>
                     </tr>
@@ -512,8 +513,10 @@
                                 <table style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                                     <tr>
                                         <td style="width: 20%"></td>
-                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: left;"> % </td>
-                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: right;"> % </td>
+                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: left;">
+                                            {{ $omisionCabeceraPercentage }}% </td>
+                                        <td style="font-size: 1.0rem; font-weight: bold; text-align: right;">
+                                            {{ $omisionPobladoPercentage }}% </td>
                                     </tr>
                                     <tr>
                                         <td style="width: 20%">
@@ -537,14 +540,14 @@
             </div>
 
             <div>
-                <table style="width: 100%">
+                <table style="width: 100%;border-spacing: 0 10px;">
                     <tr>
-                        <td
-                            style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem; padding-bottom: 0.5rem">
-                            Lugar de nacimiento</td>
+                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem; padding-bottom: 0.5rem">
+                            Lugar de nacimiento
+                        </td>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr >
+                        <td style="width: 25%">
                             <img src="storage/images/woman.png" alt="Logo Mujer"
                                 style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                         </td>
@@ -554,18 +557,18 @@
                     </tr>
                     <tr>
                         <td>Mujeres</td>
-                        <td class="poblacion-etnica-valor">1%</td>
-                        <td class="poblacion-etnica-valor">1%</td>
-                        <td class="poblacion-etnica-valor">1%</td>
+                        <td class="poblacion-etnica-valor">{{$otroPaisMujer}}%</td>
+                        <td class="poblacion-etnica-valor">{{$otroMunicipioMujer}}%</td>
+                        <td class="poblacion-etnica-valor">{{$esteMunicipioMujer}}%</td>
                     </tr>
                     <tr>
                         <td>
                             <img src="storage/images/man.png" alt="Logo Mujer"
                                 style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                         </td>
-                        <td class="poblacion-etnica-valor">1%</td>
-                        <td class="poblacion-etnica-valor">1%</td>
-                        <td class="poblacion-etnica-valor">1%</td>
+                        <td class="poblacion-etnica-valor">{{$otroPaisHombre}}%</td>
+                        <td class="poblacion-etnica-valor">{{$otroMunicipioHombre}}%</td>
+                        <td class="poblacion-etnica-valor">{{$esteMunicipioHombre}}%</td>
                     </tr>
                     <tr>
                         <td>Hombres</td>
@@ -577,10 +580,10 @@
             </div>
 
             <div>
-                <table style="width: 100%; margin-top: 1rem; height: 200px;">
+                <table style="width: 100%; margin-top: 2rem; height: 200px;">
                     <tr>
                         <td style="padding: 0.5rem; width: 30%; ">
-                            <div style="font-size: 2.0rem; font-weight: bold; margin-bottom: 0.5rem;">
+                            <div style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
                                 ¿Cómo vivimos?
                             </div>
                             <table>
@@ -599,7 +602,7 @@
                                     <td style="padding-left: 1rem;">
                                         <table style="width: 100%; margin-bottom: 1rem;">
                                             <tr>
-                                                <td style="font-size: 2.0rem; font-weight: bold; padding: 1rem;">12.314
+                                                <td style="font-size: 2.0rem; font-weight: bold; padding: 1rem;">{{$totalUnidadesVivienda}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -611,7 +614,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 2.0rem; font-weight: bold;padding: 1rem;">8931
+                                                <td style="font-size: 2.0rem; font-weight: bold;padding: 1rem;">{{$totalUnidadesViviendaOcupadas}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -647,7 +650,7 @@
             <div>
                 <table style="width: 100%; margin-top: 2rem; margin-bottom: 3rem">
                     <tr>
-                        <td style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">
+                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
                             Tipo de vivienda
                         </td>
                     </tr>
@@ -666,7 +669,7 @@
                                                 <td style="font-size: 1rem;">Casa</td>
                                             </tr>
                                             <tr>
-                                                <td class="poblacion-etnica-valor-tipo-vivienda">10480</td>
+                                                <td class="poblacion-etnica-valor-tipo-vivienda">{{$tipoViviendaCasa}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -685,7 +688,7 @@
                                                 <td style="font-size: 1rem;">Apartamento</td>
                                             </tr>
                                             <tr>
-                                                <td class="poblacion-etnica-valor-tipo-vivienda">10480</td>
+                                                <td class="poblacion-etnica-valor-tipo-vivienda">{{$tipoViviendaApartamento}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -704,7 +707,7 @@
                                                 <td style="font-size: 1rem;">Cuarto</td>
                                             </tr>
                                             <tr>
-                                                <td class="poblacion-etnica-valor-tipo-vivienda">10480</td>
+                                                <td class="poblacion-etnica-valor-tipo-vivienda">{{$tipoViviendaCuarto}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -715,7 +718,7 @@
                 </table>
                 <table style="width: 100%;">
                     <tr>
-                        <td>
+                        <td style="width:28%">
                             <table>
                                 <tr>
                                     <td><img src="storage/images/casa-etnica.png" alt="Logo Mujer"
@@ -727,7 +730,7 @@
                                                 <td style="font-size: 1rem;">Casa etnica</td>
                                             </tr>
                                             <tr>
-                                                <td class="poblacion-etnica-valor-tipo-vivienda">10480</td>
+                                                <td class="poblacion-etnica-valor-tipo-vivienda">{{$tipoViviendaIndigena}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -746,7 +749,7 @@
                                                 <td style="font-size: 1rem;">Otro</td>
                                             </tr>
                                             <tr>
-                                                <td class="poblacion-etnica-valor-tipo-vivienda">10480</td>
+                                                <td class="poblacion-etnica-valor-tipo-vivienda">{{$tipoViviendaOtro}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -759,15 +762,15 @@
                 </table>
             </div>
 
-            <div style="margin-top: 300px">
+            <div style="margin-top: 50px">
                 <table style="width: 100%;">
                     <tr>
-                        <td style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">
+                        <td style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
                             Viviendas con acceso a servicios públicos
                         </td>
                         <td>
-                            Nota: para los servicios de gas natural e internet se presentó 0,3%
-                            y 0,3% de no información respectivamente
+                            Nota: para los servicios de gas natural e internet se presentó {{$servicioPublicoGasPorcentaje}}%
+                            y {{$servicioPublicoInternetPorcentaje}}% de no información respectivamente
                         </td>
                     </tr>
                 </table>
@@ -787,7 +790,7 @@
                 <table style="margin-top: 1rem; width: 100%; padding-left: 1rem">
                     <tr>
                         <td style="width: 15%"></td>
-                        <td class="poblacion-etnica-valor-tipo-vivienda">9518</td>
+                        <td class="poblacion-etnica-valor-tipo-vivienda">{{$totalHogaresParticulares}}</td>
                     </tr>
                 </table>
                 <table style="margin-top: 1rem; width: 100%; padding-left: 1rem">
@@ -824,7 +827,7 @@
             <div>
                 <table style="width: 100%; margin-top:5rem; margin-bottom: 2rem">
                     <tr>
-                        <td style="font-size: 1.0rem; font-weight: bold; margin-bottom: 0.5rem;">
+                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
                             Número de personas por hogar
                         </td>
                     </tr>
@@ -840,7 +843,7 @@
                                     <td style="padding-left: 1rem">
                                         <table>
                                             <tr class="poblacion-etnica-valor-tipo-vivienda">
-                                                <td>11,6%</td>
+                                                <td>{{$totalPersonas1Porcentaje}}%</td>
                                             </tr>
                                             <tr>
                                                 <td>UNA PERSONA</td>
@@ -859,7 +862,7 @@
                                     <td style="padding-left: 1rem">
                                         <table>
                                             <tr class="poblacion-etnica-valor-tipo-vivienda">
-                                                <td>11,6%</td>
+                                                <td>{{$totalPersonas2Porcentaje}}%</td>
                                             </tr>
                                             <tr>
                                                 <td>DOS PERSONAS</td>
@@ -878,7 +881,7 @@
                                     <td style="padding-left: 1rem">
                                         <table>
                                             <tr class="poblacion-etnica-valor-tipo-vivienda">
-                                                <td>20,9%</td>
+                                                <td>{{$totalPersonas3Porcentaje}}%</td>
                                             </tr>
                                             <tr>
                                                 <td>TRES PERSONAS</td>
@@ -901,7 +904,7 @@
                                     <td style="padding-left: 1rem">
                                         <table>
                                             <tr class="poblacion-etnica-valor-tipo-vivienda">
-                                                <td>11,6%</td>
+                                                <td>{{$totalPersonas4Porcentaje}}%</td>
                                             </tr>
                                             <tr>
                                                 <td>CUATRO PERSONAS</td>
@@ -920,7 +923,7 @@
                                     <td style="padding-left: 1rem">
                                         <table>
                                             <tr class="poblacion-etnica-valor-tipo-vivienda">
-                                                <td>11,6%</td>
+                                                <td>{{$totalPersonas5Porcentaje}}%</td>
                                             </tr>
                                             <tr>
                                                 <td>CINCO PERSONAS</td>
@@ -939,7 +942,7 @@
                                     <td style="padding-left: 1rem">
                                         <table>
                                             <tr class="poblacion-etnica-valor-tipo-vivienda">
-                                                <td>20,9%</td>
+                                                <td>{{$totalPersonas6Porcentaje}}%</td>
                                             </tr>
                                             <tr>
                                                 <td>SEIS PERSONAS (+)</td>
@@ -957,6 +960,12 @@
 
     <script>
         //Grupos de edad chart
+        let grupoOmision1 = @json($omisionEdadGrupo1);
+        let grupoOmision2 = @json($omisionEdadGrupo2);
+        let grupoOmision3 = @json($omisionEdadGrupo3);
+        let caracterizacionGrupo1 = @json($caracterizacionGrupo1);
+        let caracterizacionGrupo2 = @json($caracterizacionGrupo2);
+        let caracterizacionGrupo3 = @json($caracterizacionGrupo3);
         const ctxGruposEdad = document.getElementById('chartGruposEdad').getContext('2d');
         const chartGruposEdad = new Chart(ctxGruposEdad, {
             type: 'bar',
@@ -964,12 +973,12 @@
                 labels: ['0-14 años', '15-59 años', '60 o más años'], // Grupos de edad
                 datasets: [{
                         label: 'Caracterización',
-                        data: [10000, 15000, 3000], // Datos de caracterización
+                        data: [caracterizacionGrupo1, caracterizacionGrupo2, caracterizacionGrupo3], // Datos de caracterización
                         backgroundColor: 'rgba(14,150,52,255)', // Color sólido
                     },
                     {
                         label: 'Población por Omisión',
-                        data: [12000, 18000, 4000], // Datos de omisión
+                        data: [grupoOmision1, grupoOmision2, grupoOmision3], // Datos de omisión
                         backgroundColor: 'rgba(131,199,152,255)', // Color con patrón o transparencia
                     }
                 ]
@@ -993,23 +1002,61 @@
             }
         });
         // piramide uno
+        let caracterizacionGrupoArbolHombre1 = @json($caracterizacionGrupoArbolHombre1);
+        let caracterizacionGrupoArbolMujer1 = @json($caracterizacionGrupoArbolMujer1);
+        let caracterizacionGrupoArbolHombre2 = @json($caracterizacionGrupoArbolHombre2);
+        let caracterizacionGrupoArbolMujer2 = @json($caracterizacionGrupoArbolMujer2);
+        let caracterizacionGrupoArbolHombre3 = @json($caracterizacionGrupoArbolHombre3);
+        let caracterizacionGrupoArbolMujer3 = @json($caracterizacionGrupoArbolMujer3);
+        let caracterizacionGrupoArbolHombre4 = @json($caracterizacionGrupoArbolHombre4);
+        let caracterizacionGrupoArbolMujer4 = @json($caracterizacionGrupoArbolMujer4);
+        let caracterizacionGrupoArbolHombre5 = @json($caracterizacionGrupoArbolHombre5);
+        let caracterizacionGrupoArbolMujer5 = @json($caracterizacionGrupoArbolMujer5);
+        let caracterizacionGrupoArbolHombre6 = @json($caracterizacionGrupoArbolHombre6);
+        let caracterizacionGrupoArbolMujer6 = @json($caracterizacionGrupoArbolMujer6);
+        let caracterizacionGrupoArbolHombre7 = @json($caracterizacionGrupoArbolHombre7);
+        let caracterizacionGrupoArbolMujer7 = @json($caracterizacionGrupoArbolMujer7);
+        let caracterizacionGrupoArbolHombre8 = @json($caracterizacionGrupoArbolHombre8);
+        let caracterizacionGrupoArbolMujer8 = @json($caracterizacionGrupoArbolMujer8);
+        let caracterizacionGrupoArbolHombre9= @json($caracterizacionGrupoArbolHombre9);
+        let caracterizacionGrupoArbolMujer9 = @json($caracterizacionGrupoArbolMujer9);
+
         const ctxPiramideUno = document.getElementById('piramide_uno').getContext('2d');
         const chartPiramideUno = new Chart(ctxPiramideUno, {
             type: 'bar',
             data: {
                 labels: [
-                    '90-94 años', '80-84 años', '70-74 años', '60-64 años',
+                    '80 o mas años', '70-74 años', '60-64 años',
                     '50-54 años', '40-44 años', '30-34 años', '20-24 años',
                     '10-14 años', '0-4 años'
                 ],
                 datasets: [{
                         label: 'Hombres',
-                        data: [-2, -3, -5, -8, -10, -12, -14, -10, -8, -5],
+                        data: [
+                            -caracterizacionGrupoArbolHombre9,
+                            -caracterizacionGrupoArbolHombre8,
+                            -caracterizacionGrupoArbolHombre7,
+                            -caracterizacionGrupoArbolHombre6,
+                            -caracterizacionGrupoArbolHombre5,
+                            -caracterizacionGrupoArbolHombre4,
+                            -caracterizacionGrupoArbolHombre3,
+                            -caracterizacionGrupoArbolHombre2,
+                            -caracterizacionGrupoArbolHombre1,
+                        ],
                         backgroundColor: 'rgba(14,150,52,255)',
                     },
                     {
                         label: 'Mujeres',
-                        data: [2, 3, 5, 8, 10, 12, 14, 10, 8, 5],
+                        data: [
+                            caracterizacionGrupoArbolMujer9,
+                            caracterizacionGrupoArbolMujer8,
+                            caracterizacionGrupoArbolMujer7,
+                            caracterizacionGrupoArbolMujer6,
+                            caracterizacionGrupoArbolMujer5,
+                            caracterizacionGrupoArbolMujer4,
+                            caracterizacionGrupoArbolMujer3,
+                            caracterizacionGrupoArbolMujer2,
+                            caracterizacionGrupoArbolMujer1],
                         backgroundColor: 'rgba(131,199,152,255)',
                     }
                 ]
@@ -1038,23 +1085,62 @@
             }
         });
         // piramide dos
+        let omisionEdadGrupoArbolHombre1 = @json($omisionEdadGrupoArbolHombre1);
+        let omisionEdadGrupoArbolHombre2 = @json($omisionEdadGrupoArbolHombre2);
+        let omisionEdadGrupoArbolHombre3 = @json($omisionEdadGrupoArbolHombre3);
+        let omisionEdadGrupoArbolHombre4 = @json($omisionEdadGrupoArbolHombre4);
+        let omisionEdadGrupoArbolHombre5 = @json($omisionEdadGrupoArbolHombre5);
+        let omisionEdadGrupoArbolHombre6 = @json($omisionEdadGrupoArbolHombre6);
+        let omisionEdadGrupoArbolHombre7 = @json($omisionEdadGrupoArbolHombre7);
+        let omisionEdadGrupoArbolHombre8 = @json($omisionEdadGrupoArbolHombre8);
+        let omisionEdadGrupoArbolHombre9 = @json($omisionEdadGrupoArbolHombre9);
+        let omisionEdadGrupoArbolMujer1 = @json($omisionEdadGrupoArbolMujer1);
+        let omisionEdadGrupoArbolMujer2 = @json($omisionEdadGrupoArbolMujer2);
+        let omisionEdadGrupoArbolMujer3 = @json($omisionEdadGrupoArbolMujer3);
+        let omisionEdadGrupoArbolMujer4 = @json($omisionEdadGrupoArbolMujer4);
+        let omisionEdadGrupoArbolMujer5 = @json($omisionEdadGrupoArbolMujer5);
+        let omisionEdadGrupoArbolMujer6 = @json($omisionEdadGrupoArbolMujer6);
+        let omisionEdadGrupoArbolMujer7 = @json($omisionEdadGrupoArbolMujer7);
+        let omisionEdadGrupoArbolMujer8 = @json($omisionEdadGrupoArbolMujer8);
+        let omisionEdadGrupoArbolMujer9 = @json($omisionEdadGrupoArbolMujer9);
+
         const ctxPiramideDos = document.getElementById('piramide_dos').getContext('2d');
         const chartPiramideDos = new Chart(ctxPiramideDos, {
             type: 'bar',
             data: {
                 labels: [
-                    '90-94 años', '80-84 años', '70-74 años', '60-64 años',
+                    '80-84 años', '70-74 años', '60-64 años',
                     '50-54 años', '40-44 años', '30-34 años', '20-24 años',
                     '10-14 años', '0-4 años'
                 ],
                 datasets: [{
                         label: 'Hombres',
-                        data: [-2, -3, -5, -8, -10, -12, -14, -10, -8, -5],
+                        data: [
+                            -omisionEdadGrupoArbolHombre9,
+                            -omisionEdadGrupoArbolHombre8,
+                            -omisionEdadGrupoArbolHombre7,
+                            -omisionEdadGrupoArbolHombre6,
+                            -omisionEdadGrupoArbolHombre5,
+                            -omisionEdadGrupoArbolHombre4,
+                            -omisionEdadGrupoArbolHombre3,
+                            -omisionEdadGrupoArbolHombre2,
+                            -omisionEdadGrupoArbolHombre1
+                            ],
                         backgroundColor: 'rgba(14,150,52,255)',
                     },
                     {
                         label: 'Mujeres',
-                        data: [2, 3, 5, 8, 10, 12, 14, 10, 8, 5],
+                        data: [
+                            omisionEdadGrupoArbolMujer9,
+                            omisionEdadGrupoArbolMujer8,
+                            omisionEdadGrupoArbolMujer7,
+                            omisionEdadGrupoArbolMujer6,
+                            omisionEdadGrupoArbolMujer5,
+                            omisionEdadGrupoArbolMujer4,
+                            omisionEdadGrupoArbolMujer3,
+                            omisionEdadGrupoArbolMujer2,
+                            omisionEdadGrupoArbolMujer1
+                        ],
                         backgroundColor: 'rgba(131,199,152,255)',
                     }
                 ]
@@ -1077,42 +1163,50 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Caracterización de Población Vulnerable 2024'
+                        text: 'Población Ajustada por Omisión 2024'
                     }
                 }
             }
         });
 
-        // torta
+        let discapacidadNula = @json($caracterizacionDiscapacidadNula);
+        let discapacidadMultiple = @json($caracterizacionPluridiscapacidad);
+        let discapacidadMotoraSensorial = @json($caracterizacionDiscapacidadMotoraSensorial);
+        let discapacidadOrganica = @json($caracterizacionDiscapacidadOrganica);
+        let discapacidadSensorial = @json($caracterizacionDiscapacidadSensorial);
+        let discapacidadMental = @json($caracterizacionDiscapacidadMental);
+
+    
+
         const ctxTortaChart = document.getElementById('tortaChart').getContext('2d');
         const chartTortaChart = new Chart(ctxTortaChart, {
             type: 'pie',
             data: {
                 labels: [
-                    'Discapacidad Nula',
-                    'Discapacidad Motora - Discapacidad Sensorial',
-                    'Pluridiscapacidad',
-                    'Discapacidad Sensorial',
-                    'Discapacidad Orgánica',
-                    'Discapacidad Mental'
+                    'Discapacidad Nula: ' + discapacidadNula + '%',
+                    'Discapacidad Motora/Sensorial: ' + discapacidadMotoraSensorial + '%',
+                    'Pluridiscapacidad: '  + discapacidadMultiple + '%',
+                    'Discapacidad Sensorial: ' + discapacidadSensorial + '%' ,
+                    'Discapacidad Orgánica: ' + discapacidadOrganica + '%',
+                    'Discapacidad Mental: ' + discapacidadMental + '%'
                 ],
                 datasets: [{
-                    data: [52.39, 39.57, 5.07, 1.82, 0.79, 0.37],
+                    data: [discapacidadNula,discapacidadMotoraSensorial, discapacidadMultiple,discapacidadSensorial,  discapacidadOrganica, discapacidadMental],
                     backgroundColor: [
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 255, 102, 0.6)',
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(255, 205, 86, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(0, 128, 0, 0.7)',
+                        'rgba(173, 255, 47, 0.7)',
+                        'rgba(34, 139, 34, 0.7)',
+                        'rgba(0, 250, 154, 0.7)',
+                        'rgba(144, 238, 144, 0.7)',
+                        'rgba(0, 255, 127, 0.7)'
                     ],
                     borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 255, 102, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 205, 86, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(153, 102, 255, 1)',
+                        'rgba(0, 128, 0, 0.7)',
+                        'rgba(173, 255, 47, 0.7)',
+                        'rgba(34, 139, 34, 0.7)',
+                        'rgba(0, 250, 154, 0.7)',
+                        'rgba(144, 238, 144, 0.7)',
+                        'rgba(0, 255, 127, 0.7)'
                     ],
                     borderWidth: 1
                 }]
@@ -1130,55 +1224,73 @@
                                 return data + '%';
                             }
                         }
-                    }
+                    },
                 }
             }
         });
 
         // centros poblados
+        let caracterizacionDiscapacidadNulaPorCentroPoblado = @json($caracterizacionDiscapacidadNulaPorCentroPoblado);
+        let caracterizacionDiscapacidadMentalPorCentroPoblado = @json($caracterizacionDiscapacidadMentalPorCentroPoblado);
+        let caracterizacionDiscapacidadMultiplePorCentroPoblado = @json($caracterizacionDiscapacidadMultiplePorCentroPoblado);
+        let caracterizacionDiscapacidadMotoraPorCentroPoblado = @json($caracterizacionDiscapacidadMotoraPorCentroPoblado);
+        let caracterizacionDiscapacidadSensorialPorCentroPoblado = @json($caracterizacionDiscapacidadSensorialPorCentroPoblado);
+        let caracterizacionDiscapacidadOrganicaPorCentroPoblado = @json($caracterizacionDiscapacidadOrganicaPorCentroPoblado);
+
+        let centrosPoblados = @json($centrosPoblados);
+
+
+
+        let caracterizacionesPorTipo = {
+            'Discapacidad Mental': caracterizacionDiscapacidadMentalPorCentroPoblado,
+            'Discapacidad Orgánica': caracterizacionDiscapacidadOrganicaPorCentroPoblado,
+            'Discapacidad Sensorial': caracterizacionDiscapacidadSensorialPorCentroPoblado,
+            'Pluridiscapacidad': caracterizacionDiscapacidadMultiplePorCentroPoblado,
+            'Discapacidad Motora': caracterizacionDiscapacidadMotoraPorCentroPoblado,
+            'Discapacidad Nula': caracterizacionDiscapacidadNulaPorCentroPoblado
+        };
+
+        let tiposDiscapacidad = [
+            'Discapacidad Mental',
+            'Discapacidad Orgánica',
+            'Discapacidad Sensorial',
+            'Pluridiscapacidad',
+            'Discapacidad Motora',
+            'Discapacidad Nula'
+        ];
+
+        // Función para generar los datos de cada centro poblado dinámicamente
+        function getDataForCentroPoblado(centroPoblado) {
+            return tiposDiscapacidad.map(tipo => {
+                let discapacidadData = caracterizacionesPorTipo[tipo];
+                return discapacidadData[centroPoblado] || 0;
+            });
+        }
+
+        let datasets = centrosPoblados.map((centroPoblado, index) => {
+            // Colores dinámicos para cada dataset
+            let backgroundColors = [
+                'rgba(0, 128, 0, 0.7)',
+                'rgba(173, 255, 47, 0.7)',
+                'rgba(34, 139, 34, 0.7)',
+                'rgba(0, 250, 154, 0.7)',
+                'rgba(144, 238, 144, 0.7)',
+                'rgba(0, 255, 127, 0.7)'
+            ];
+            
+            return {
+                label: centroPoblado,
+                data: getDataForCentroPoblado(centroPoblado),
+                backgroundColor: backgroundColors[index] // Asignar un color diferente a cada centro poblado
+            };
+        });
+
         const ctxChartCentrosPoblados = document.getElementById('chartCentrosPoblados').getContext('2d');
         const chartChartCentrosPoblados = new Chart(ctxChartCentrosPoblados, {
             type: 'bar',
             data: {
-                labels: [
-                    'Discapacidad Mental',
-                    'Discapacidad Orgánica',
-                    'Discapacidad Sensorial',
-                    'Pluridiscapacidad',
-                    'Discapacidad Motora',
-                    'Discapacidad Nula'
-                ],
-                datasets: [{
-                        label: 'Cabecera Municipal',
-                        data: [100, 12000, 400, 10, 300, 8000],
-                        backgroundColor: 'rgba(0, 128, 0, 0.7)' // Verde oscuro
-                    },
-                    {
-                        label: 'La Loma',
-                        data: [50, 9000, 300, 5, 200, 7000],
-                        backgroundColor: 'rgba(173, 255, 47, 0.7)' // Verde claro
-                    },
-                    {
-                        label: 'Potrerillo',
-                        data: [30, 8000, 200, 8, 150, 6000],
-                        backgroundColor: 'rgba(34, 139, 34, 0.7)' // Otro tono de verde
-                    },
-                    {
-                        label: 'Cuatro Vientos',
-                        data: [25, 6000, 100, 4, 100, 5000],
-                        backgroundColor: 'rgba(0, 250, 154, 0.7)' // Verde medio
-                    },
-                    {
-                        label: 'El Vallito',
-                        data: [20, 4000, 50, 2, 50, 3000],
-                        backgroundColor: 'rgba(144, 238, 144, 0.7)' // Verde claro
-                    },
-                    {
-                        label: 'El Carmen',
-                        data: [15, 2000, 30, 1, 20, 1000],
-                        backgroundColor: 'rgba(0, 255, 127, 0.7)' // Verde claro neón
-                    }
-                ]
+                labels: tiposDiscapacidad,
+                datasets: datasets
             },
             options: {
                 indexAxis: 'y',
@@ -1199,29 +1311,56 @@
         });
 
         // Leer escribir
+
+        let caracterizacionLeerHombreSiGrupo1 = @json($caracterizacionLeerHombreSiGrupo1);
+        let caracterizacionLeerHombreNoGrupo1 = @json($caracterizacionLeerHombreNoGrupo1);
+        let caracterizacionLeerMujerSiGrupo1 = @json($caracterizacionLeerMujerSiGrupo1);
+        let caracterizacionLeerMujerNoGrupo1 = @json($caracterizacionLeerMujerNoGrupo1);
+
+        let caracterizacionLeerHombreSiGrupo2 = @json($caracterizacionLeerHombreSiGrupo2);
+        let caracterizacionLeerHombreNoGrupo2 = @json($caracterizacionLeerHombreNoGrupo2);
+        let caracterizacionLeerMujerSiGrupo2 = @json($caracterizacionLeerMujerSiGrupo2);
+        let caracterizacionLeerMujerNoGrupo2 = @json($caracterizacionLeerMujerNoGrupo2);
+
+
+        let caracterizacionLeerHombreSiGrupo3 = @json($caracterizacionLeerHombreSiGrupo3);
+        let caracterizacionLeerHombreNoGrupo3 = @json($caracterizacionLeerHombreNoGrupo3);
+        let caracterizacionLeerMujerSiGrupo3 = @json($caracterizacionLeerMujerSiGrupo3);
+        let caracterizacionLeerMujerNoGrupo3 = @json($caracterizacionLeerMujerNoGrupo3);
+
+
+
+
         const ctx2ChartLeerEscribir = document.getElementById('chartLeerEscribir').getContext('2d');
         const chartChartLeerEscribir = new Chart(ctx2ChartLeerEscribir, {
             type: 'bar',
             data: {
-                labels: ['Categoría 1', 'Categoría 2', 'Categoría 3',
-                    'Categoría 4'
+                labels: ['5-14 años', '15-64 años', '65 o mas años'
                 ],
                 datasets: [{
-                        label: '5-14 años',
-                        data: [5540, 5200, 5610, 5270],
+                        label: 'SI HOMBRE',
+                        data: [caracterizacionLeerHombreSiGrupo1, caracterizacionLeerHombreSiGrupo2, caracterizacionLeerHombreSiGrupo3],
                         backgroundColor: 'rgba(0, 128, 0, 0.8)'
                     },
                     {
-                        label: '15-64 años',
-                        data: [9523, 10187, 9267, 9939],
+                        label: 'SI MUJER',
+                        data: [caracterizacionLeerMujerSiGrupo1, caracterizacionLeerMujerSiGrupo2, caracterizacionLeerMujerSiGrupo3],
                         backgroundColor: 'rgba(0, 128, 0, 0.5)',
                         borderWidth: 1,
                         borderColor: 'rgba(0, 128, 0, 1)',
                         borderDash: [5, 5]
                     },
                     {
-                        label: '65 y + años',
-                        data: [467, 438, 777, 724],
+                        label: 'NO HOMBRE',
+                        data: [caracterizacionLeerHombreNoGrupo1, caracterizacionLeerHombreNoGrupo2, caracterizacionLeerHombreNoGrupo3],
+                        backgroundColor: 'rgba(0, 128, 0, 0.3)',
+                        borderWidth: 1,
+                        borderColor: 'rgba(0, 128, 0, 1)',
+                        borderDash: [10, 5]
+                    },
+                    {
+                        label: 'NO MUJER',
+                        data: [caracterizacionLeerMujerNoGrupo1, caracterizacionLeerMujerNoGrupo2, caracterizacionLeerMujerNoGrupo3],
                         backgroundColor: 'rgba(0, 128, 0, 0.3)',
                         borderWidth: 1,
                         borderColor: 'rgba(0, 128, 0, 1)',
@@ -1244,6 +1383,17 @@
         });
 
         // Asistencia escolar
+
+
+        let caracterizacionEscolarHombreSiGrupo1 = @json($caracterizacionEscolarHombreSiGrupo1);
+        let caracterizacionEscolarMujerSiGrupo1 = @json($caracterizacionEscolarMujerSiGrupo1);
+
+        let caracterizacionEscolarHombreSiGrupo2 = @json($caracterizacionEscolarHombreSiGrupo2);
+        let caracterizacionEscolarMujerSiGrupo2 = @json($caracterizacionEscolarMujerSiGrupo2);
+
+        let caracterizacionEscolarHombreSiGrupo3 = @json($caracterizacionEscolarHombreSiGrupo3);
+        let caracterizacionEscolarMujerSiGrupo3 = @json($caracterizacionEscolarMujerSiGrupo3);
+
         const ctxChartAsistenciaEscolar = document.getElementById('chartAsistenciaEscolar').getContext('2d');
         const chartChartAsistenciaEscolar = new Chart(ctxChartAsistenciaEscolar, {
             type: 'bar',
@@ -1251,12 +1401,12 @@
                 labels: ['65 y + años', '15-64 años', '5-14 años'], // Grupos de edad
                 datasets: [{
                         label: 'Hombres',
-                        data: [3, 1880, 5551], // Datos para hombres en cada grupo de edad
+                        data: [caracterizacionEscolarHombreSiGrupo1, caracterizacionEscolarHombreSiGrupo2, caracterizacionEscolarHombreSiGrupo3], // Datos para hombres en cada grupo de edad
                         backgroundColor: 'rgba(0, 128, 0, 0.8)' // Color sólido para los hombres
                     },
                     {
                         label: 'Mujeres',
-                        data: [2, 1538, 5915], // Datos para mujeres en cada grupo de edad
+                        data: [caracterizacionEscolarMujerSiGrupo1, caracterizacionEscolarMujerSiGrupo2, caracterizacionEscolarMujerSiGrupo3], // Datos para mujeres en cada grupo de edad
                         backgroundColor: 'rgba(0, 128, 0, 0.5)', // Color más claro para las mujeres
                         borderWidth: 1,
                         borderColor: 'rgba(0, 128, 0, 1)', // Bordes para mayor claridad
@@ -1280,6 +1430,13 @@
         });
 
         //Uso de vivienda
+
+        let porcentajeViviendasResidencial = @json($totalResidencial);
+        let porcentajeViviendasNoResidencial = @json($totalNoResidencial);
+        let porcentajeViviendasMixta = @json($totalMixto);
+
+
+
         const ctxChartUsoVivienda = document.getElementById('chartUsoVivienda').getContext('2d');
         const chartChartUsoVivienda = new Chart(ctxChartUsoVivienda, {
             type: 'bar',
@@ -1287,7 +1444,7 @@
                 labels: ['Residencial', 'No residencial', 'Mixto'],
                 datasets: [{
                     label: 'Porcentaje de uso',
-                    data: [74.1, 22.4, 3.5],
+                    data: [porcentajeViviendasResidencial, porcentajeViviendasNoResidencial, porcentajeViviendasMixta],
                     backgroundColor: [
                         'green', // Puedes cambiar el color si lo deseas
                         'green',
@@ -1324,16 +1481,31 @@
             }
         });
 
+        let servicioPublicoGasPorcentaje = @json($servicioPublicoGasPorcentaje);
+        let servicioPublicoElectricoPorcentaje = @json($servicioPublicoElectricoPorcentaje);
+        let servicioPublicoAlcantarilladoPorcentaje = @json($servicioPublicoAlcantarilladoPorcentaje);
+        let servicioPublicoAcueductoPorcentaje = @json($servicioPublicoAcueductoPorcentaje);
+        let servicioPublicoBasurasPorcentaje = @json($servicioPublicoBasurasPorcentaje);
+        let servicioPublicoInternetPorcentaje = @json($servicioPublicoInternetPorcentaje);
+
+        
+
+
         const ctxChartServiciosPublicos = document.getElementById('chartServiciosPublicos').getContext('2d');
         const chartChartServiciosPublicos = new Chart(ctxChartServiciosPublicos, {
             type: 'bar',
             data: {
-                labels: ['Energía Eléctrica', 'Acueducto', 'Alcantarillado', 'Gas Natural',
-                    'Recolección de Basuras', 'Internet'
+                labels: [
+                    'Energía Eléctrica: ' + servicioPublicoElectricoPorcentaje +'%', 
+                    'Acueducto: ' + servicioPublicoAcueductoPorcentaje +'%', 
+                    'Alcantarillado: ' + servicioPublicoAlcantarilladoPorcentaje +'%', 
+                    'Gas Natural: ' + servicioPublicoGasPorcentaje +'%',
+                    'Recolección de Basuras: ' + servicioPublicoBasurasPorcentaje +'%', 
+                    'Internet: ' + servicioPublicoInternetPorcentaje +'%'
                 ],
                 datasets: [{
                     label: 'Porcentaje de uso',
-                    data: [98.7, 86.4, 72.8, 36.6, 61.1, 8.1],
+                    data: [servicioPublicoElectricoPorcentaje, servicioPublicoAcueductoPorcentaje, servicioPublicoAlcantarilladoPorcentaje, servicioPublicoGasPorcentaje, servicioPublicoBasurasPorcentaje, servicioPublicoInternetPorcentaje],
                     backgroundColor: [
                         'green', 'green', 'green', 'green', 'green', 'green'
                     ],
