@@ -42,7 +42,7 @@ class Reporte extends Page
     {
         $configurations = Configuration::get();
 
-        return $configurations->count()>0;
+        return false;
     }
 
     public function generateGraphics()

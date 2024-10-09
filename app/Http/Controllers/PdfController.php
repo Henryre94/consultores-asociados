@@ -7,15 +7,16 @@ use Livewire\Livewire;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Diligenciamiento;
 use App\Models\Configuration;
+use App\Models\ReportData;
 
 class PdfController extends Controller
 {
     public function generatePdf(Diligenciamiento $diligenciamiento, Configuration $configuration)
     {
         $diligenciamientos = Diligenciamiento::where('ficha_no',  $diligenciamiento->ficha_no)->where('id', '!=', $diligenciamiento->id)->get();
-        
-        $pdf = Pdf::loadView('pdf_view',compact('diligenciamiento', 'configuration', 'diligenciamientos'));
-        
+
+        $pdf = Pdf::loadView('pdf_view', compact('diligenciamiento', 'configuration', 'diligenciamientos'));
+
         return $pdf->stream();
     }
 
@@ -23,66 +24,70 @@ class PdfController extends Controller
 
 
 
-        public function generateReport(Request $request)
+    public function generateReport(Request $request)
     {
 
+        $dataReport = ReportData::get()->first();
         $configurations = Configuration::query()->get();
 
         $diligenciamientos = Diligenciamiento::query()->get();
+        if (!$dataReport) {
+            return redirect()->route('filament.admin.pages.bienvenida');
+        }
 
         $count = count($diligenciamientos);
 
-        $omision = $request->query('omision');
+        $omision = $dataReport->omision;
 
-        $omisionCabecera = $request->query('omisionCabecera');
+        $omisionCabecera = $dataReport->omisionCabecera;
 
-        $omisionPoblado = $request->query('omisionPoblado');
+        $omisionPoblado = $dataReport->omisionPoblado;
 
-        $noAutoreconocimiento = $request->query('noAutoreconocimiento');
+        $noAutoreconocimiento = $dataReport->noAutoreconocimiento;
 
-        $omisionPorcentaje = $request->query('omisionPorcentaje');
+        $omisionPorcentaje = $dataReport->omisionPorcentaje;
 
-        $omisionEdadGrupo1 = $request->query('omisionEdadGrupo1');
+        $omisionEdadGrupo1 = $dataReport->omisionEdadGrupo1;
 
-        $omisionEdadGrupo2 = $request->query('omisionEdadGrupo2');
+        $omisionEdadGrupo2 = $dataReport->omisionEdadGrupo2;
 
-        $omisionEdadGrupo3 = $request->query('omisionEdadGrupo3');
+        $omisionEdadGrupo3 = $dataReport->omisionEdadGrupo3;
 
-        $omisionEdadGrupoArbolMujer1 = $request->query('omisionEdadGrupoArbolMujer1');
+        $omisionEdadGrupoArbolMujer1 = $dataReport->omisionEdadGrupoArbolMujer1;
 
-        $omisionEdadGrupoArbolMujer2 = $request->query('omisionEdadGrupoArbolMujer2');
+        $omisionEdadGrupoArbolMujer2 = $dataReport->omisionEdadGrupoArbolMujer2;
 
-        $omisionEdadGrupoArbolMujer3 = $request->query('omisionEdadGrupoArbolMujer3');
+        $omisionEdadGrupoArbolMujer3 = $dataReport->omisionEdadGrupoArbolMujer3;
 
-        $omisionEdadGrupoArbolMujer4 = $request->query('omisionEdadGrupoArbolMujer4');
+        $omisionEdadGrupoArbolMujer4 = $dataReport->omisionEdadGrupoArbolMujer4;
 
-        $omisionEdadGrupoArbolMujer5 = $request->query('omisionEdadGrupoArbolMujer5');
+        $omisionEdadGrupoArbolMujer5 = $dataReport->omisionEdadGrupoArbolMujer5;
 
-        $omisionEdadGrupoArbolMujer6 = $request->query('omisionEdadGrupoArbolMujer6');
+        $omisionEdadGrupoArbolMujer6 = $dataReport->omisionEdadGrupoArbolMujer6;
 
-        $omisionEdadGrupoArbolMujer7 = $request->query('omisionEdadGrupoArbolMujer7');
+        $omisionEdadGrupoArbolMujer7 = $dataReport->omisionEdadGrupoArbolMujer7;
 
-        $omisionEdadGrupoArbolMujer8 = $request->query('omisionEdadGrupoArbolMujer8');
+        $omisionEdadGrupoArbolMujer8 = $dataReport->omisionEdadGrupoArbolMujer8;
 
-        $omisionEdadGrupoArbolMujer9 = $request->query('omisionEdadGrupoArbolMujer9');
+        $omisionEdadGrupoArbolMujer9 = $dataReport->omisionEdadGrupoArbolMujer9;
 
-        $omisionEdadGrupoArbolHombre1 = $request->query('omisionEdadGrupoArbolHombre1');
+        $omisionEdadGrupoArbolHombre1 = $dataReport->omisionEdadGrupoArbolHombre1;
 
-        $omisionEdadGrupoArbolHombre2 = $request->query('omisionEdadGrupoArbolHombre2');
+        $omisionEdadGrupoArbolHombre2 = $dataReport->omisionEdadGrupoArbolHombre2;
 
-        $omisionEdadGrupoArbolHombre3 = $request->query('omisionEdadGrupoArbolHombre3');
+        $omisionEdadGrupoArbolHombre3 = $dataReport->omisionEdadGrupoArbolHombre3;
 
-        $omisionEdadGrupoArbolHombre4 = $request->query('omisionEdadGrupoArbolHombre4');
+        $omisionEdadGrupoArbolHombre4 = $dataReport->omisionEdadGrupoArbolHombre4;
 
-        $omisionEdadGrupoArbolHombre5 = $request->query('omisionEdadGrupoArbolHombre5');
+        $omisionEdadGrupoArbolHombre5 = $dataReport->omisionEdadGrupoArbolHombre5;
 
-        $omisionEdadGrupoArbolHombre6 = $request->query('omisionEdadGrupoArbolHombre6');
+        $omisionEdadGrupoArbolHombre6 = $dataReport->omisionEdadGrupoArbolHombre6;
 
-        $omisionEdadGrupoArbolHombre7 = $request->query('omisionEdadGrupoArbolHombre7');
+        $omisionEdadGrupoArbolHombre7 = $dataReport->omisionEdadGrupoArbolHombre7;
 
-        $omisionEdadGrupoArbolHombre8 = $request->query('omisionEdadGrupoArbolHombre8');
+        $omisionEdadGrupoArbolHombre8 = $dataReport->omisionEdadGrupoArbolHombre8;
 
-        $omisionEdadGrupoArbolHombre9 = $request->query('omisionEdadGrupoArbolHombre9');
+        $omisionEdadGrupoArbolHombre9 = $dataReport->omisionEdadGrupoArbolHombre9;
 
 
 
@@ -93,38 +98,38 @@ class PdfController extends Controller
 
         //Grupos Etnicos
 
-        $percentageAfroColombiano =  $request->query('afrocolombiano');
+        $percentageAfroColombiano =  $dataReport->afrocolombiano;
 
-        $percentageIndigena = $request->query('indigenas');
+        $percentageIndigena = $dataReport->indigenas;
 
-        $percentageRaizales = $request->query('raizales');
+        $percentageRaizales = $dataReport->raizales;
 
-        $percentagePalenqueros = $request->query('palenqueros');
+        $percentagePalenqueros = $dataReport->palenqueros;
 
-        $percentageGitanos = $request->query('gitanos');
+        $percentageGitanos = $dataReport->gitanos;
 
-        $percentageResto = $request->query('ningunoEtnico');
+        $percentageResto = $dataReport->ningunoEtnico;
 
 
-        
+
         // Servicios publicos
 
-        $servicioPublicoElectricoPorcentaje = $request->query('servicioElectrico');
+        $servicioPublicoElectricoPorcentaje = $dataReport->servicioElectrico;
 
 
-        $servicioPublicoAlcantarilladoPorcentaje = $request->query('servicioAlcantarillado');
+        $servicioPublicoAlcantarilladoPorcentaje = $dataReport->servicioAlcantarillado;
 
 
-        $servicioPublicoBasurasPorcentaje = $request->query('servicioBasuras');
+        $servicioPublicoBasurasPorcentaje = $dataReport->servicioBasuras;
 
 
-        $servicioPublicoAcueductoPorcentaje = $request->query('servicioAcueducto');
+        $servicioPublicoAcueductoPorcentaje = $dataReport->servicioAcueducto;
 
 
-        $servicioPublicoGasPorcentaje = $request->query('servicioGas');
+        $servicioPublicoGasPorcentaje = $dataReport->servicioGas;
 
 
-        $servicioPublicoInternetPorcentaje = $request->query('servicioInternet');
+        $servicioPublicoInternetPorcentaje = $dataReport->servicioInternet;
 
 
 
@@ -133,26 +138,26 @@ class PdfController extends Controller
 
         // Total Unidades Viviendas
 
-        $totalUnidadesVivienda = $request->query('totalUnidadesVivienda');
+        $totalUnidadesVivienda = $dataReport->totalUnidadesVivienda;
 
-        $totalUnidadesViviendaOcupadas = $request->query('totalUnidadesViviendaOcupadas');
+        $totalUnidadesViviendaOcupadas = $dataReport->totalUnidadesViviendaOcupadas;
 
-        $totalResidencial = $request->query('totalResidencial');
+        $totalResidencial = $dataReport->totalResidencial;
 
-        $totalNoResidencial = $request->query('totalNoResidencial');
+        $totalNoResidencial = $dataReport->totalNoResidencial;
 
-        $totalMixto = $request->query('totalMixto');
+        $totalMixto = $dataReport->totalMixto;
 
 
 
-        $otroPaisMujer = $request->query('otroPaisMujer');
-        $otroPaisHombre = $request->query('otroPaisHombre');
-        $otroMunicipioMujer = $request->query('otroMunicipioMujer');
-        $otroMunicipioHombre = $request->query('otroMunicipioHombre');
-        $esteMunicipioMujer = $request->query('esteMunicipioMujer');
-        $esteMunicipioHombre = $request->query('esteMunicipioHombre');
+        $otroPaisMujer = $dataReport->otroPaisMujer;
+        $otroPaisHombre = $dataReport->otroPaisHombre;
+        $otroMunicipioMujer = $dataReport->otroMunicipioMujer;
+        $otroMunicipioHombre = $dataReport->otroMunicipioHombre;
+        $esteMunicipioMujer = $dataReport->esteMunicipioMujer;
+        $esteMunicipioHombre = $dataReport->esteMunicipioHombre;
 
-        $totalHogaresParticulares = $request->query('totalHogaresParticulares');
+        $totalHogaresParticulares = $dataReport->totalHogaresParticulares;
 
 
 
@@ -167,31 +172,31 @@ class PdfController extends Controller
 
         // Total personas
 
-        $totalPersonas1= $diligenciamientos->filter(function ($diligenciamiento) {
+        $totalPersonas1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->total_personas === 1;
         })->count();
 
         $totalPersonas1Porcentaje = $count > 0 ? round(($totalPersonas1 / $count) * 100, 2) : 0;
 
-        $totalPersonas2= $diligenciamientos->filter(function ($diligenciamiento) {
+        $totalPersonas2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->total_personas === 2;
         })->count();
 
         $totalPersonas2Porcentaje = $count > 0 ? round(($totalPersonas2 / $count) * 100, 2) : 0;
 
-        $totalPersonas3= $diligenciamientos->filter(function ($diligenciamiento) {
+        $totalPersonas3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->total_personas === 3;
         })->count();
 
         $totalPersonas3Porcentaje = $count > 0 ? round(($totalPersonas3 / $count) * 100, 2) : 0;
 
-        $totalPersonas4= $diligenciamientos->filter(function ($diligenciamiento) {
+        $totalPersonas4 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->total_personas === 4;
         })->count();
 
         $totalPersonas4Porcentaje = $count > 0 ? round(($totalPersonas4 / $count) * 100, 2) : 0;
 
-        $totalPersonas5= $diligenciamientos->filter(function ($diligenciamiento) {
+        $totalPersonas5 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->total_personas === 5;
         })->count();
 
@@ -210,7 +215,7 @@ class PdfController extends Controller
 
         // Tipo vivienda
 
-        
+
         $tipoViviendaCasa = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->tipo_vivienda === 'Casa';
         })->count();
@@ -236,39 +241,39 @@ class PdfController extends Controller
 
         $caracterizacionEscolarHombreSiGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 5 && $diligenciamiento->edad <= 14 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionEscolarMujerSiGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 5 && $diligenciamiento->edad <= 14 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->actualmente_estudia === 1;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->actualmente_estudia === 1;
         })->count();
 
         $caracterizacionEscolarHombreSiGrupo2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 15 && $diligenciamiento->edad <= 64 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionEscolarMujerSiGrupo2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 15 && $diligenciamiento->edad <= 64 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->actualmente_estudia === 1;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->actualmente_estudia === 1;
         })->count();
 
 
         $caracterizacionEscolarHombreSiGrupo3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 65 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionEscolarMujerSiGrupo3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 65 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->actualmente_estudia === 1;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->actualmente_estudia === 1;
         })->count();
 
 
@@ -278,76 +283,76 @@ class PdfController extends Controller
 
         $caracterizacionLeerHombreSiGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 5 && $diligenciamiento->edad <= 14 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionLeerHombreNoGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 5 && $diligenciamiento->edad <= 14 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 0;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 0;
         })->count();
 
         $caracterizacionLeerMujerSiGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 5 && $diligenciamiento->edad <= 14 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionLeerMujerNoGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 5 && $diligenciamiento->edad <= 14 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->sabe_leer_escribir === 0;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->sabe_leer_escribir === 0;
         })->count();
 
 
         $caracterizacionLeerHombreSiGrupo2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 15 && $diligenciamiento->edad <= 64 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionLeerHombreNoGrupo2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 15 && $diligenciamiento->edad <= 64 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 0;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 0;
         })->count();
 
         $caracterizacionLeerMujerSiGrupo2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 15 && $diligenciamiento->edad <= 64 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionLeerMujerNoGrupo2 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 15 && $diligenciamiento->edad <= 64 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->sabe_leer_escribir === 0;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->sabe_leer_escribir === 0;
         })->count();
 
 
         $caracterizacionLeerHombreSiGrupo3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 65 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionLeerHombreNoGrupo3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 65 &&
-                   $diligenciamiento->sexo === 'Hombre' && 
-                   $diligenciamiento->sabe_leer_escribir === 0;
+                $diligenciamiento->sexo === 'Hombre' &&
+                $diligenciamiento->sabe_leer_escribir === 0;
         })->count();
 
         $caracterizacionLeerMujerSiGrupo3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 65 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->sabe_leer_escribir === 1;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->sabe_leer_escribir === 1;
         })->count();
 
         $caracterizacionLeerMujerNoGrupo3 = $diligenciamientos->filter(function ($diligenciamiento) {
             return $diligenciamiento->edad >= 65 &&
-                   $diligenciamiento->sexo === 'Mujer' && 
-                   $diligenciamiento->sabe_leer_escribir === 0;
+                $diligenciamiento->sexo === 'Mujer' &&
+                $diligenciamiento->sabe_leer_escribir === 0;
         })->count();
 
 
@@ -381,27 +386,25 @@ class PdfController extends Controller
         });
 
         $caracterizacionDiscapacidadSensorialPorCentroPoblado = $diligenciamientos->filter(function ($diligenciamiento) {
-            return str_contains($diligenciamiento->limitantes_permanentes, 'Discapacidad Auditiva') 
-            || str_contains($diligenciamiento->limitantes_permanentes, 'Discapacidad Afonía') 
-            || str_contains($diligenciamiento->limitantes_permanentes, 'Discapacidad Visual');
-
+            return str_contains($diligenciamiento->limitantes_permanentes, 'Discapacidad Auditiva')
+                || str_contains($diligenciamiento->limitantes_permanentes, 'Discapacidad Afonía')
+                || str_contains($diligenciamiento->limitantes_permanentes, 'Discapacidad Visual');
         })->groupBy('centro_poblado')->map(function ($grupo) {
             return $grupo->count();
         });
 
         $caracterizacionDiscapacidadMentalPorCentroPoblado = $diligenciamientos->filter(function ($diligenciamiento) {
-            return str_contains($diligenciamiento->limitantes_permanentes, 'Dispacidad Psicosocial') 
-            || str_contains($diligenciamiento->limitantes_permanentes, 'Dispacidad Mental') 
-            || str_contains($diligenciamiento->limitantes_permanentes, 'Dispacidad Intelectual');
-
+            return str_contains($diligenciamiento->limitantes_permanentes, 'Dispacidad Psicosocial')
+                || str_contains($diligenciamiento->limitantes_permanentes, 'Dispacidad Mental')
+                || str_contains($diligenciamiento->limitantes_permanentes, 'Dispacidad Intelectual');
         })->groupBy('centro_poblado')->map(function ($grupo) {
             return $grupo->count();
         });
 
 
-        
 
-        
+
+
 
 
 
@@ -561,18 +564,18 @@ class PdfController extends Controller
 
 
 
-        if ($omision > 0) { 
+        if ($omision > 0) {
             $omisionCabeceraPercentage = round(($omisionCabecera * 100) / $omision, 2);
         } else {
-            $omisionCabeceraPercentage = 0; 
+            $omisionCabeceraPercentage = 0;
         }
-        
-        if ($omision > 0) { 
+
+        if ($omision > 0) {
             $omisionPobladoPercentage = round(($omisionPoblado * 100) / $omision, 2);
         } else {
-            $omisionPobladoPercentage = 0; 
+            $omisionPobladoPercentage = 0;
         }
-        
+
 
 
         $caracterizacionGrupo1 = $diligenciamientos->filter(function ($diligenciamiento) {
@@ -599,137 +602,133 @@ class PdfController extends Controller
         })->count();
 
 
-        
+
         $percentageNoAutoreconocimiento = round(($noAutoreconocimiento / $count) * 100, 2);
 
 
         return view('aux_report', compact(
-        'municipio',
-        'departamento',
-        'count', 
-        'womenCount',
-        'menCount', 
-        'noAutoreconocimiento',
-        'percentageNoAutoreconocimiento',
-        'percentageAfroColombiano',
-        'percentageIndigena' , 
-        'percentageGitanos', 
-        'percentageResto', 
-        'percentagePalenqueros',
-        'omisionEdadGrupo1',
-        'omisionEdadGrupo2',
-        'omisionEdadGrupo3', 
-        'caracterizacionGrupoArbolMujer1',
-        'caracterizacionGrupoArbolHombre1',
-        'caracterizacionGrupoArbolMujer2',
-        'caracterizacionGrupoArbolHombre2',
-        'caracterizacionGrupoArbolMujer3',
-        'caracterizacionGrupoArbolHombre3',
-        'caracterizacionGrupoArbolMujer4',
-        'caracterizacionGrupoArbolHombre4',
-        'caracterizacionGrupoArbolMujer5',
-        'caracterizacionGrupoArbolHombre5',
-        'caracterizacionGrupoArbolMujer6',
-        'caracterizacionGrupoArbolHombre6',
-        'caracterizacionGrupoArbolMujer7',
-        'caracterizacionGrupoArbolHombre7',
-        'caracterizacionGrupoArbolMujer8',
-        'caracterizacionGrupoArbolHombre8',
-        'caracterizacionGrupoArbolMujer9',
-        'caracterizacionGrupoArbolHombre9',
-        'omisionEdadGrupoArbolMujer1',
-        'omisionEdadGrupoArbolHombre1',
-        'omisionEdadGrupoArbolMujer2',
-        'omisionEdadGrupoArbolHombre2',
-        'omisionEdadGrupoArbolMujer3',
-        'omisionEdadGrupoArbolHombre3',
-        'omisionEdadGrupoArbolMujer4',
-        'omisionEdadGrupoArbolHombre4',
-        'omisionEdadGrupoArbolMujer5',
-        'omisionEdadGrupoArbolHombre5',
-        'omisionEdadGrupoArbolMujer6',
-        'omisionEdadGrupoArbolHombre6',
-        'omisionEdadGrupoArbolMujer7',
-        'omisionEdadGrupoArbolHombre7',
-        'omisionEdadGrupoArbolMujer8',
-        'omisionEdadGrupoArbolHombre8',
-        'omisionEdadGrupoArbolMujer9',
-        'omisionEdadGrupoArbolHombre9',
-        'caracterizacionDiscapacidadNula',
-        'caracterizacionPluridiscapacidad',
-        'caracterizacionDiscapacidadMotoraSensorial',
-        'caracterizacionDiscapacidadOrganica',
-        'caracterizacionDiscapacidadSensorial',
-        'caracterizacionDiscapacidadMental',
-        'centrosPoblados',
-        'caracterizacionDiscapacidadNulaPorCentroPoblado',
-        'caracterizacionDiscapacidadMultiplePorCentroPoblado',
-        'caracterizacionDiscapacidadMotoraPorCentroPoblado',
-        'caracterizacionDiscapacidadOrganicaPorCentroPoblado',
-        'caracterizacionDiscapacidadSensorialPorCentroPoblado',
-        'caracterizacionDiscapacidadMentalPorCentroPoblado',
-        'caracterizacionLeerHombreSiGrupo1',
-        'caracterizacionLeerHombreNoGrupo1',
-        'caracterizacionLeerMujerSiGrupo1',
-        'caracterizacionLeerMujerNoGrupo1',
-        'caracterizacionLeerHombreSiGrupo2',
-        'caracterizacionLeerHombreNoGrupo2',
-        'caracterizacionLeerMujerSiGrupo2',
-        'caracterizacionLeerMujerNoGrupo2',
-        'caracterizacionLeerHombreSiGrupo3',
-        'caracterizacionLeerHombreNoGrupo3',
-        'caracterizacionLeerMujerSiGrupo3',
-        'caracterizacionLeerMujerNoGrupo3',
-        'caracterizacionEscolarHombreSiGrupo1',
-        'caracterizacionEscolarMujerSiGrupo1',
-        'caracterizacionEscolarHombreSiGrupo2',
-        'caracterizacionEscolarMujerSiGrupo2',
-        'caracterizacionEscolarHombreSiGrupo3',
-        'caracterizacionEscolarMujerSiGrupo3',
-        'totalUnidadesVivienda',
-        'totalUnidadesViviendaOcupadas',
-        'totalResidencial',
-        'totalNoResidencial',
-        'totalMixto',
-        'tipoViviendaCasa',
-        'tipoViviendaApartamento',
-        'tipoViviendaCuarto',
-        'tipoViviendaIndigena',
-        'tipoViviendaOtro',
-        'servicioPublicoElectricoPorcentaje',
-        'servicioPublicoBasurasPorcentaje',
-        'servicioPublicoAcueductoPorcentaje',
-        'servicioPublicoAlcantarilladoPorcentaje',
-        'servicioPublicoGasPorcentaje',
-        'servicioPublicoInternetPorcentaje',
-        'totalPersonas1Porcentaje',
-        'totalPersonas2Porcentaje',
-        'totalPersonas3Porcentaje',
-        'totalPersonas4Porcentaje',
-        'totalPersonas5Porcentaje',
-        'totalPersonas6Porcentaje',
-        'otroPaisMujer',
-        'otroPaisHombre',
-        'otroMunicipioMujer',
-        'otroMunicipioHombre',
-        'esteMunicipioMujer',
-        'esteMunicipioHombre',
-        'totalHogaresParticulares',
-        'caracterizacionGrupo1',
-        'caracterizacionGrupo2',
-        'caracterizacionGrupo3',
-        'percentageRaizales',
-        'diligenciamientos', 
-        'omisionPorcentaje',
-        'omision',
-        'omisionPoblado',
-        'omisionPobladoPercentage',
-        'omisionCabecera',
-        'omisionCabeceraPercentage'));
-
+            'municipio',
+            'departamento',
+            'count',
+            'womenCount',
+            'menCount',
+            'noAutoreconocimiento',
+            'percentageNoAutoreconocimiento',
+            'percentageAfroColombiano',
+            'percentageIndigena',
+            'percentageGitanos',
+            'percentageResto',
+            'percentagePalenqueros',
+            'omisionEdadGrupo1',
+            'omisionEdadGrupo2',
+            'omisionEdadGrupo3',
+            'caracterizacionGrupoArbolMujer1',
+            'caracterizacionGrupoArbolHombre1',
+            'caracterizacionGrupoArbolMujer2',
+            'caracterizacionGrupoArbolHombre2',
+            'caracterizacionGrupoArbolMujer3',
+            'caracterizacionGrupoArbolHombre3',
+            'caracterizacionGrupoArbolMujer4',
+            'caracterizacionGrupoArbolHombre4',
+            'caracterizacionGrupoArbolMujer5',
+            'caracterizacionGrupoArbolHombre5',
+            'caracterizacionGrupoArbolMujer6',
+            'caracterizacionGrupoArbolHombre6',
+            'caracterizacionGrupoArbolMujer7',
+            'caracterizacionGrupoArbolHombre7',
+            'caracterizacionGrupoArbolMujer8',
+            'caracterizacionGrupoArbolHombre8',
+            'caracterizacionGrupoArbolMujer9',
+            'caracterizacionGrupoArbolHombre9',
+            'omisionEdadGrupoArbolMujer1',
+            'omisionEdadGrupoArbolHombre1',
+            'omisionEdadGrupoArbolMujer2',
+            'omisionEdadGrupoArbolHombre2',
+            'omisionEdadGrupoArbolMujer3',
+            'omisionEdadGrupoArbolHombre3',
+            'omisionEdadGrupoArbolMujer4',
+            'omisionEdadGrupoArbolHombre4',
+            'omisionEdadGrupoArbolMujer5',
+            'omisionEdadGrupoArbolHombre5',
+            'omisionEdadGrupoArbolMujer6',
+            'omisionEdadGrupoArbolHombre6',
+            'omisionEdadGrupoArbolMujer7',
+            'omisionEdadGrupoArbolHombre7',
+            'omisionEdadGrupoArbolMujer8',
+            'omisionEdadGrupoArbolHombre8',
+            'omisionEdadGrupoArbolMujer9',
+            'omisionEdadGrupoArbolHombre9',
+            'caracterizacionDiscapacidadNula',
+            'caracterizacionPluridiscapacidad',
+            'caracterizacionDiscapacidadMotoraSensorial',
+            'caracterizacionDiscapacidadOrganica',
+            'caracterizacionDiscapacidadSensorial',
+            'caracterizacionDiscapacidadMental',
+            'centrosPoblados',
+            'caracterizacionDiscapacidadNulaPorCentroPoblado',
+            'caracterizacionDiscapacidadMultiplePorCentroPoblado',
+            'caracterizacionDiscapacidadMotoraPorCentroPoblado',
+            'caracterizacionDiscapacidadOrganicaPorCentroPoblado',
+            'caracterizacionDiscapacidadSensorialPorCentroPoblado',
+            'caracterizacionDiscapacidadMentalPorCentroPoblado',
+            'caracterizacionLeerHombreSiGrupo1',
+            'caracterizacionLeerHombreNoGrupo1',
+            'caracterizacionLeerMujerSiGrupo1',
+            'caracterizacionLeerMujerNoGrupo1',
+            'caracterizacionLeerHombreSiGrupo2',
+            'caracterizacionLeerHombreNoGrupo2',
+            'caracterizacionLeerMujerSiGrupo2',
+            'caracterizacionLeerMujerNoGrupo2',
+            'caracterizacionLeerHombreSiGrupo3',
+            'caracterizacionLeerHombreNoGrupo3',
+            'caracterizacionLeerMujerSiGrupo3',
+            'caracterizacionLeerMujerNoGrupo3',
+            'caracterizacionEscolarHombreSiGrupo1',
+            'caracterizacionEscolarMujerSiGrupo1',
+            'caracterizacionEscolarHombreSiGrupo2',
+            'caracterizacionEscolarMujerSiGrupo2',
+            'caracterizacionEscolarHombreSiGrupo3',
+            'caracterizacionEscolarMujerSiGrupo3',
+            'totalUnidadesVivienda',
+            'totalUnidadesViviendaOcupadas',
+            'totalResidencial',
+            'totalNoResidencial',
+            'totalMixto',
+            'tipoViviendaCasa',
+            'tipoViviendaApartamento',
+            'tipoViviendaCuarto',
+            'tipoViviendaIndigena',
+            'tipoViviendaOtro',
+            'servicioPublicoElectricoPorcentaje',
+            'servicioPublicoBasurasPorcentaje',
+            'servicioPublicoAcueductoPorcentaje',
+            'servicioPublicoAlcantarilladoPorcentaje',
+            'servicioPublicoGasPorcentaje',
+            'servicioPublicoInternetPorcentaje',
+            'totalPersonas1Porcentaje',
+            'totalPersonas2Porcentaje',
+            'totalPersonas3Porcentaje',
+            'totalPersonas4Porcentaje',
+            'totalPersonas5Porcentaje',
+            'totalPersonas6Porcentaje',
+            'otroPaisMujer',
+            'otroPaisHombre',
+            'otroMunicipioMujer',
+            'otroMunicipioHombre',
+            'esteMunicipioMujer',
+            'esteMunicipioHombre',
+            'totalHogaresParticulares',
+            'caracterizacionGrupo1',
+            'caracterizacionGrupo2',
+            'caracterizacionGrupo3',
+            'percentageRaizales',
+            'diligenciamientos',
+            'omisionPorcentaje',
+            'omision',
+            'omisionPoblado',
+            'omisionPobladoPercentage',
+            'omisionCabecera',
+            'omisionCabeceraPercentage'
+        ));
     }
-
-
-
-
 }
