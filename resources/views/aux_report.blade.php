@@ -7,7 +7,7 @@
     <title>Report File</title>
     <style>
         body {
-            font-family: font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: 'Open Sans', 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
             font-size: 14px;
             margin: 0;
             padding: 0;
@@ -52,11 +52,9 @@
 
         .bar-container {
             width: 100%;
-            height: 30px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
+            height: 20px; /* Ajusta la altura según necesites */
+            background-color: #E2E8F0; /* Color de fondo de la barra */
+            border-radius: 5px; /* Esquinas redondeadas */
         }
 
         .bar-container-second {
@@ -78,9 +76,10 @@
         }
 
         .bar-fill {
-            width: {{ $omisionCabeceraPercentage }}%;
+            width: {{ $omisionCabeceraPercentage }}%; /* Asegúrate de que se ajuste dinámicamente */
             height: 100%;
-            background-color: green;
+            background-color: green; /* Color de la barra de progreso */
+            border-radius: 5px; /* Esquinas redondeadas */
         }
 
         td {
@@ -161,6 +160,18 @@
         }
 
         @media print {
+
+            .bar-fill {
+                background-color: green !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .bar-container {
+                background-color: #E2E8F0; /* Color de fondo de la barra */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
 
             body,
             html {
@@ -244,7 +255,7 @@
                     {{$municipio}} Departamento del {{$departamento}} 2024
                 </div>
 
-                <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.25rem;">
+                <div style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 0.25rem;">
                   {{$departamento}}  / {{$municipio}}
                 </div>
             </div>
@@ -253,7 +264,7 @@
                     <tr>
                         <td style="padding: 0.5rem; width: 50%; ">
                             <div
-                                style="text-align: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
+                                style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
                                 ¿Cuántos somos?
                             </div>
                             <table style="width: 100%; height: margin-top: 1rem; margin-bottom: 1rem;">
@@ -350,8 +361,8 @@
                 <table style="width: 100%; height: 100%">
                     <tr>
                         <td style="padding: 0.5rem;">
-                            <div style="font-size: 1.5rem; font-weight: bold;">
-                                La población étnica en {{$municipio}} se autoreconoció como:
+                            <div style="text-align: center; font-size: 1.2rem; font-weight: bold;">           
+                                LA POBLACIÓN ÉTNICA EN CHIVOLO SE AUTORECONOCIÓ COMO:
                             </div>
                         </td>
                     </tr>
@@ -411,10 +422,10 @@
                     <tr>
                         <td style="padding: 1rem; text-align: center; width: 50%;">
                             <canvas id="tortaChart"
-                                style="width: 100% !important; height: 20rem !important; display: inline;"></canvas>
+                                style="width: 100% !important; height: 12rem !important; display: inline;"></canvas>
                         </td>
                         <td style="padding: 1rem; text-align: center;">
-                            <canvas id="chartCentrosPoblados" style="width: 100%; height: 20rem;"></canvas>
+                            <canvas id="chartCentrosPoblados" style="width: 100%; height: 12rem;"></canvas>
                         </td>
                     </tr>
                 </table>
@@ -423,8 +434,8 @@
             <div>
                 <table style="width: 100%">
                     <tr>
-                        <td style="font-size: 1.8rem; font-weight: bold; width: 70%;">
-                            Alfabetismo: leer y escribir
+                        <td style="font-size: 1.2rem; font-weight: bold; width: 90%; text-align: center; padding-left:100px">
+                            ALFABETISMO: LEER Y ESCRIBIR
                         </td>
                         <td style="text-align: center;">
                             <table style="width: 100%; border-spacing: 1rem;">
@@ -444,9 +455,9 @@
                     <tr>
                         <td colspan="2" style="text-align: center; padding-top: 1rem;">
                             <div
-                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem;">
+                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 15rem;">
                                 <canvas id="chartLeerEscribir"
-                                    style="width: 100% !important; height: 20rem;"></canvas>
+                                    style="width: 100% !important; height: 15rem;"></canvas>
                             </div>
                         </td>
                     </tr>
@@ -454,8 +465,8 @@
 
                 <table style="width: 100%; margin-top: 1rem;">
                     <tr>
-                        <td style="font-size: 1.8rem; font-weight: bold; width: 70%;">
-                            Asistencia escolar
+                        <td style="font-size: 1.2rem; font-weight: bold; width: 60%; text-align: center; padding-left:100px">
+                            ASISTENCIA ESCOLAR
                         </td>
                         <td style="text-align: center;">
                             <table style="width: 100%; border-spacing: 1rem;">
@@ -476,18 +487,18 @@
 
                         <td class="graphic-container">
                             <canvas id="chartAsistenciaEscolar"
-                                style="height: 20rem !important; width: 100%;"></canvas>
+                                style="height: 15rem !important; width: 100%;"></canvas>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <div style="margin-top: 2rem; border-bottom: 2px solid #A0AEC0; padding-bottom: 1rem; width: 100%;">
+            <div style="margin-top: 5rem;margin-bottom: 2rem; border-bottom: 2px solid #A0AEC0; padding-bottom: 1rem; width: 100%;">
                 <table style="width: 100%">
                     <tr>
-                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">¿Dónde estamos?</td>
+                        <td style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;text-align: right">¿DÓNDE ESTAMOS?</td>
                     </tr>
-                    <tr>
+                    <tr >
                         <td style="width: 60%; font-size: 1.0rem;">Población ajustada por omisión en cabecera
                             municipal: <span class="poblacion-etnica-valor"> {{ $omisionCabecera }}</span></td>
                         <td><img src="storage/images/building.png" alt="Logo Hombre"
@@ -540,18 +551,18 @@
             </div>
 
             <div>
-                <table style="width: 100%;border-spacing: 0 10px;">
+                <table style="width: 100%; border-spacing: 0 10px;">
                     <tr>
-                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem; padding-bottom: 0.5rem">
+                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem; padding-bottom: 0.5rem; text-align: center;" colspan="4">
                             Lugar de nacimiento
                         </td>
                     </tr>
-                    <tr >
-                        <td style="width: 25%">
+                    <tr>
+                        <td style="width: 25%;">
                             <img src="storage/images/woman.png" alt="Logo Mujer"
                                 style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                         </td>
-                        <td>Otro Pais</td>
+                        <td>Otro País</td>
                         <td>Otro municipio</td>
                         <td>Este municipio</td>
                     </tr>
@@ -563,7 +574,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="storage/images/man.png" alt="Logo Mujer"
+                            <img src="storage/images/man.png" alt="Logo Hombre"
                                 style="width: 3rem; height: 3rem; object-fit: cover; margin-bottom: 0.5rem;">
                         </td>
                         <td class="poblacion-etnica-valor">{{$otroPaisHombre}}%</td>
@@ -580,7 +591,7 @@
             </div>
 
             <div>
-                <table style="width: 100%; margin-top: 2rem; height: 200px;">
+                <table style="width: 100%; margin-top: 2rem; height: 100px;">
                     <tr>
                         <td style="padding: 0.5rem; width: 30%; ">
                             <div style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
@@ -638,8 +649,8 @@
                                 Uso de vivienda
                             </div>
                             <div
-                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem; text-align: center;">
-                                <canvas id="chartUsoVivienda" style="width: 100%; height: 20rem;"></canvas>
+                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 12rem; text-align: center;">
+                                <canvas id="chartUsoVivienda" style="width: 100%; height: 12rem;"></canvas>
                             </div>
                         </td>
                     </tr>
@@ -648,9 +659,9 @@
 
 
             <div>
-                <table style="width: 100%; margin-top: 2rem; margin-bottom: 3rem">
+                <table style="width: 100%;; margin-bottom: 3rem">
                     <tr>
-                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
+                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem; text-align: center">
                             Tipo de vivienda
                         </td>
                     </tr>
@@ -765,8 +776,8 @@
             <div style="margin-top: 50px">
                 <table style="width: 100%;">
                     <tr>
-                        <td style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">
-                            Viviendas con acceso a servicios públicos
+                        <td style="font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;">
+                            VIVIENDAS CON ACCESO A SERVICIOS PÚBLICOS
                         </td>
                         <td>
                             Nota: para los servicios de gas natural e internet se presentó {{$servicioPublicoGasPorcentaje}}%
@@ -778,15 +789,15 @@
                     <tr>
                         <td>
                             <div
-                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 20rem; text-align: center;">
-                                <canvas id="chartServiciosPublicos" style="width: 100%; height: 20rem;"></canvas>
+                                style="border: 2px dashed #A0AEC0; background-color: #EDF2F7; padding: 1rem; height: 12rem; text-align: center;">
+                                <canvas id="chartServiciosPublicos" style="width: 100%; height: 12rem;"></canvas>
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <div style="margin-top: 5rem">
+            <div >
                 <table style="margin-top: 1rem; width: 100%; padding-left: 1rem">
                     <tr>
                         <td style="width: 15%"></td>
@@ -825,10 +836,10 @@
                 </table>
             </div>
             <div>
-                <table style="width: 100%; margin-top:5rem; margin-bottom: 2rem">
+                <table style="width: 100%; margin-top:1rem; margin-bottom: 2rem; padding-top: 1rem">
                     <tr>
-                        <td style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">
-                            Número de personas por hogar
+                        <td style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; text-align: center">
+                            NÚMERO DE PERSONAS POR HOGAR
                         </td>
                     </tr>
                 </table>
@@ -1538,6 +1549,9 @@
                 }
             }
         });
+
+
+        
     </script>
 </body>
 
